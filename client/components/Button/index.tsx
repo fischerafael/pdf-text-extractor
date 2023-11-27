@@ -11,7 +11,6 @@ export const Button = ({ children, ...props }: ButtonProps) => {
     <C.Button
       colorScheme={theme.accentColour}
       borderRadius="4"
-      fontWeight="normal"
       fontSize="md"
       {...props}
     >

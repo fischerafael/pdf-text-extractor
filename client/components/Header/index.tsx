@@ -18,6 +18,7 @@ export const Header = ({
 }: HeaderProps) => {
   return (
     <C.HStack
+      w="full"
       h="10vh"
       px="4"
       justify="space-between"
