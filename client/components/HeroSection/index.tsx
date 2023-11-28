@@ -1,8 +1,4 @@
 import { theme } from "@/client/config/theme";
-import { Header } from "../Header";
-import { HeaderAction } from "../HeaderAction";
-import { HeaderHorizontalLinks } from "../HeaderHorizontalLinks";
-import { Logo } from "../Logo";
 import * as C from "@chakra-ui/react";
 import { Button } from "../Button";
 
@@ -10,10 +6,10 @@ interface HeroSectionProps {
   headline?: string;
   subHeadline?: string;
   ctaSlot?: React.ReactNode;
-  heroImg?: string;
+  heroVisualSlot?: React.ReactNode;
 }
 
-export const HeroSection = ({}: HeroSectionProps) => {
+export const HeroSection = ({ heroVisualSlot }: HeroSectionProps) => {
   return (
     <C.VStack w="full">
       <C.VStack
@@ -39,13 +35,9 @@ export const HeroSection = ({}: HeroSectionProps) => {
           isso, nosso SuperCriador irá trabalhar para você.
         </C.Text>
         <Button size="lg">Comece</Button>
-        <C.Image
-          p="8"
-          objectFit="cover"
-          w="full"
-          maxW="container.lg"
-          src="https://images.unsplash.com/photo-1519211975560-4ca611f5a72a?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-        />
+        <C.HStack w="full" maxW="container.lg">
+          {heroVisualSlot}
+        </C.HStack>
       </C.VStack>
     </C.VStack>
   );
