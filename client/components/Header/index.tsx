@@ -19,14 +19,20 @@ export const Header = ({
   return (
     <C.HStack
       w="full"
-      h="10vh"
-      px="4"
-      justify="space-between"
+      justify="center"
       bg={isTransparent ? "transparent" : `${theme.mainColour}`}
     >
-      {logoSlot}
-      {linksSlot}
-      {actionSlot}
+      <C.HStack
+        w="full"
+        h="10vh"
+        justify="space-between"
+        maxW="container.xl"
+        px="4"
+      >
+        {logoSlot}
+        {linksSlot}
+        {actionSlot}
+      </C.HStack>
     </C.HStack>
   );
 };

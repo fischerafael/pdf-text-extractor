@@ -4,9 +4,11 @@ import * as C from "@chakra-ui/react";
 export const FeatureSectionContainer = ({
   leftSlot,
   rightSlot,
+  renderFirstOnMobile = "left",
 }: {
   leftSlot: React.ReactElement;
   rightSlot: React.ReactElement;
+  renderFirstOnMobile?: "left" | "right";
 }) => {
   return (
     <C.HStack w="full" p="8" justify="center">
