@@ -32,6 +32,7 @@ export const LandingPage = () => {
           />
         }
       />
+      <CompaniesCarousel />
       <FeatureSectionFactory
         imagePosition="left"
         heroImage={
