@@ -53,6 +53,7 @@ export const LandingPage = () => {
           "Veja como é fácil e rápido usar a Inteligência Artificial para criar, conteúdos para diversas aplicações, campanhas de vendas e marketing, e muito mais."
         }
         ctaSlot={<Button>Selecione</Button>}
+        renderFirstOnMobile="right"
       />
     </>
   );
