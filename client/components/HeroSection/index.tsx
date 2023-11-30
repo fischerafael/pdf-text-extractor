@@ -12,14 +12,7 @@ interface HeroSectionProps {
 export const HeroSection = ({ heroVisualSlot }: HeroSectionProps) => {
   return (
     <C.VStack w="full">
-      <C.VStack
-        w="full"
-        px="4"
-        maxW="container.lg"
-        align="center"
-        pt="20"
-        gap="8"
-      >
+      <C.VStack w="full" maxW="container.lg" align="center" pt="20" gap="8">
         <C.Text
           lineHeight="1.15"
           fontSize="6xl"

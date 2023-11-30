@@ -22,13 +22,7 @@ export const Header = ({
       justify="center"
       bg={isTransparent ? "transparent" : `${theme.mainColour}`}
     >
-      <C.HStack
-        w="full"
-        h="10vh"
-        justify="space-between"
-        maxW="container.xl"
-        px="4"
-      >
+      <C.HStack w="full" h="10vh" justify="space-between" maxW="container.xl">
         {logoSlot}
         {linksSlot}
         {actionSlot}

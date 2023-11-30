@@ -16,7 +16,7 @@ export const CompaniesCarouselContainer = ({
 }) => {
   return (
     <C.HStack w="full" justify="center" py="8">
-      <C.VStack w="full" p="4" maxW="container.lg" spacing="16">
+      <C.VStack w="full" maxW="container.lg" spacing="16">
         {!!title && (
           <C.Heading fontSize="xl" color={theme.mainColour} fontWeight="medium">
             {title}

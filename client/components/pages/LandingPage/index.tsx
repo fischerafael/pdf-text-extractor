@@ -9,10 +9,11 @@ import { HeaderHorizontalLinks } from "../../HeaderHorizontalLinks";
 import { Image } from "../../HeroImage";
 import { HeroSection } from "../../HeroSection";
 import { Logo } from "../../Logo";
+import * as C from "@chakra-ui/react";
 
 export const LandingPage = () => {
   return (
-    <>
+    <C.VStack w="full" spacing="8" px="8">
       <Header
         actionSlot={<HeaderAction />}
         logoSlot={<Logo />}
@@ -64,6 +65,6 @@ export const LandingPage = () => {
         }
         ctaSlot={<Button>Selecione</Button>}
       />
-    </>
+    </C.VStack>
   );
 };

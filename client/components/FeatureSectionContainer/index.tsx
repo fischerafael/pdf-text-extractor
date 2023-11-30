@@ -11,12 +11,11 @@ export const FeatureSectionContainer = ({
   renderFirstOnMobile?: "left" | "right";
 }) => {
   return (
-    <C.HStack w="full" p="8" justify="center">
+    <C.HStack w="full" py="8" justify="center">
       <C.Grid
         display={["none", "none", "grid"]}
         templateColumns={["1fr", "1fr", "1fr 1fr"]}
         w="full"
-        px="8"
         gap="8"
         maxW="container.lg"
       >
@@ -28,7 +27,6 @@ export const FeatureSectionContainer = ({
           display={["grid", "grid", "none"]}
           templateColumns={"1fr"}
           w="full"
-          px="8"
           gap="8"
           maxW="container.lg"
         >
@@ -40,7 +38,6 @@ export const FeatureSectionContainer = ({
           display={["grid", "grid", "none"]}
           templateColumns={"1fr"}
           w="full"
-          px="8"
           gap="8"
           maxW="container.lg"
         >
