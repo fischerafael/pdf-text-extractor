@@ -1,4 +1,5 @@
 import { Button } from "../../Button";
+import { CardContainer } from "../../CardsContainer";
 import { CompaniesCarousel } from "../../CompaniesCarousel";
 import { FeatureSectionContainer } from "../../FeatureSectionContainer";
 import { FeatureSectionContent } from "../../FeatureSectionContent";
@@ -10,6 +11,7 @@ import { Image } from "../../HeroImage";
 import { HeroSection } from "../../HeroSection";
 import { Logo } from "../../Logo";
 import * as C from "@chakra-ui/react";
+import { PricingCard } from "../../PricingCard";
 
 export const LandingPage = () => {
   return (
@@ -65,6 +67,28 @@ export const LandingPage = () => {
         }
         ctaSlot={<Button>Selecione</Button>}
       />
+      <CardContainer>
+        <PricingCard
+          plan="Premium"
+          heading="£99 / consultation"
+          actionSlot={<Button>Learn More</Button>}
+          subHeading="Book a consultation call to discuss and seek advice on your tax queries."
+          features={[
+            {
+              id: 1,
+              description: "30 minute video or telephone call",
+            },
+            {
+              id: 2,
+              description: "One-on-one call with a dedicated accountant",
+            },
+            {
+              id: 3,
+              description: "Post call summary",
+            },
+          ]}
+        />
+      </CardContainer>
     </C.VStack>
   );
 };
