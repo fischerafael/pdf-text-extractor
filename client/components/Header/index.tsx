@@ -49,6 +49,7 @@ const MobileHeader = ({ logoSlot, linksSlot, actionSlot }: HeaderProps) => {
   useEffect(() => {
     onClose();
   }, [asPath]);
+
   return (
     <C.HStack
       display={["flex", "flex", "none"]}
