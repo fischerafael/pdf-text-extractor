@@ -3,6 +3,7 @@ import * as C from "@chakra-ui/react";
 import { Button } from "../Button";
 import { Logo } from "../Logo";
 import * as Icon from "react-icons/hi";
+import { Drawer } from "../Drawer";
 
 interface HeaderProps {
   logoSlot: React.ReactNode;
@@ -42,7 +43,11 @@ const MobileHeader = ({ logoSlot, linksSlot, actionSlot }: HeaderProps) => {
         aria-label="Hamburguer Menu"
         icon={<Icon.HiOutlineMenu />}
         colorScheme={theme.accentColour}
+        onClick={onOpen}
       />
+      <Drawer isOpen={isOpen} onClose={onClose} headerSlot={<Logo />}>
+        <p>test</p>
+      </Drawer>
     </C.HStack>
   );
 };
