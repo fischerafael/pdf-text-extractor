@@ -2,7 +2,7 @@ import * as C from "@chakra-ui/react";
 import { Link } from "../Link";
 import { ILink, links } from "@/client/config/links";
 
-export const HeaderLinks = () => {
+export const LinksContainer = () => {
   return (
     <>
       <HorizontalLinks links={links.pages} />
