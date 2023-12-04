@@ -6,7 +6,7 @@ import { FeatureSectionContent } from "../../FeatureSectionContent";
 import { FeatureSectionFactory } from "../../FeatureSectionFactory";
 import { Header } from "../../Header";
 import { HeaderAction } from "../../HeaderAction";
-import { HeaderHorizontalLinks } from "../../HeaderHorizontalLinks";
+import { HeaderLinks } from "../../HeaderLinks";
 import { Image } from "../../HeroImage";
 import { HeroSection } from "../../HeroSection";
 import { Logo } from "../../Logo";
@@ -19,7 +19,7 @@ export const LandingPage = () => {
       <Header
         actionSlot={<HeaderAction />}
         logoSlot={<Logo />}
-        linksSlot={<HeaderHorizontalLinks />}
+        linksSlot={<HeaderLinks />}
       />
       <HeroSection
         headline="Foque no que importa nós cuidamos do resto"

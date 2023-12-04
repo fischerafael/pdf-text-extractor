@@ -12,6 +12,7 @@ interface HeaderProps {
   linksSlot: React.ReactNode;
   actionSlot: React.ReactNode;
   isTransparent?: boolean;
+  isDisplayLinksOnWeb?: boolean;
 }
 
 export const Header = ({ isTransparent = true, ...props }: HeaderProps) => {
@@ -27,7 +28,12 @@ export const Header = ({ isTransparent = true, ...props }: HeaderProps) => {
   );
 };
 
-const WebHeader = ({ logoSlot, linksSlot, actionSlot }: HeaderProps) => {
+const WebHeader = ({
+  logoSlot,
+  linksSlot,
+  actionSlot,
+  isDisplayLinksOnWeb = true,
+}: HeaderProps) => {
   return (
     <C.HStack
       display={["none", "none", "flex"]}
@@ -37,7 +43,7 @@ const WebHeader = ({ logoSlot, linksSlot, actionSlot }: HeaderProps) => {
       maxW="container.xl"
     >
       {logoSlot}
-      {linksSlot}
+      {!!isDisplayLinksOnWeb && linksSlot}
       {actionSlot}
     </C.HStack>
   );
@@ -46,9 +52,21 @@ const WebHeader = ({ logoSlot, linksSlot, actionSlot }: HeaderProps) => {
 const MobileHeader = ({ logoSlot, linksSlot, actionSlot }: HeaderProps) => {
   const { asPath } = useRouter();
   const { isOpen, onClose, onOpen } = C.useDisclosure();
+
+  const isMobile = C.useBreakpointValue({
+    base: true,
+    md: false,
+  });
+
   useEffect(() => {
     onClose();
   }, [asPath]);
+
+  useEffect(() => {
+    if (!isMobile && isOpen) {
+      onClose();
+    }
+  }, [isMobile]);
 
   return (
     <C.HStack
