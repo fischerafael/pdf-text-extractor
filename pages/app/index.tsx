@@ -1,5 +1,6 @@
 import { Avatar } from "@/client/components/Avatar";
 import { Button } from "@/client/components/Button";
+import { Footer } from "@/client/components/Footer";
 import { Header } from "@/client/components/Header";
 import { LinksContainer } from "@/client/components/LinksContainer";
 import { LinksContainerWithIcons } from "@/client/components/LinksContainerWithIcons";
@@ -22,6 +23,8 @@ const index = () => {
           isDisplayLinksOnWeb={false}
         />
       }
+      mainSlot={<div>hi</div>}
+      footerSlot={<Footer />}
     />
   );
 };
