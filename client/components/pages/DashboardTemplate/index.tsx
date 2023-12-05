@@ -20,19 +20,15 @@ export const DashboardTemplate = ({
         h="full"
         spacing="0"
         display={["none", "none", "flex"]}
+        shadow="md"
+        zIndex="10"
       >
         <C.VStack h="10vh" justify="center">
           {logoSlot}
         </C.VStack>
         <C.VStack h="full">{linksSlot}</C.VStack>
       </C.VStack>
-      <C.VStack
-        w="full"
-        bg={`${theme.accentColour}.50`}
-        h="full"
-        px="8"
-        spacing="0"
-      >
+      <C.VStack w="full" bg={`gray.50`} h="full" px="8" spacing="0">
         {headerSlot}
         <C.Text>test</C.Text>
       </C.VStack>

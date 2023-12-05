@@ -1,3 +1,4 @@
+import { Avatar } from "@/client/components/Avatar";
 import { Button } from "@/client/components/Button";
 import { Header } from "@/client/components/Header";
 import { LinksContainer } from "@/client/components/LinksContainer";
@@ -13,7 +14,9 @@ const index = () => {
       linksSlot={<LinksContainerWithIcons />}
       headerSlot={
         <Header
-          logoSlot={<C.Avatar />}
+          logoSlot={
+            <Avatar title="Rafael Fischer" subTitle="rafael@gmail.com" />
+          }
           linksSlot={<LinksContainer />}
           actionSlot={<Button>Log Out</Button>}
           isDisplayLinksOnWeb={false}
