@@ -2,6 +2,7 @@ import { Avatar } from "@/client/components/Avatar";
 import { Button } from "@/client/components/Button";
 import { Footer } from "@/client/components/Footer";
 import { Header } from "@/client/components/Header";
+import { InputText } from "@/client/components/InputText";
 import { LinksContainer } from "@/client/components/LinksContainer";
 import { LinksContainerWithIcons } from "@/client/components/LinksContainerWithIcons";
 import { Logo } from "@/client/components/Logo";
@@ -23,7 +24,7 @@ const index = () => {
           isDisplayLinksOnWeb={false}
         />
       }
-      mainSlot={<div>hi</div>}
+      mainSlot={<InputText label="testing" helpText="test" />}
       footerSlot={<Footer />}
     />
   );
