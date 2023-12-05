@@ -32,5 +32,19 @@ export const links = {
       href: "/pricing",
       icon: Icon.HiOutlineCash,
     },
+    {
+      isPublic: true,
+      isPrivate: true,
+      label: "Pricing",
+      href: "/pricing",
+      icon: Icon.HiOutlineCash,
+    },
+    {
+      isPublic: true,
+      isPrivate: true,
+      label: "Pricing",
+      href: "/pricing",
+      icon: Icon.HiOutlineCash,
+    },
   ],
 };

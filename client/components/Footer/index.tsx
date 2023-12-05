@@ -1,11 +1,26 @@
 import React from "react";
 import * as C from "@chakra-ui/react";
 import { Logo } from "../Logo";
+import { LinksContainer } from "../LinksContainer";
 
-export const Footer = () => {
+const currentYear = new Date().getFullYear();
+
+export const Footer = ({ year = currentYear }: { year?: number }) => {
   return (
-    <C.HStack px="8" w="full" h="10vh">
-      <Logo />
-    </C.HStack>
+    <C.VStack w="full" minH="10vh" spacing="0">
+      <C.HStack
+        h="full"
+        align="flex-start"
+        p="8"
+        w="full"
+        justify="space-between"
+      >
+        <Logo />
+        <LinksContainer />
+      </C.HStack>
+      <C.Text pb="8" fontSize="xs">
+        SuperCreator © {year}
+      </C.Text>
+    </C.VStack>
   );
 };

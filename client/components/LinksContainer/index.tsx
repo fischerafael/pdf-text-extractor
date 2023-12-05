@@ -24,7 +24,12 @@ const HorizontalLinks = ({ links }: { links: ILink[] }) => {
 };
 const VerticalLinks = ({ links }: { links: ILink[] }) => {
   return (
-    <C.VStack gap="4" align="flex-start" display={["flex", "flex", "none"]}>
+    <C.VStack
+      gap="4"
+      py="4"
+      align="flex-start"
+      display={["flex", "flex", "none"]}
+    >
       {links.map((link) => (
         <Link key={link.href} href={link.href}>
           {link.label}
