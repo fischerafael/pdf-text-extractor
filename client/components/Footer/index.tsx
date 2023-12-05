@@ -2,6 +2,7 @@ import React from "react";
 import * as C from "@chakra-ui/react";
 import { Logo } from "../Logo";
 import { LinksContainer } from "../LinksContainer";
+import { theme } from "@/client/config/theme";
 
 const currentYear = new Date().getFullYear();
 

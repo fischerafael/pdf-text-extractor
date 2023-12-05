@@ -12,6 +12,7 @@ import { HeroSection } from "../../HeroSection";
 import { Logo } from "../../Logo";
 import * as C from "@chakra-ui/react";
 import { PricingCard } from "../../PricingCard";
+import { Footer } from "../../Footer";
 
 export const LandingPage = () => {
   return (
@@ -89,6 +90,7 @@ export const LandingPage = () => {
           ]}
         />
       </CardContainer>
+      <Footer />
     </C.VStack>
   );
 };
