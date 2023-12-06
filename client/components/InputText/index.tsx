@@ -10,7 +10,7 @@ interface InputTextProps extends C.InputProps {
 
 export const InputText = ({ label, helpText, ...props }: InputTextProps) => {
   return (
-    <FormControl label="Testing Something">
+    <FormControl label={label}>
       <C.Input
         fontSize="xs"
         _focus={{ ring: "none", borderColor: theme.accentColour }}

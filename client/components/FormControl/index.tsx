@@ -11,13 +11,15 @@ export const FormControl = ({
   helpText?: string;
 }) => {
   return (
-    <C.FormControl as={C.VStack} align="flex-start" px="8" spacing="0">
-      <C.FormLabel fontWeight="regular" fontSize="xs">
+    <C.FormControl as={C.VStack} align="flex-start" px="8" w="full" spacing="0">
+      <C.FormLabel fontWeight="regular" fontSize="xs" w="full">
         {label}
       </C.FormLabel>
       {children}
       {helpText && (
-        <C.FormHelperText fontSize="xs">{helpText}</C.FormHelperText>
+        <C.FormHelperText fontSize="xs" w="full">
+          {helpText}
+        </C.FormHelperText>
       )}
     </C.FormControl>
   );

@@ -2,12 +2,12 @@ import { Avatar } from "@/client/components/Avatar";
 import { Button } from "@/client/components/Button";
 import { Footer } from "@/client/components/Footer";
 import { Header } from "@/client/components/Header";
+import { InputNumber } from "@/client/components/InputNumber";
 import { InputText } from "@/client/components/InputText";
 import { LinksContainer } from "@/client/components/LinksContainer";
 import { LinksContainerWithIcons } from "@/client/components/LinksContainerWithIcons";
 import { Logo } from "@/client/components/Logo";
 import { DashboardTemplate } from "@/client/components/pages/DashboardTemplate";
-import * as C from "@chakra-ui/react";
 
 const index = () => {
   return (
@@ -24,7 +24,12 @@ const index = () => {
           isDisplayLinksOnWeb={false}
         />
       }
-      mainSlot={<InputText label="testing" helpText="test" />}
+      mainSlot={
+        <>
+          <InputText label="testing" helpText="test" />
+          <InputNumber label="testing" helpText="test" />
+        </>
+      }
       footerSlot={<Footer />}
     />
   );
