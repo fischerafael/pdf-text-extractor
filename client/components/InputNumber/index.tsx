@@ -18,8 +18,8 @@ export const InputNumber = ({ label, helpText, ...props }: InputTextProps) => {
           borderRadius="none"
         />
         <C.NumberInputStepper>
-          <C.NumberIncrementStepper />
-          <C.NumberDecrementStepper />
+          <C.NumberIncrementStepper color={`${theme.accentColour}.500`} />
+          <C.NumberDecrementStepper color={`${theme.accentColour}.500`} />
         </C.NumberInputStepper>
       </C.NumberInput>
     </FormControl>
