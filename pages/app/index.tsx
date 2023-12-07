@@ -9,24 +9,16 @@ import { InputTextArea } from "@/client/components/InputTextArea";
 import { LinksContainer } from "@/client/components/LinksContainer";
 import { LinksContainerWithIcons } from "@/client/components/LinksContainerWithIcons";
 import { Logo } from "@/client/components/Logo";
+import { Modal } from "@/client/components/Modal";
 import { DashboardTemplate } from "@/client/components/pages/DashboardTemplate";
+import { useDisclosure } from "@chakra-ui/react";
 
 const index = () => {
+  const { isOpen, onClose, onOpen } = useDisclosure();
+
   return (
-    <DashboardTemplate
-      logoSlot={<Logo />}
-      linksSlot={<LinksContainerWithIcons />}
-      headerSlot={
-        <Header
-          logoSlot={
-            <Avatar title="Rafael Fischer" subTitle="rafael@gmail.com" />
-          }
-          linksSlot={<LinksContainer />}
-          actionSlot={<Button>Log Out</Button>}
-          isDisplayLinksOnWeb={false}
-        />
-      }
-      mainSlot={
+    <>
+      <Modal header={<p>Title</p>} isOpen={isOpen} onClose={onClose}>
         <>
           <InputText label="testing" helpText="test" />
           <InputNumber label="testing" helpText="test" />
@@ -47,9 +39,24 @@ const index = () => {
             placeholder="Test"
           />
         </>
-      }
-      footerSlot={<Footer />}
-    />
+      </Modal>
+      <DashboardTemplate
+        logoSlot={<Logo />}
+        linksSlot={<LinksContainerWithIcons />}
+        headerSlot={
+          <Header
+            logoSlot={
+              <Avatar title="Rafael Fischer" subTitle="rafael@gmail.com" />
+            }
+            linksSlot={<LinksContainer />}
+            actionSlot={<Button>Log Out</Button>}
+            isDisplayLinksOnWeb={false}
+          />
+        }
+        mainSlot={<Button onClick={onOpen}>Open</Button>}
+        footerSlot={<Footer />}
+      />
+    </>
   );
 };
 
