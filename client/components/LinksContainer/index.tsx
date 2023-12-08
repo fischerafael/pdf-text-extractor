@@ -5,8 +5,8 @@ import { ILink, links } from "@/client/config/links";
 export const LinksContainer = () => {
   return (
     <>
-      <HorizontalLinks links={links.pages} />
-      <VerticalLinks links={links.pages} />
+      <HorizontalLinks links={links} />
+      <VerticalLinks links={links} />
     </>
   );
 };

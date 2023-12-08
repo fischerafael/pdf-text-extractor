@@ -1,4 +1,4 @@
-import { ILink, links, links as lk } from "@/client/config/links";
+import { ILink, links } from "@/client/config/links";
 import { theme } from "@/client/config/theme";
 import * as C from "@chakra-ui/react";
 import { useRouter } from "next/router";
@@ -7,7 +7,7 @@ import NextLink from "next/link";
 export const LinksContainerWithIcons = () => {
   return (
     <C.VStack w="full" align="center" spacing="8">
-      {links.pages.map((lk) => (
+      {links.map((lk) => (
         <LinkWithIcon lk={lk} />
       ))}
     </C.VStack>
