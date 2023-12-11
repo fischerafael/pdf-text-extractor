@@ -17,6 +17,8 @@ export const useAuthentication = () => {
     cookieGateway.destroy();
   };
 
+  useSyncAuthorizationFromCookies(updateStateAndCookie, reset);
+
   const logIn = async (email?: string, password?: string) => {
     try {
       // logic
@@ -49,21 +51,6 @@ export const useAuthentication = () => {
     }
   };
 
-  useEffect(() => {
-    (async () => {
-      try {
-        const result: IAuthAtom = cookieGateway.get();
-        if (!result) throw new Error("No Cookie");
-        updateStateAndCookie(result);
-        console.log("Has cookie");
-      } catch (e: any) {
-        reset();
-        utils.handleNavigateTo(pages.landingPage.href);
-        console.log("No cookie found");
-      }
-    })();
-  }, []);
-
   return {
     presenters: {
       refresh: state.refresh,
@@ -91,3 +78,24 @@ const tokenState = atom<IAuthAtom>({
   key: "tokenAtom",
   default: INITIAL_STATE_TOKEN,
 });
+
+const useSyncAuthorizationFromCookies = (
+  updateStateAndCookie: (value: { access: string; refresh: string }) => void,
+  reset: () => void
+) => {
+  useEffect(() => {
+    (async () => {
+      try {
+        if (!updateStateAndCookie || !reset) throw new Error();
+        const result: IAuthAtom = cookieGateway.get();
+        if (!result) throw new Error("No Cookie");
+        updateStateAndCookie(result);
+        console.log("Has cookie");
+      } catch (e: any) {
+        reset();
+        utils.handleNavigateTo(pages.landingPage.href);
+        console.log("No cookie found");
+      }
+    })();
+  }, []);
+};

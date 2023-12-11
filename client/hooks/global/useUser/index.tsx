@@ -17,16 +17,7 @@ export const useUser = () => {
     cookieGateway.destroy(USER_KEY);
   };
 
-  useEffect(() => {
-    try {
-      const cookie = cookieGateway.get<IUserAtom>(USER_KEY);
-      if (!!cookie && !!cookie.email) {
-        update(cookie);
-      }
-    } catch (e: any) {
-      console.log("No User Cookie");
-    }
-  }, []);
+  useSyncUserFromLocalStorage(update);
 
   return {
     presenters: {
@@ -52,3 +43,17 @@ const userState = atom<IUserAtom>({
   key: "userAtom",
   default: INITIAL_STATE_TOKEN,
 });
+
+const useSyncUserFromLocalStorage = (update: (value: IUserAtom) => void) => {
+  useEffect(() => {
+    try {
+      if (!update) throw new Error();
+      const cookie = cookieGateway.get<IUserAtom>(USER_KEY);
+      if (!!cookie && !!cookie.email) {
+        update(cookie);
+      }
+    } catch (e: any) {
+      console.log("No User Cookie");
+    }
+  }, []);
+};
