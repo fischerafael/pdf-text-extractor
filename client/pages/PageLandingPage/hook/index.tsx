@@ -10,7 +10,7 @@ export const usePageLandingPage = () => {
     try {
       const { displayName, email, photoURL } = await signUpWithGoogle();
       if (!email) throw new Error("Failed to log in. Missing email");
-      authControllers.logIn(email, "");
+      authControllers.signUpOrSignIn(email, "");
       userControllers.update({
         email: email,
         imageSrc: photoURL!,

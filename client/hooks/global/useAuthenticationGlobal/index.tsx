@@ -30,11 +30,22 @@ export const useAuthentication = () => {
     }
   };
 
-  const signUp = async () => {
+  const signUp = async (email?: string, password?: string) => {
     try {
       // logic
       utils.handleNavigateTo(pages.app.href);
       updateStateAndCookie({ access: "", refresh: "" });
+    } catch (e: any) {
+      console.log(e);
+    } finally {
+    }
+  };
+
+  const signUpOrSignIn = async (email?: string, password?: string) => {
+    try {
+      // logic
+      utils.handleNavigateTo(pages.app.href);
+      updateStateAndCookie({ access: email || "", refresh: "" });
     } catch (e: any) {
       console.log(e);
     } finally {
@@ -60,6 +71,7 @@ export const useAuthentication = () => {
       logIn: logIn,
       logOut: logOut,
       signUp: signUp,
+      signUpOrSignIn: signUpOrSignIn,
     },
   };
 };
