@@ -20,7 +20,7 @@ export const useAuthentication = () => {
   const logIn = async (email?: string, password?: string) => {
     try {
       // logic
-
+      utils.handleNavigateTo(pages.app.href);
       updateStateAndCookie({ access: "", refresh: "" });
     } catch (e: any) {
       console.log(e);
@@ -31,7 +31,7 @@ export const useAuthentication = () => {
   const signUp = async () => {
     try {
       // logic
-
+      utils.handleNavigateTo(pages.app.href);
       updateStateAndCookie({ access: "", refresh: "" });
     } catch (e: any) {
       console.log(e);
@@ -42,6 +42,7 @@ export const useAuthentication = () => {
   const logOut = async () => {
     try {
       reset();
+      utils.handleNavigateTo(pages.landingPage.href);
     } catch (e: any) {
       console.log(e);
     } finally {
@@ -54,9 +55,11 @@ export const useAuthentication = () => {
         const result: IAuthAtom = cookieGateway.get();
         if (!result) throw new Error("No Cookie");
         updateStateAndCookie(result);
+        console.log("Has cookie");
       } catch (e: any) {
         reset();
         utils.handleNavigateTo(pages.landingPage.href);
+        console.log("No cookie found");
       }
     })();
   }, []);

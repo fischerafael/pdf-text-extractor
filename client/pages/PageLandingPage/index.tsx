@@ -1,24 +1,25 @@
-import { Button } from "../../Button";
-import { CardContainer } from "../../CardsContainer";
-import { CompaniesCarousel } from "../../CompaniesCarousel";
-import { FeatureSectionContainer } from "../../FeatureSectionContainer";
-import { FeatureSectionContent } from "../../FeatureSectionContent";
-import { FeatureSectionFactory } from "../../FeatureSectionFactory";
-import { Header } from "../../Header";
-import { HeaderAction } from "../../HeaderAction";
-import { LinksContainer } from "../../LinksContainer";
-import { Image } from "../../HeroImage";
-import { HeroSection } from "../../HeroSection";
-import { Logo } from "../../Logo";
+import React from "react";
 import * as C from "@chakra-ui/react";
-import { PricingCard } from "../../PricingCard";
-import { Footer } from "../../Footer";
+import { Header } from "@/client/components/Header";
+import { Logo } from "@/client/components/Logo";
+import { LinksContainer } from "@/client/components/LinksContainer";
+import { HeroSection } from "@/client/components/HeroSection";
+import { Button } from "@/client/components/Button";
+import { Image } from "@/client/components/HeroImage";
+import { CompaniesCarousel } from "@/client/components/CompaniesCarousel";
+import { FeatureSectionFactory } from "@/client/components/FeatureSectionFactory";
+import { CardContainer } from "@/client/components/CardsContainer";
+import { PricingCard } from "@/client/components/PricingCard";
+import { Footer } from "@/client/components/Footer";
+import { usePageLandingPage } from "./hook";
 
-export const LandingPage = () => {
+export const PageLandingPage = () => {
+  const { controllers } = usePageLandingPage();
+
   return (
     <C.VStack w="full" spacing="8" px="8">
       <Header
-        actionSlot={<HeaderAction />}
+        actionSlot={<Button onClick={controllers.handleLogIn}>Sign In</Button>}
         logoSlot={<Logo />}
         linksSlot={<LinksContainer />}
       />
