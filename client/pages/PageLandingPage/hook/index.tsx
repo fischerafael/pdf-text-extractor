@@ -1,4 +1,4 @@
-import { signUpWithGoogle } from "@/client/gateways/firebase";
+import { signUpWithGoogle } from "@/client/config/firebase";
 import { useAuthentication } from "@/client/hooks/global/useAuthenticationGlobal";
 import { useUser } from "@/client/hooks/global/useUser";
 
