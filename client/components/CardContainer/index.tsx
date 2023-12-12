@@ -2,12 +2,19 @@ import React from "react";
 import * as C from "@chakra-ui/react";
 import { theme } from "@/client/config/theme";
 
-export const CardContainer = ({ children }: { children: React.ReactNode }) => {
+export const CardContainer = ({
+  children,
+  spacing = "2",
+}: {
+  children: React.ReactNode;
+  spacing: string;
+}) => {
   return (
     <C.VStack
       w="full"
       align="flex-start"
       p="8"
+      spacing={spacing}
       borderRadius="16"
       border="solid"
       borderWidth="1px"
