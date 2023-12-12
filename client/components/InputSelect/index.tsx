@@ -24,7 +24,6 @@ export const InputSelect = ({
       <C.Select
         fontSize="xs"
         _focus={{ ring: "none", borderColor: theme.accentColour }}
-        borderRadius="none"
         isDisabled={!isEnabled}
         {...props}
       >

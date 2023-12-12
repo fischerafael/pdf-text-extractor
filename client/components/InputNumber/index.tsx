@@ -15,7 +15,6 @@ export const InputNumber = ({ label, helpText, ...props }: InputTextProps) => {
         <C.NumberInputField
           _focus={{ ring: "none", borderColor: theme.accentColour }}
           w="full"
-          borderRadius="none"
         />
         <C.NumberInputStepper>
           <C.NumberIncrementStepper color={`${theme.accentColour}.500`} />

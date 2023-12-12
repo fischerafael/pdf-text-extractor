@@ -17,7 +17,6 @@ export const InputTextArea = ({
       <C.Textarea
         fontSize="xs"
         _focus={{ ring: "none", borderColor: theme.accentColour }}
-        borderRadius="none"
         {...props}
       />
     </FormControl>

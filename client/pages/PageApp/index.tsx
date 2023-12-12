@@ -13,7 +13,7 @@ import { Logo } from "@/client/components/Logo";
 import { Modal } from "@/client/components/Modal";
 import { usePageApp } from "./hook";
 import * as C from "@chakra-ui/react";
-import { MainSlotContainer } from "@/client/components/MainSlotContainer";
+import { ContentVStack } from "@/client/components/MainSlotContainer";
 
 export const PageApp = () => {
   const { controllers, presenters } = usePageApp();
@@ -66,9 +66,9 @@ export const PageApp = () => {
           />
         }
         mainSlot={
-          <MainSlotContainer>
+          <ContentVStack>
             <Button onClick={controllers.onOpen}>Open</Button>
-          </MainSlotContainer>
+          </ContentVStack>
         }
         footerSlot={<Footer />}
       />

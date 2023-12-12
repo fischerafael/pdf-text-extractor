@@ -8,8 +8,8 @@ import { Button } from "@/client/components/Button";
 import { Image } from "@/client/components/HeroImage";
 import { CompaniesCarousel } from "@/client/components/CompaniesCarousel";
 import { FeatureSectionFactory } from "@/client/components/FeatureSectionFactory";
-import { CardContainer } from "@/client/components/CardsContainer";
-import { PricingCard } from "@/client/components/PricingCard";
+import { CardListContainer } from "@/client/components/CardsListContainer";
+import { PricingCard } from "@/client/components/CardPricing";
 import { Footer } from "@/client/components/Footer";
 import { usePageLandingPage } from "./hook";
 
@@ -69,7 +69,7 @@ export const PageLandingPage = () => {
         }
         ctaSlot={<Button>Selecione</Button>}
       />
-      <CardContainer>
+      <CardListContainer>
         <PricingCard
           plan="Premium"
           heading="£99 / consultation"
@@ -90,7 +90,7 @@ export const PageLandingPage = () => {
             },
           ]}
         />
-      </CardContainer>
+      </CardListContainer>
       <Footer />
     </C.VStack>
   );

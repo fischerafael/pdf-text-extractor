@@ -11,7 +11,7 @@ export const FormControl = ({
   helpText?: string;
 }) => {
   return (
-    <C.FormControl as={C.VStack} align="flex-start" px="8" w="full" spacing="0">
+    <C.FormControl as={C.VStack} align="flex-start" w="full" spacing="0">
       <C.FormLabel fontWeight="regular" fontSize="xs" w="full">
         {label}
       </C.FormLabel>

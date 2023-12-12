@@ -14,7 +14,6 @@ export const InputText = ({ label, helpText, ...props }: InputTextProps) => {
       <C.Input
         fontSize="xs"
         _focus={{ ring: "none", borderColor: theme.accentColour }}
-        borderRadius="none"
         {...props}
       />
     </FormControl>

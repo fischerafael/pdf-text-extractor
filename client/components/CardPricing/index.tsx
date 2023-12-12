@@ -2,6 +2,7 @@ import React from "react";
 import * as C from "@chakra-ui/react";
 import * as Icon from "react-icons/hi";
 import { theme } from "@/client/config/theme";
+import { CardContainer } from "../CardContainer";
 
 interface PricingCardProps {
   plan?: string;
@@ -13,19 +14,7 @@ interface PricingCardProps {
 
 export const PricingCard = (props: PricingCardProps) => {
   return (
-    <C.VStack
-      w="full"
-      align="flex-start"
-      p="8"
-      borderRadius="16"
-      border="solid"
-      borderWidth="1px"
-      borderColor={`${theme.accentColour}.200`}
-      cursor="pointer"
-      bg={`${theme.accentColour}.50`}
-      transition="0.5s"
-      _hover={{ bg: `${theme.accentColour}.100` }}
-    >
+    <CardContainer>
       <C.Tag colorScheme={theme.accentColour}>{props.plan}</C.Tag>
       <C.Heading py="4" fontSize="4xl" color={theme.mainColour}>
         {props.heading}
@@ -44,6 +33,6 @@ export const PricingCard = (props: PricingCardProps) => {
         ))}
       <br />
       {props.actionSlot}
-    </C.VStack>
+    </CardContainer>
   );
 };
