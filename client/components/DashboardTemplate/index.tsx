@@ -54,11 +54,11 @@ export const DashboardTemplate = ({
             },
           }}
         >
-          <C.VStack h="90vh" w="full" spacing="0">
+          <C.VStack w="full" spacing="0">
             {mainSlot}
-          </C.VStack>
-          <C.VStack h="10vh" w="full" spacing="0">
-            {footerSlot}
+            <C.VStack h="10vh" w="full" spacing="0">
+              {footerSlot}
+            </C.VStack>
           </C.VStack>
         </C.Grid>
       </C.VStack>

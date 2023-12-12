@@ -12,6 +12,8 @@ import { LinksContainerWithIcons } from "@/client/components/LinksContainerWithI
 import { Logo } from "@/client/components/Logo";
 import { Modal } from "@/client/components/Modal";
 import { usePageApp } from "./hook";
+import * as C from "@chakra-ui/react";
+import { MainSlotContainer } from "@/client/components/MainSlotContainer";
 
 export const PageApp = () => {
   const { controllers, presenters } = usePageApp();
@@ -63,7 +65,11 @@ export const PageApp = () => {
             isDisplayLinksOnWeb={false}
           />
         }
-        mainSlot={<Button onClick={controllers.onOpen}>Open</Button>}
+        mainSlot={
+          <MainSlotContainer>
+            <Button onClick={controllers.onOpen}>Open</Button>
+          </MainSlotContainer>
+        }
         footerSlot={<Footer />}
       />
     </>
