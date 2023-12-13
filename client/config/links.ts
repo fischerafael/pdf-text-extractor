@@ -18,7 +18,14 @@ export const pages = {
     href: "/",
     icon: Icon.HiOutlineHome,
   },
-  app: {
+  signIn: {
+    isPublic: true,
+    isPrivate: true,
+    label: "Sign In",
+    href: "/sign-in",
+    icon: Icon.HiOutlineKey,
+  },
+  prompts: {
     isPublic: false,
     isPrivate: true,
     label: "Prompts",

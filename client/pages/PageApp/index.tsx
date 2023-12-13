@@ -13,7 +13,7 @@ import { Logo } from "@/client/components/Logo";
 import { Modal } from "@/client/components/Modal";
 import { usePageApp } from "./hook";
 import * as C from "@chakra-ui/react";
-import { ContentVStack } from "@/client/components/MainSlotContainer";
+import { ContentVStack } from "@/client/components/ContentVStack";
 
 export const PageApp = () => {
   const { controllers, presenters } = usePageApp();

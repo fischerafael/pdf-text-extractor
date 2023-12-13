@@ -1,29 +1,15 @@
-import { useAuthentication } from "@/client/hooks/global/useAuthenticationGlobal";
-import { useUser } from "@/client/hooks/global/useUser";
+import { pages } from "@/client/config/links";
+import { utils } from "@/client/utils";
 
 export const usePageLandingPage = () => {
-  const { controllers: authControllers } = useAuthentication();
-  const { controllers: userControllers } = useUser();
-
-  const handleLogInWithGoogle = async () => {
-    try {
-      // authControllers.signUpOrSignIn(email, "");
-      // userControllers.update({
-      //   email: email,
-      //   imageSrc: photoURL!,
-      //   name: displayName!,
-      // });
-    } catch (e: any) {
-      console.log(e.message);
-    }
+  const handleSignIn = () => {
+    utils.handleNavigateTo(pages.signIn.href);
   };
 
   return {
     providers: {},
     controllers: {
-      handleLogIn: handleLogInWithGoogle,
+      handleLogIn: handleSignIn,
     },
   };
 };
-
-// testing something

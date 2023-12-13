@@ -8,9 +8,9 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 
 interface HeaderProps {
-  logoSlot: React.ReactNode;
-  linksSlot: React.ReactNode;
-  actionSlot: React.ReactNode;
+  logoSlot?: React.ReactNode;
+  linksSlot?: React.ReactNode;
+  actionSlot?: React.ReactNode;
   isTransparent?: boolean;
   isDisplayLinksOnWeb?: boolean;
 }

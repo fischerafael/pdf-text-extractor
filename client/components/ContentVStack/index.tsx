@@ -1,15 +1,17 @@
 import React from "react";
 import * as C from "@chakra-ui/react";
 
+interface VStackProps extends C.StackProps {
+  children: React.ReactNode;
+}
+
 export const ContentVStack = ({
   children,
   minH = "90vh",
-}: {
-  children: React.ReactNode;
-  minH?: string;
-}) => {
+  ...props
+}: VStackProps) => {
   return (
-    <C.VStack minH={minH} w="full" p="8">
+    <C.VStack minH={minH} w="full" p="8" spacing="4" {...props}>
       {children}
     </C.VStack>
   );
