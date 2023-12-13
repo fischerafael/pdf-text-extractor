@@ -26,13 +26,13 @@ export const useAuthentication = () => {
       email: email!,
       password: password!,
     });
-    console.log(access, refresh);
     utils.handleNavigateTo(pages.prompts.href);
     updateStateAndCookie({ access: access, refresh: refresh });
   };
 
   const logOut = async () => {
     try {
+      const {} = await apiGateway.post;
       reset();
       utils.handleNavigateTo(pages.landingPage.href);
     } catch (e: any) {

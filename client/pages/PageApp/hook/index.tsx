@@ -9,7 +9,13 @@ export const usePageApp = () => {
   const { controllers: userControllers, presenters: userPresenters } =
     useUser();
 
-  const handleLogOut = async () => {};
+  const handleLogOut = async () => {
+    try {
+      await authControllers.logOut();
+    } catch (e: any) {
+      console.log(e.message);
+    }
+  };
 
   return {
     presenters: {
