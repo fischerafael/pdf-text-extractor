@@ -3,7 +3,7 @@ import * as C from "@chakra-ui/react";
 
 interface TextProps extends C.TextProps {
   children: React.ReactNode;
-  variant: "h1" | "h2" | "p";
+  variant?: "h1" | "h2" | "h3" | "p";
 }
 
 export const Text = ({ children, variant = "p", ...props }: TextProps) => {
@@ -16,6 +16,12 @@ export const Text = ({ children, variant = "p", ...props }: TextProps) => {
   if (variant === "h2")
     return (
       <C.Text fontSize="xl" fontWeight="medium" {...props}>
+        {children}
+      </C.Text>
+    );
+  if (variant === "h3")
+    return (
+      <C.Text fontSize="lg" fontWeight="medium" {...props}>
         {children}
       </C.Text>
     );
