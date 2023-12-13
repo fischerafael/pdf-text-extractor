@@ -4,11 +4,14 @@ import { IOption } from "@/client/interfaces";
 import * as C from "@chakra-ui/react";
 import { theme } from "@/client/config/theme";
 
-interface InputSelectMultipleProps extends InputSelectProps {}
+interface InputSelectMultipleProps extends InputSelectProps {
+  updateOptions: (options: IOption[]) => void;
+}
 
 export const InputSelectMultiple = ({
   value,
   options,
+  updateOptions,
   ...props
 }: InputSelectMultipleProps) => {
   const [selectedOptions, setSelectedOptions] = useState<IOption[]>([]);
@@ -17,10 +20,14 @@ export const InputSelectMultiple = ({
     value: "Select",
   };
 
+  const syncState = (updatedOptions: IOption[]) => {
+    setSelectedOptions(updatedOptions);
+    updateOptions(updatedOptions);
+  };
+
   const onRemove = (optionKey: string) => {
-    console.log("KEY TO REMOVE", optionKey);
     const updated = selectedOptions.filter((op) => op.key !== optionKey);
-    setSelectedOptions(updated);
+    syncState(updated);
   };
 
   const onSelect = (optionValue: string) => {
@@ -29,7 +36,8 @@ export const InputSelectMultiple = ({
       (selected) => selected.key === option?.key
     );
     if (alreadySelected) return;
-    setSelectedOptions((prev) => [...prev, option]);
+    const updated = [...selectedOptions, option];
+    syncState(updated);
   };
 
   const filteredOptions = [
@@ -41,8 +49,6 @@ export const InputSelectMultiple = ({
       return !isSelected;
     }) || []),
   ];
-
-  console.log("selectedOptions", selectedOptions);
 
   return (
     <C.VStack w="full" spacing="2">

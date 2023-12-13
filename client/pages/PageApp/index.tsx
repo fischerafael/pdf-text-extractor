@@ -4,15 +4,14 @@ import { ContentVStack } from "@/client/components/ContentVStack";
 import { DashboardTemplate } from "@/client/components/DashboardTemplate";
 import { Footer } from "@/client/components/Footer";
 import { Header } from "@/client/components/Header";
+import { InputSelectMultiple } from "@/client/components/InputSelectMultiple";
+import { InputText } from "@/client/components/InputText";
 import { LinksContainer } from "@/client/components/LinksContainer";
 import { LinksContainerWithIcons } from "@/client/components/LinksContainerWithIcons";
 import { Logo } from "@/client/components/Logo";
-import { usePageApp } from "./hook";
-import * as C from "@chakra-ui/react";
-import { InputText } from "@/client/components/InputText";
-import { InputSelect } from "@/client/components/InputSelect";
 import { Text } from "@/client/components/Text";
-import { InputSelectMultiple } from "@/client/components/InputSelectMultiple";
+import * as C from "@chakra-ui/react";
+import { usePageApp } from "./hook";
 
 export const PageApp = () => {
   const { controllers, presenters } = usePageApp();
@@ -47,14 +46,17 @@ export const PageApp = () => {
                 <InputSelectMultiple
                   label="Categories"
                   options={presenters.categoryOptions}
+                  updateOptions={controllers.updateCategories}
                 />
                 <InputSelectMultiple
                   label="Departments"
                   options={presenters.departmentOptions}
+                  updateOptions={controllers.updateDepartments}
                 />
                 <InputSelectMultiple
                   label="AI Models"
                   options={presenters.aiModelOptions}
+                  updateOptions={controllers.updateAIModels}
                 />
               </C.HStack>
             </C.VStack>
