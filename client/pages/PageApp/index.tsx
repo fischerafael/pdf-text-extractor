@@ -1,77 +1,69 @@
 import { Avatar } from "@/client/components/Avatar";
 import { Button } from "@/client/components/Button";
+import { ContentVStack } from "@/client/components/ContentVStack";
 import { DashboardTemplate } from "@/client/components/DashboardTemplate";
 import { Footer } from "@/client/components/Footer";
 import { Header } from "@/client/components/Header";
-import { InputNumber } from "@/client/components/InputNumber";
-import { InputSelect } from "@/client/components/InputSelect";
-import { InputText } from "@/client/components/InputText";
-import { InputTextArea } from "@/client/components/InputTextArea";
 import { LinksContainer } from "@/client/components/LinksContainer";
 import { LinksContainerWithIcons } from "@/client/components/LinksContainerWithIcons";
 import { Logo } from "@/client/components/Logo";
-import { Modal } from "@/client/components/Modal";
 import { usePageApp } from "./hook";
 import * as C from "@chakra-ui/react";
-import { ContentVStack } from "@/client/components/ContentVStack";
+import { InputText } from "@/client/components/InputText";
+import { InputSelect } from "@/client/components/InputSelect";
+import { Text } from "@/client/components/Text";
 
 export const PageApp = () => {
   const { controllers, presenters } = usePageApp();
 
   return (
-    <>
-      <Modal
-        header={<p>Title</p>}
-        isOpen={presenters.isOpen}
-        onClose={controllers.onClose}
-      >
-        <>
-          <InputText label="testing" helpText="test" />
-          <InputNumber label="testing" helpText="test" />
-          <InputTextArea label="testing" helpText="test" />
-          <InputSelect
-            options={[
-              { key: "1", value: "Random" },
-              { key: "2", value: "Random" },
-
-              { key: "3", value: "Random" },
-
-              { key: "4", value: "Random" },
-
-              { key: "5", value: "Random" },
-            ]}
-            label="testing"
-            helpText="test"
-            placeholder="Test"
-          />
-        </>
-      </Modal>
-      <DashboardTemplate
-        logoSlot={<Logo />}
-        linksSlot={<LinksContainerWithIcons />}
-        headerSlot={
-          <Header
-            logoSlot={
-              <Avatar
-                title={presenters.userName}
-                subTitle={presenters.userEmail}
-                src={presenters.userName}
-              />
-            }
-            linksSlot={<LinksContainer />}
-            actionSlot={
-              <Button onClick={controllers.handleLogOut}>Log Out</Button>
-            }
-            isDisplayLinksOnWeb={false}
-          />
-        }
-        mainSlot={
-          <ContentVStack>
-            <Button onClick={controllers.onOpen}>Open</Button>
+    <DashboardTemplate
+      logoSlot={<Logo />}
+      linksSlot={<LinksContainerWithIcons />}
+      headerSlot={
+        <Header
+          logoSlot={
+            <Avatar
+              title={presenters.userName}
+              subTitle={presenters.userEmail}
+              src={presenters.userName}
+            />
+          }
+          linksSlot={<LinksContainer />}
+          actionSlot={
+            <Button onClick={controllers.handleLogOut}>Log Out</Button>
+          }
+          isDisplayLinksOnWeb={false}
+        />
+      }
+      mainSlot={
+        <ContentVStack>
+          <ContentVStack align="flex-start" px="0" minH="0vh">
+            <Text variant="h2">Search</Text>
+            <C.VStack w="full" spacing="4" pb="8">
+              <InputText label="Prompt Title" />
+              <C.HStack w="full" spacing="8">
+                <InputSelect
+                  label="Categories"
+                  options={presenters.categoryOptions}
+                />
+                <InputSelect
+                  label="Departments"
+                  options={presenters.departmentOptions}
+                />
+                <InputSelect
+                  label="AI Models"
+                  options={presenters.aiModelOptions}
+                />
+              </C.HStack>
+            </C.VStack>
           </ContentVStack>
-        }
-        footerSlot={<Footer />}
-      />
-    </>
+          <ContentVStack px="0">
+            <p>hi</p>
+          </ContentVStack>
+        </ContentVStack>
+      }
+      footerSlot={<Footer />}
+    />
   );
 };

@@ -3,6 +3,11 @@ import { useQuery } from "react-query";
 
 interface Input {
   access?: string;
+  title?: string;
+  departmentId?: number[];
+  categoryId?: number[];
+  aiModelId?: number[];
+  authorId?: number[];
 }
 
 interface Output {
@@ -10,7 +15,7 @@ interface Output {
   fullName: string;
 }
 
-export const useGetUser = ({ access }: Input): Output => {
+export const useGetPrompts = ({ access }: Input): Output => {
   const { data } = useQuery(
     ["user", access],
     async () => {

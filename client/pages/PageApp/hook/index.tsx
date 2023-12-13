@@ -24,6 +24,9 @@ export const usePageApp = () => {
       isOpen,
       userName: globalCachePresenters.userFullName,
       userEmail: globalCachePresenters.userEmail,
+      categoryOptions: globalCachePresenters.categoryOptions,
+      departmentOptions: globalCachePresenters.departmentOptions,
+      aiModelOptions: globalCachePresenters.aiModelOptions,
     },
     controllers: { onClose, onOpen, handleLogOut },
   };
