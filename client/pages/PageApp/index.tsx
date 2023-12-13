@@ -55,7 +55,7 @@ export const PageApp = () => {
               <Avatar
                 title={presenters.userName}
                 subTitle={presenters.userEmail}
-                src={presenters.imageSource}
+                src={presenters.userName}
               />
             }
             linksSlot={<LinksContainer />}

@@ -12,7 +12,7 @@ export const Avatar = (props: AvatarProps) => {
   return (
     <C.HStack spacing="4">
       <C.Avatar
-        bg={`${theme.accentColour}.500`}
+        bg={`${theme.mainColour}`}
         color="white"
         src={props.src}
         name={props.title}

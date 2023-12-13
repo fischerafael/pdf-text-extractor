@@ -1,13 +1,15 @@
 import { useAuthentication } from "@/client/hooks/global/useAuthenticationGlobal";
-import { useUser } from "@/client/hooks/global/useUser";
+import { useGlobalCache } from "@/client/hooks/global/useGlobalCache";
 import { useDisclosure } from "@chakra-ui/react";
 
 export const usePageApp = () => {
   const { isOpen, onClose, onOpen } = useDisclosure();
   const { controllers: authControllers, presenters: authPresenters } =
     useAuthentication();
-  const { controllers: userControllers, presenters: userPresenters } =
-    useUser();
+  const {
+    controllers: globalCacheControllers,
+    presenters: globalCachePresenters,
+  } = useGlobalCache();
 
   const handleLogOut = async () => {
     try {
@@ -20,9 +22,8 @@ export const usePageApp = () => {
   return {
     presenters: {
       isOpen,
-      imageSource: "",
-      userName: "",
-      userEmail: "",
+      userName: globalCachePresenters.userFullName,
+      userEmail: globalCachePresenters.userEmail,
     },
     controllers: { onClose, onOpen, handleLogOut },
   };
