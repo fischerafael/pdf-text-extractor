@@ -17,6 +17,12 @@ export const InputSelectMultiple = ({
     value: "Select",
   };
 
+  const onRemove = (optionKey: string) => {
+    console.log("KEY TO REMOVE", optionKey);
+    const updated = selectedOptions.filter((op) => op.key !== optionKey);
+    setSelectedOptions(updated);
+  };
+
   const onSelect = (optionValue: string) => {
     const option = options?.find((op) => op.value === optionValue)!;
     const alreadySelected = selectedOptions.some(
@@ -36,7 +42,7 @@ export const InputSelectMultiple = ({
     }) || []),
   ];
 
-  console.log(selectedOptions);
+  console.log("selectedOptions", selectedOptions);
 
   return (
     <C.VStack w="full" spacing="2">
@@ -48,7 +54,13 @@ export const InputSelectMultiple = ({
       />
       <C.HStack justify="flex-start">
         {selectedOptions.map((selected) => (
-          <C.Tag colorScheme={theme.accentColour}>{selected.value}</C.Tag>
+          <C.Tag
+            key={selected.key}
+            colorScheme={theme.accentColour}
+            onClick={() => onRemove(selected.key)}
+          >
+            {selected.value}
+          </C.Tag>
         ))}
       </C.HStack>
     </C.VStack>
