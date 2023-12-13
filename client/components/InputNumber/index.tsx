@@ -11,7 +11,7 @@ interface InputTextProps extends C.NumberInputProps {
 export const InputNumber = ({ label, helpText, ...props }: InputTextProps) => {
   return (
     <FormControl label={label}>
-      <C.NumberInput fontSize="xs" w="full" {...props}>
+      <C.NumberInput fontSize="xs" w="full" bg="white" {...props}>
         <C.NumberInputField
           _focus={{ ring: "none", borderColor: theme.accentColour }}
           w="full"

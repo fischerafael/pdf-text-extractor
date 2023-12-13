@@ -12,6 +12,7 @@ export const InputText = ({ label, helpText, ...props }: InputTextProps) => {
   return (
     <FormControl label={label}>
       <C.Input
+        bg="white"
         fontSize="xs"
         _focus={{ ring: "none", borderColor: theme.accentColour }}
         {...props}

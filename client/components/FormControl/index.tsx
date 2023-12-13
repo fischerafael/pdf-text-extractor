@@ -1,3 +1,4 @@
+import { theme } from "@/client/config/theme";
 import * as C from "@chakra-ui/react";
 import React from "react";
 
@@ -12,7 +13,12 @@ export const FormControl = ({
 }) => {
   return (
     <C.FormControl as={C.VStack} align="flex-start" w="full" spacing="0">
-      <C.FormLabel fontWeight="regular" fontSize="xs" w="full">
+      <C.FormLabel
+        color={theme.mainColour}
+        fontWeight="regular"
+        fontSize="xs"
+        w="full"
+      >
         {label}
       </C.FormLabel>
       {children}

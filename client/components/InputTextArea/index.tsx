@@ -15,6 +15,7 @@ export const InputTextArea = ({
   return (
     <FormControl label={label}>
       <C.Textarea
+        bg="white"
         fontSize="xs"
         _focus={{ ring: "none", borderColor: theme.accentColour }}
         {...props}

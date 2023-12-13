@@ -23,6 +23,7 @@ export const InputSelect = ({
     <FormControl label={label}>
       <C.Select
         fontSize="xs"
+        bg="white"
         _focus={{ ring: "none", borderColor: theme.accentColour }}
         isDisabled={!isEnabled}
         {...props}
