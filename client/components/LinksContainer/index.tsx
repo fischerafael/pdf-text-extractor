@@ -1,20 +1,30 @@
 import * as C from "@chakra-ui/react";
 import { Link } from "../Link";
 import { ILink, links } from "@/client/config/links";
+import { useGetIsPublicPage } from "@/client/hooks/general/useGetIsPublicPage";
+import { utils } from "@/client/utils";
 
 export const LinksContainer = () => {
+  const isPublic = useGetIsPublicPage();
   return (
     <>
-      <HorizontalLinks links={links} />
-      <VerticalLinks links={links} />
+      <HorizontalLinks isPublic={isPublic} links={links} />
+      <VerticalLinks isPublic={isPublic} links={links} />
     </>
   );
 };
 
-const HorizontalLinks = ({ links }: { links: ILink[] }) => {
+const HorizontalLinks = ({
+  links,
+  isPublic = false,
+}: {
+  links: ILink[];
+  isPublic?: boolean;
+}) => {
+  const filteredLinks = isPublic ? utils.filterPublicLinks(links) : links;
   return (
     <C.HStack gap="8" display={["none", "none", "flex"]}>
-      {links.map((link) => (
+      {filteredLinks.map((link) => (
         <Link key={link.href} href={link.href}>
           {link.label}
         </Link>
@@ -22,7 +32,14 @@ const HorizontalLinks = ({ links }: { links: ILink[] }) => {
     </C.HStack>
   );
 };
-const VerticalLinks = ({ links }: { links: ILink[] }) => {
+const VerticalLinks = ({
+  links,
+  isPublic = false,
+}: {
+  links: ILink[];
+  isPublic?: boolean;
+}) => {
+  const filteredLinks = isPublic ? utils.filterPublicLinks(links) : links;
   return (
     <C.VStack
       gap="4"
@@ -30,7 +47,7 @@ const VerticalLinks = ({ links }: { links: ILink[] }) => {
       align="flex-start"
       display={["flex", "flex", "none"]}
     >
-      {links.map((link) => (
+      {filteredLinks.map((link) => (
         <Link key={link.href} href={link.href}>
           {link.label}
         </Link>
