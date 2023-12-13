@@ -3,6 +3,8 @@ import { cookieGateway } from "@/client/gateways/cookie";
 import { utils } from "@/client/utils";
 import { useEffect } from "react";
 import { atom, useRecoilState } from "recoil";
+import { useGetIsPublicPage as useIsPublic } from "../../general/useGetIsPublicPage";
+import { apiGateway } from "@/client/gateways/api";
 
 export const useAuthentication = () => {
   const [state, setState] = useRecoilState(tokenState);
@@ -20,36 +22,13 @@ export const useAuthentication = () => {
   useSyncAuthorizationFromCookies(updateStateAndCookie, reset);
 
   const logIn = async (email?: string, password?: string) => {
-    try {
-      // logic
-      utils.handleNavigateTo(pages.app.href);
-      updateStateAndCookie({ access: "", refresh: "" });
-    } catch (e: any) {
-      console.log(e);
-    } finally {
-    }
-  };
-
-  const signUp = async (email?: string, password?: string) => {
-    try {
-      // logic
-      utils.handleNavigateTo(pages.app.href);
-      updateStateAndCookie({ access: "", refresh: "" });
-    } catch (e: any) {
-      console.log(e);
-    } finally {
-    }
-  };
-
-  const signUpOrSignIn = async (email?: string, password?: string) => {
-    try {
-      // logic
-      utils.handleNavigateTo(pages.app.href);
-      updateStateAndCookie({ access: email || "", refresh: "" });
-    } catch (e: any) {
-      console.log(e);
-    } finally {
-    }
+    const { access, refresh } = await apiGateway.post.logIn({
+      email: email!,
+      password: password!,
+    });
+    console.log(access, refresh);
+    utils.handleNavigateTo(pages.prompts.href);
+    updateStateAndCookie({ access: access, refresh: refresh });
   };
 
   const logOut = async () => {
@@ -70,8 +49,6 @@ export const useAuthentication = () => {
     controllers: {
       logIn: logIn,
       logOut: logOut,
-      signUp: signUp,
-      signUpOrSignIn: signUpOrSignIn,
     },
   };
 };
@@ -95,9 +72,11 @@ const useSyncAuthorizationFromCookies = (
   updateStateAndCookie: (value: { access: string; refresh: string }) => void,
   reset: () => void
 ) => {
+  const isPublic = useIsPublic();
   useEffect(() => {
     (async () => {
       try {
+        if (isPublic) return;
         if (!updateStateAndCookie || !reset) throw new Error();
         const result: IAuthAtom = cookieGateway.get();
         if (!result) throw new Error("No Cookie");

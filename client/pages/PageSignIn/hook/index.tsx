@@ -1,5 +1,6 @@
 import { pages } from "@/client/config/links";
 import { apiGateway } from "@/client/gateways/api";
+import { useAuthentication } from "@/client/hooks/global/useAuthenticationGlobal";
 import { utils } from "@/client/utils";
 import { useState } from "react";
 
@@ -9,6 +10,7 @@ interface ILogIn {
 }
 
 export const usePageSignIn = () => {
+  const { controllers } = useAuthentication();
   const [state, setState] = useState<ILogIn>({ email: "", password: "" });
   const [isLoading, setLoading] = useState(false);
 
@@ -16,11 +18,7 @@ export const usePageSignIn = () => {
     try {
       setLoading(true);
       e.preventDefault();
-      const { access, refresh } = await apiGateway.post.logIn({
-        email: state.email,
-        password: state.password,
-      });
-      console.log(access, refresh);
+      await controllers.logIn(state.email, state.password);
     } catch (e: any) {
       console.log(e.message);
     } finally {

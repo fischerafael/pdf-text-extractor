@@ -16,11 +16,42 @@ const logIn: LogIn = async ({ email, password }) => {
     email,
     password,
   });
-  return data;
+  const mockReturn = {
+    access: "test",
+    refresh: "test",
+  };
+  return mockReturn;
+};
+
+interface GetUser {
+  (input: { access: string }): Promise<{
+    email: string;
+    fullName: string;
+  }>;
+}
+
+const user: GetUser = async ({ access }) => {
+  const url = ``;
+  const { data } = await api.backend.get<{
+    email: string;
+    fullName: string;
+  }>(url, {
+    headers: {
+      Authorization: `Bearer ${access}`,
+    },
+  });
+  const mockReturn = {
+    email: "rafael@gmail.com",
+    fullName: "Rafael Fischer",
+  };
+  return mockReturn;
 };
 
 export const apiGateway = {
   post: {
     logIn,
+  },
+  get: {
+    user,
   },
 };

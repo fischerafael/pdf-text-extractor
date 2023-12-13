@@ -4,10 +4,10 @@ import { useDisclosure } from "@chakra-ui/react";
 
 export const usePageApp = () => {
   const { isOpen, onClose, onOpen } = useDisclosure();
-  // const { controllers: userControllers, presenters: userPresenters } =
-  //   useUser();
-  // const { controllers: authControllers, presenters: authPresenters } =
-  //   useAuthentication();
+  const { controllers: authControllers, presenters: authPresenters } =
+    useAuthentication();
+  const { controllers: userControllers, presenters: userPresenters } =
+    useUser();
 
   const handleLogOut = async () => {};
 
