@@ -7,4 +7,11 @@ export const utils = {
   },
   filterPublicLinks: (links: ILink[]): ILink[] =>
     links.filter((link) => link.isPublic),
+  isEmailValid: (email: string): boolean => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  },
+  isPasswordValid: (password: string): boolean => {
+    return password.length >= 8;
+  },
 };

@@ -12,6 +12,7 @@ export const usePageSignIn = () => {
 
   const handleLogIn = async (e: any) => {
     try {
+      e.preventDefault();
       alert("Login");
     } catch (e: any) {
       console.log(e.message);
@@ -26,7 +27,8 @@ export const usePageSignIn = () => {
     setState((prev) => ({ ...prev, [key]: value }));
   };
 
-  console.log("state", state);
+  const isSubmitValid =
+    utils.isEmailValid(state.email) && utils.isPasswordValid(state.password);
 
   return {
     controllers: {
@@ -37,6 +39,7 @@ export const usePageSignIn = () => {
     presenters: {
       email: state.email,
       password: state.password,
+      isDisabled: !isSubmitValid,
     },
   };
 };

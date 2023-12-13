@@ -43,7 +43,11 @@ export const PageSignIn = () => {
             controllers.handleUpdateState("password", e.target.value)
           }
         />
-        <Button type="submit" alignSelf="flex-end">
+        <Button
+          type="submit"
+          alignSelf="flex-end"
+          isDisabled={presenters.isDisabled}
+        >
           Log In
         </Button>
       </ContentVStack>
