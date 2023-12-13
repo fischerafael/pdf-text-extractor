@@ -7,7 +7,7 @@ export const CardContainer = ({
   spacing = "2",
 }: {
   children: React.ReactNode;
-  spacing: string;
+  spacing?: string;
 }) => {
   return (
     <C.VStack
