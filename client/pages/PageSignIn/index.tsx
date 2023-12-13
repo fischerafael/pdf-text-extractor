@@ -21,7 +21,7 @@ export const PageSignIn = () => {
       <ContentVStack
         as="form"
         px="0"
-        maxW="container.sm"
+        maxW={"400px"}
         minH="40vh"
         justify="center"
       >
