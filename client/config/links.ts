@@ -14,15 +14,8 @@ export const pages = {
   landingPage: {
     isPublic: true,
     isPrivate: true,
-    label: "Landing Page",
+    label: "Home",
     href: "/",
-    icon: Icon.HiOutlineHome,
-  },
-  pricing: {
-    isPublic: true,
-    isPrivate: true,
-    label: "Pricing",
-    href: "/pricing",
     icon: Icon.HiOutlineHome,
   },
   app: {
@@ -31,6 +24,13 @@ export const pages = {
     label: "App",
     href: "/app",
     icon: Icon.HiOutlineHome,
+  },
+  settings: {
+    isPublic: false,
+    isPrivate: true,
+    label: "Settings",
+    href: "/app/settings",
+    icon: Icon.HiOutlineCog,
   },
 };
 

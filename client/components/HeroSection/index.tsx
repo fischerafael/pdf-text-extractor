@@ -31,7 +31,7 @@ export const HeroSection = ({
           {subHeadline}
         </C.Text>
         {ctaSlot}
-        <C.HStack w="full" maxW="container.lg">
+        <C.HStack w="full" maxW="container.lg" justify="center">
           {heroVisualSlot}
         </C.HStack>
       </C.VStack>

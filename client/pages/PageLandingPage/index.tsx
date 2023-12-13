@@ -24,11 +24,7 @@ export const PageLandingPage = () => {
         subHeadline="Supercharge Your Workflow with AI: Access our Library of Professional Prompts."
         ctaSlot={<Button size="lg">Log In</Button>}
         heroVisualSlot={
-          <Image
-            heroImage={
-              "https://supercriador.com/public/uploads/media/uuguZ8Twpzyhzh7VHmRFi8OKMZmFqGyoJhIYYwHb.png"
-            }
-          />
+          <Image heroImage={"/PROMPT-MANAGER-IMAGE.png"} borderRadius={"16"} />
         }
       />
       {/* <FeatureSectionFactory
