@@ -24,11 +24,28 @@ export const PageSignIn = () => {
         maxW={"400px"}
         minH="40vh"
         justify="center"
+        onSubmit={controllers.handleLogIn}
       >
         <Text variant="h2">Log In</Text>
-        <InputText label="Email" type="email" />
-        <InputText label="Password" type="password" />
-        <Button alignSelf="flex-end">Log In</Button>
+        <InputText
+          label="Email"
+          type="email"
+          value={presenters.email}
+          onChange={(e) =>
+            controllers.handleUpdateState("email", e.target.value)
+          }
+        />
+        <InputText
+          label="Password"
+          type="password"
+          value={presenters.password}
+          onChange={(e) =>
+            controllers.handleUpdateState("password", e.target.value)
+          }
+        />
+        <Button type="submit" alignSelf="flex-end">
+          Log In
+        </Button>
       </ContentVStack>
     </ContainerPagePublic>
   );
