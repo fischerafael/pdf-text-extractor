@@ -9,7 +9,12 @@ interface HeroSectionProps {
   heroVisualSlot?: React.ReactNode;
 }
 
-export const HeroSection = ({ heroVisualSlot }: HeroSectionProps) => {
+export const HeroSection = ({
+  heroVisualSlot,
+  headline,
+  ctaSlot,
+  subHeadline,
+}: HeroSectionProps) => {
   return (
     <C.VStack w="full">
       <C.VStack w="full" maxW="container.lg" align="center" pt="20" gap="8">
@@ -20,14 +25,12 @@ export const HeroSection = ({ heroVisualSlot }: HeroSectionProps) => {
           textAlign="center"
           color={theme.mainColour}
         >
-          Foque no que importa nós cuidamos do resto
+          {headline}
         </C.Text>
-        <C.Text textAlign="center" fontSize="xl">
-          Queremos te dar mais tempo para se concentrar nas coisas que importam.
-          O trabalho repetitivo tem matado lentamente a criatividade humana. Por
-          isso, nosso SuperCriador irá trabalhar para você.
+        <C.Text textAlign="center" fontSize="xl" maxW="400px">
+          {subHeadline}
         </C.Text>
-        <Button size="lg">Comece</Button>
+        {ctaSlot}
         <C.HStack w="full" maxW="container.lg">
           {heroVisualSlot}
         </C.HStack>
