@@ -47,6 +47,7 @@ export const PageSignIn = () => {
           type="submit"
           alignSelf="flex-end"
           isDisabled={presenters.isDisabled}
+          isLoading={presenters.isLoading}
         >
           Log In
         </Button>

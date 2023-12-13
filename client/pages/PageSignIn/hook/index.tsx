@@ -1,4 +1,5 @@
 import { pages } from "@/client/config/links";
+import { apiGateway } from "@/client/gateways/api";
 import { utils } from "@/client/utils";
 import { useState } from "react";
 
@@ -9,13 +10,21 @@ interface ILogIn {
 
 export const usePageSignIn = () => {
   const [state, setState] = useState<ILogIn>({ email: "", password: "" });
+  const [isLoading, setLoading] = useState(false);
 
   const handleLogIn = async (e: any) => {
     try {
+      setLoading(true);
       e.preventDefault();
-      alert("Login");
+      const { access, refresh } = await apiGateway.post.logIn({
+        email: state.email,
+        password: state.password,
+      });
+      console.log(access, refresh);
     } catch (e: any) {
       console.log(e.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -40,6 +49,7 @@ export const usePageSignIn = () => {
       email: state.email,
       password: state.password,
       isDisabled: !isSubmitValid,
+      isLoading: isLoading,
     },
   };
 };
