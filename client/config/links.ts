@@ -21,9 +21,9 @@ export const pages = {
   app: {
     isPublic: false,
     isPrivate: true,
-    label: "App",
-    href: "/app",
-    icon: Icon.HiOutlineHome,
+    label: "Prompts",
+    href: "/app/prompts",
+    icon: Icon.HiOutlineLibrary,
   },
   settings: {
     isPublic: false,
