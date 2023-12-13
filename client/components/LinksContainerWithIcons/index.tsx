@@ -1,13 +1,15 @@
 import { ILink, links } from "@/client/config/links";
 import { theme } from "@/client/config/theme";
+import { utils } from "@/client/utils";
 import * as C from "@chakra-ui/react";
-import { useRouter } from "next/router";
 import NextLink from "next/link";
+import { useRouter } from "next/router";
 
 export const LinksContainerWithIcons = () => {
+  const privateLinks = utils.filterPrivateLinks(links);
   return (
     <C.VStack w="full" align="center" spacing="8" py="8">
-      {links.map((lk) => (
+      {privateLinks.map((lk) => (
         <LinkWithIcon lk={lk} />
       ))}
     </C.VStack>

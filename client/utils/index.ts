@@ -6,7 +6,9 @@ export const utils = {
     Router.push(url);
   },
   filterPublicLinks: (links: ILink[]): ILink[] =>
-    links.filter((link) => link.isPublic),
+    links.filter((link) => !!link.isPublic && !link.isPrivate),
+  filterPrivateLinks: (links: ILink[]): ILink[] =>
+    links.filter((link) => !link.isPublic && !!link.isPrivate),
   isEmailValid: (email: string): boolean => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);

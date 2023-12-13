@@ -13,14 +13,14 @@ export interface ILink {
 export const pages = {
   landingPage: {
     isPublic: true,
-    isPrivate: true,
+    isPrivate: false,
     label: "Home",
     href: "/",
     icon: Icon.HiOutlineHome,
   },
   signIn: {
     isPublic: true,
-    isPrivate: true,
+    isPrivate: false,
     label: "Sign In",
     href: "/sign-in",
     icon: Icon.HiOutlineKey,
