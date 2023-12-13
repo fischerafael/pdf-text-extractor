@@ -43,12 +43,12 @@ export const PageApp = () => {
             <Text variant="h2">Search</Text>
             <C.VStack w="full" spacing="4" pb="8">
               <InputText label="Prompt Title" />
-              <C.HStack w="full" spacing="8">
-                <InputSelect
+              <C.HStack w="full" spacing="8" align="flex-start">
+                <InputSelectMultiple
                   label="Categories"
                   options={presenters.categoryOptions}
                 />
-                <InputSelect
+                <InputSelectMultiple
                   label="Departments"
                   options={presenters.departmentOptions}
                 />

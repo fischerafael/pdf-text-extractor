@@ -52,12 +52,16 @@ export const InputSelectMultiple = ({
         value={value}
         {...props}
       />
-      <C.HStack justify="flex-start">
+      <C.HStack justify="flex-start" flexFlow="wrap" w="full">
         {selectedOptions.map((selected) => (
           <C.Tag
             key={selected.key}
-            colorScheme={theme.accentColour}
+            bg={theme.mainColour}
+            color="white"
+            fontWeight="regular"
+            fontSize="xs"
             onClick={() => onRemove(selected.key)}
+            cursor="pointer"
           >
             {selected.value}
           </C.Tag>
