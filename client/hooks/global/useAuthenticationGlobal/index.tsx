@@ -32,12 +32,12 @@ export const useAuthentication = () => {
 
   const logOut = async () => {
     try {
-      const {} = await apiGateway.post;
-      reset();
-      utils.handleNavigateTo(pages.landingPage.href);
+      await apiGateway.post.logOut({ refresh: state.refresh });
     } catch (e: any) {
       console.log(e);
     } finally {
+      reset();
+      utils.handleNavigateTo(pages.landingPage.href);
     }
   };
 

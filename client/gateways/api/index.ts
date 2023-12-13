@@ -23,6 +23,19 @@ const logIn: LogIn = async ({ email, password }) => {
   return mockReturn;
 };
 
+interface LogOut {
+  (input: { refresh: string }): Promise<void>;
+}
+
+const logOut: LogOut = async ({ refresh }) => {
+  const url = `/logout`;
+  const { data } = await api.backend.post<{
+    refresh: string;
+  }>(url, {
+    refresh,
+  });
+};
+
 interface GetUser {
   (input: { access: string }): Promise<{
     email: string;
@@ -50,6 +63,7 @@ const user: GetUser = async ({ access }) => {
 export const apiGateway = {
   post: {
     logIn,
+    logOut,
   },
   get: {
     user,
