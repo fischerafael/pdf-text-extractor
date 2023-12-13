@@ -6,7 +6,7 @@ import NextLink from "next/link";
 
 export const LinksContainerWithIcons = () => {
   return (
-    <C.VStack w="full" align="center" spacing="8">
+    <C.VStack w="full" align="center" spacing="8" py="8">
       {links.map((lk) => (
         <LinkWithIcon lk={lk} />
       ))}
@@ -25,9 +25,7 @@ export const LinkWithIcon = ({ lk }: { lk: ILink }) => {
         w="full"
         gap="0"
         cursor="pointer"
-        color={
-          isActive ? `${theme.accentColour}.600` : `${theme.accentColour}.300`
-        }
+        color={isActive ? `${theme.mainColour}` : `${theme.accentColour}.300`}
         _hover={{
           color: `${theme.accentColour}.600`,
         }}
