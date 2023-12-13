@@ -3,7 +3,7 @@ import * as C from "@chakra-ui/react";
 import { theme } from "@/client/config/theme";
 import { FormControl } from "../FormControl";
 
-interface InputSelectProps extends C.SelectProps {
+export interface InputSelectProps extends C.SelectProps {
   label: string;
   options?: { value: string; key: string }[];
   helpText?: string;

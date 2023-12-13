@@ -12,6 +12,7 @@ import * as C from "@chakra-ui/react";
 import { InputText } from "@/client/components/InputText";
 import { InputSelect } from "@/client/components/InputSelect";
 import { Text } from "@/client/components/Text";
+import { InputSelectMultiple } from "@/client/components/InputSelectMultiple";
 
 export const PageApp = () => {
   const { controllers, presenters } = usePageApp();
@@ -51,7 +52,7 @@ export const PageApp = () => {
                   label="Departments"
                   options={presenters.departmentOptions}
                 />
-                <InputSelect
+                <InputSelectMultiple
                   label="AI Models"
                   options={presenters.aiModelOptions}
                 />
