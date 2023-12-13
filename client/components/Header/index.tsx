@@ -78,6 +78,7 @@ const MobileHeader = ({ logoSlot, linksSlot, actionSlot }: HeaderProps) => {
       {logoSlot}
       <C.IconButton
         aria-label="Hamburguer Menu"
+        bg={theme.mainColour}
         icon={<Icon.HiOutlineMenu />}
         colorScheme={theme.accentColour}
         onClick={onOpen}

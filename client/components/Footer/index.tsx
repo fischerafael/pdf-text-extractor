@@ -3,6 +3,7 @@ import * as C from "@chakra-ui/react";
 import { Logo } from "../Logo";
 import { LinksContainer } from "../LinksContainer";
 import { theme } from "@/client/config/theme";
+import { appConfig } from "@/client/config/app";
 
 const currentYear = new Date().getFullYear();
 
@@ -20,7 +21,7 @@ export const Footer = ({ year = currentYear }: { year?: number }) => {
         <LinksContainer />
       </C.HStack>
       <C.Text pb="8" fontSize="xs">
-        SuperCreator © {year}
+        {appConfig.name} © {year}
       </C.Text>
     </C.VStack>
   );

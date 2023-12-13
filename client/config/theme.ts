@@ -1,5 +1,5 @@
 export const theme = {
-  mainColour: "purple.700",
-  accentColour: "purple",
+  mainColour: "#131C30",
+  accentColour: "blue",
   theme: "light",
 };
