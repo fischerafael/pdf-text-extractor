@@ -4,7 +4,7 @@ import { theme } from "@/client/config/theme";
 
 interface TextProps extends C.TextProps {
   children: React.ReactNode;
-  variant?: "h1" | "h2" | "h3" | "p";
+  variant?: "h1" | "h2" | "h3" | "p" | "xs";
 }
 
 export const Text = ({ children, variant = "p", ...props }: TextProps) => {
@@ -12,7 +12,7 @@ export const Text = ({ children, variant = "p", ...props }: TextProps) => {
     return (
       <C.Text
         color={theme.mainColour}
-        fontSize="3xl"
+        fontSize="2xl"
         fontWeight="medium"
         {...props}
       >
@@ -38,6 +38,12 @@ export const Text = ({ children, variant = "p", ...props }: TextProps) => {
         fontWeight="medium"
         {...props}
       >
+        {children}
+      </C.Text>
+    );
+  if (variant === "xs")
+    return (
+      <C.Text color={theme.mainColour} fontSize="xs" {...props}>
         {children}
       </C.Text>
     );

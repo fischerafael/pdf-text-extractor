@@ -1,6 +1,6 @@
 import { IOption } from "@/client/interfaces";
 import * as C from "@chakra-ui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { InputSelect, InputSelectProps } from "../InputSelect";
 import { Tag } from "../Tag";
 
@@ -11,6 +11,7 @@ interface InputSelectMultipleProps extends InputSelectProps {
 export const InputSelectMultiple = ({
   value,
   options,
+
   updateOptions,
   ...props
 }: InputSelectMultipleProps) => {

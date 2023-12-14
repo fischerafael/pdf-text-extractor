@@ -5,6 +5,22 @@ import { IOption } from "@/client/interfaces";
 import { useDisclosure } from "@chakra-ui/react";
 import { useState } from "react";
 
+interface IState {
+  searchInput: string;
+  selectedCategories: IOption[];
+  selectedAIModels: IOption[];
+  selectedDepartments: IOption[];
+  selectedAuthors: IOption[];
+}
+
+const INITIAL_STATE: IState = {
+  searchInput: "",
+  selectedCategories: [],
+  selectedAIModels: [],
+  selectedDepartments: [],
+  selectedAuthors: [],
+};
+
 export const usePageApp = () => {
   const { isOpen, onClose, onOpen } = useDisclosure();
   const { controllers: authControllers, presenters: authPresenters } =
@@ -13,21 +29,9 @@ export const usePageApp = () => {
     controllers: globalCacheControllers,
     presenters: globalCachePresenters,
   } = useGlobalCache();
-  const {} = useGetPrompts({ access: authPresenters.access });
+  const { prompts } = useGetPrompts({ access: authPresenters.access });
 
-  const [state, setState] = useState<{
-    searchInput: string;
-    selectedCategories: IOption[];
-    selectedAIModels: IOption[];
-    selectedDepartments: IOption[];
-    selectedAuthors: IOption[];
-  }>({
-    searchInput: "",
-    selectedCategories: [],
-    selectedAIModels: [],
-    selectedDepartments: [],
-    selectedAuthors: [],
-  });
+  const [state, setState] = useState<IState>(INITIAL_STATE);
 
   const onChangeSearchInput = (value: string) => {
     setState({
@@ -80,6 +84,7 @@ export const usePageApp = () => {
       aiModelOptions: globalCachePresenters.aiModelOptions,
       authorOptions: globalCachePresenters.authorOptions,
       searchInputValue: state.searchInput,
+      prompts: prompts,
     },
     controllers: {
       onClose,

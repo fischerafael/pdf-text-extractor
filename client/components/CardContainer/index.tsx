@@ -1,3 +1,4 @@
+import { theme } from "@/client/config/theme";
 import * as C from "@chakra-ui/react";
 import React from "react";
 
@@ -21,7 +22,7 @@ export const CardContainer = ({
       cursor="pointer"
       bg={"white"}
       transition="0.5s"
-      _hover={{ bg: "gray.50" }}
+      _hover={{ shadow: "md" }}
     >
       {children}
     </C.VStack>
