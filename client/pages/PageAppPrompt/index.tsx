@@ -45,7 +45,7 @@ export const PageAppPrompt = () => {
             <Tag>Use Case</Tag>
             <Text>{presenters.description}</Text>
             <AccordionContainer>
-              <AccordionItem title="Details">
+              <AccordionItem title="More Details">
                 <Text variant="xs">Categories</Text>
                 <C.HStack>
                   {presenters.categories.map((entry) => (
@@ -87,14 +87,18 @@ export const PageAppPrompt = () => {
 
           <ContentVStack px="0" w="full" align="flex-start">
             <CardContainer cursor="normal" spacing="4">
-              <Tag>Customize Prompt</Tag>
-              <C.Divider py="2" />
+              <Tag>Customize This Prompt</Tag>
+
               <C.VStack w="full" align="flex-start">
-                {presenters.promptHTML.map((el) => {
-                  if (el.element.html === "input") {
+                {presenters.promptHTML.map((el, index) => {
+                  const isInput = el.element.html === "input";
+                  const isFirstEl = index === 0;
+                  const isLastEl = index === presenters.promptHTML.length - 1;
+                  if (isInput) {
                     return (
                       <InputTextArea
                         label={el.label}
+                        placeholder="Type a value here"
                         onChange={(e) =>
                           controllers.handleUpdatePrompt(
                             el.label,
@@ -104,18 +108,29 @@ export const PageAppPrompt = () => {
                       />
                     );
                   }
+                  if (isLastEl)
+                    return (
+                      <Text py="4" fontSize={"lg"} key={el.label}>
+                        ...{el.label}
+                      </Text>
+                    );
+                  if (isFirstEl)
+                    return (
+                      <Text py="4" fontSize={"lg"} key={el.label}>
+                        {el.label}...
+                      </Text>
+                    );
                   return (
-                    <Text fontSize={"lg"} key={el.label}>
-                      {el.label}
+                    <Text py="4" fontSize={"lg"} key={el.label}>
+                      ...{el.label}...
                     </Text>
                   );
                 })}
               </C.VStack>
-              <C.Divider py="2" />
             </CardContainer>
 
             <CardContainer cursor="normal" spacing="4">
-              <Tag>Your Final Prompt</Tag>
+              <Tag>Your Final Customized Prompt</Tag>
               <Text>{presenters.finalPrompt}</Text>
               <Button
                 alignSelf="flex-end"

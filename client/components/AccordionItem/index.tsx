@@ -9,9 +9,9 @@ interface AccordionItemProps {
 
 export const AccordionItem = ({ title, children }: AccordionItemProps) => {
   return (
-    <C.AccordionItem w="full">
+    <C.AccordionItem w="full" border="none">
       <C.AccordionButton w="full">
-        <Text flex="1" textAlign="left">
+        <Text flex="1" fontSize="xs" textAlign="left">
           {title}
         </Text>
         <C.AccordionIcon />

@@ -17,7 +17,7 @@ export const PageAppSettings = () => {
       linksSlot={<LinksContainerWithIcons />}
       headerSlot={<HeaderAppFactory />}
       mainSlot={
-        <ContentVStack>
+        <ContentVStack maxW="container.lg">
           <ContentVStack minH="40vh" align="flex-start">
             <Text variant="h3">Change Password</Text>
             <InputText label="New Password" isDisabled />
