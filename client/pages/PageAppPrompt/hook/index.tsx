@@ -16,5 +16,20 @@ export const usePageAppPrompt = () => {
     promptId: promptId,
   });
 
-  return { presenters: {}, controllers: { handleNavigateBackToPrompts } };
+  console.log(promptId);
+
+  return {
+    presenters: {
+      title: prompt.title,
+      description: prompt.description,
+      categories: prompt.categories,
+      departments: prompt.departments,
+      id: prompt.id,
+      author: prompt.author,
+      topP: prompt.topP,
+      temperature: prompt.temperature,
+      maxResponse: prompt.maxResponse,
+    },
+    controllers: { handleNavigateBackToPrompts },
+  };
 };

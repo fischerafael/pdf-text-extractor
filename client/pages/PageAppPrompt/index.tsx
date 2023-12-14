@@ -8,9 +8,12 @@ import { Logo } from "@/client/components/Logo";
 import { Text } from "@/client/components/Text";
 import * as C from "@chakra-ui/react";
 import { usePageAppPrompt } from "./hook";
+import { Tag } from "@/client/components/Tag";
+import { Avatar } from "@/client/components/Avatar";
+import { CardContainer } from "@/client/components/CardContainer";
 
 export const PageAppPrompt = () => {
-  const { controllers } = usePageAppPrompt();
+  const { controllers, presenters } = usePageAppPrompt();
 
   return (
     <DashboardTemplate
@@ -19,19 +22,61 @@ export const PageAppPrompt = () => {
       headerSlot={<HeaderAppFactory />}
       mainSlot={
         <ContentVStack align="flex-start">
-          <C.HStack justify="space-between" w="full">
-            <Text variant="h1">Prompt</Text>
+          <C.HStack justify="space-between" w="full" align="flex-start">
+            <C.VStack align="flex-start">
+              <Tag>Prompt ID: {presenters.id}</Tag>
+              <Text variant="h1">{presenters.title}</Text>
+            </C.VStack>
+
             <Button
               variant="outline"
               bg="transparent"
               onClick={controllers.handleNavigateBackToPrompts}
             >
-              Back to Prompts
+              Back
             </Button>
           </C.HStack>
 
-          <ContentVStack px="0" spacing="8" w="full" align="flex-start">
-            <Text variant="h1">Prompt </Text>
+          <ContentVStack px="0" w="full" align="flex-start">
+            <CardContainer>
+              <Text variant="xs">Use Case</Text>
+              <Text>{presenters.description}</Text>
+              <C.Divider py="2" />
+              <Text variant="xs">Categories</Text>
+              <C.HStack>
+                {presenters.categories.map((entry) => (
+                  <Tag key={entry}>{entry}</Tag>
+                ))}
+              </C.HStack>
+              <Text variant="xs">Departments</Text>
+              <C.HStack>
+                {presenters.departments.map((entry) => (
+                  <Tag key={entry}>{entry}</Tag>
+                ))}
+              </C.HStack>
+              <C.Divider py="2" />
+              <C.Grid
+                w="full"
+                gap="8"
+                templateColumns={["1fr", "1fr 1fr", "1fr 1fr 1fr"]}
+              >
+                <C.VStack w="full" align="flex-start">
+                  <Text variant="xs">Max Response</Text>
+                  <Tag>{presenters.maxResponse}</Tag>
+                </C.VStack>
+                <C.VStack w="full" align="flex-start">
+                  <Text variant="xs">Top P</Text>
+                  <Tag>{presenters.topP}</Tag>
+                </C.VStack>
+                <C.VStack w="full" align="flex-start">
+                  <Text variant="xs">Temperature</Text>
+                  <Tag>{presenters.temperature}</Tag>
+                </C.VStack>
+              </C.Grid>
+              <C.Divider py="2" />
+              <Text variant="xs">Author</Text>
+              <Avatar title={presenters.author} />
+            </CardContainer>
           </ContentVStack>
         </ContentVStack>
       }
