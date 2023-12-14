@@ -42,7 +42,13 @@ export const PageApp = () => {
           <ContentVStack align="flex-start" px="0" minH="0vh">
             <Text variant="h2">Search</Text>
             <C.VStack w="full" spacing="4" pb="8">
-              <InputText label="Prompt Title" />
+              <InputText
+                label="Prompt Title"
+                value={presenters.searchInputValue}
+                onChange={(e) =>
+                  controllers.onChangeSearchInput(e.target.value)
+                }
+              />
               <C.Grid
                 w="full"
                 gap="4"

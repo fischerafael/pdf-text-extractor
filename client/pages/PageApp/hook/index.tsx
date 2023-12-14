@@ -1,3 +1,4 @@
+import { useGetPrompts } from "@/client/hooks/general/useGetPrompts";
 import { useAuthentication } from "@/client/hooks/global/useAuthenticationGlobal";
 import { useGlobalCache } from "@/client/hooks/global/useGlobalCache";
 import { IOption } from "@/client/interfaces";
@@ -12,19 +13,28 @@ export const usePageApp = () => {
     controllers: globalCacheControllers,
     presenters: globalCachePresenters,
   } = useGlobalCache();
+  const {} = useGetPrompts({ access: authPresenters.access });
 
   const [state, setState] = useState<{
+    searchInput: string;
     selectedCategories: IOption[];
     selectedAIModels: IOption[];
     selectedDepartments: IOption[];
     selectedAuthors: IOption[];
   }>({
+    searchInput: "",
     selectedCategories: [],
     selectedAIModels: [],
     selectedDepartments: [],
     selectedAuthors: [],
   });
 
+  const onChangeSearchInput = (value: string) => {
+    setState({
+      ...state,
+      searchInput: value,
+    });
+  };
   const updateCategories = (options: IOption[]) => {
     setState({
       ...state,
@@ -69,6 +79,7 @@ export const usePageApp = () => {
       departmentOptions: globalCachePresenters.departmentOptions,
       aiModelOptions: globalCachePresenters.aiModelOptions,
       authorOptions: globalCachePresenters.authorOptions,
+      searchInputValue: state.searchInput,
     },
     controllers: {
       onClose,
@@ -78,6 +89,7 @@ export const usePageApp = () => {
       updateAIModels,
       updateDepartments,
       updateAuthors,
+      onChangeSearchInput,
     },
   };
 };

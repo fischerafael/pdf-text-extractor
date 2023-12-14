@@ -27,7 +27,7 @@ export const useGetPrompts = ({ access }: Input): Output => {
     }
   );
   return {
-    prompts: [],
+    prompts: HARD_CODED_PROMPTS,
   };
 };
 
