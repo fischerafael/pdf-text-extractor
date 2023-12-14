@@ -25,7 +25,7 @@ export const PageApp = () => {
       headerSlot={<HeaderAppFactory />}
       mainSlot={
         <ContentVStack align="flex-start" maxW="container.lg">
-          <Text variant="h1">Prompts</Text>
+          <Text variant="h1">Prompts ({presenters.promptsCount})</Text>
           <InputText
             label="Search"
             value={presenters.searchInputValue}

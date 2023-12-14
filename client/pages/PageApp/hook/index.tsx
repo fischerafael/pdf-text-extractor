@@ -74,6 +74,7 @@ export const usePageApp = () => {
       authorOptions: globalCachePresenters.authorOptions,
       searchInputValue: state.searchInput,
       prompts: prompts,
+      promptsCount: prompts.length,
     },
     controllers: {
       onClose,
