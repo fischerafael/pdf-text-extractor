@@ -27,9 +27,9 @@ export const LinkWithIcon = ({ lk }: { lk: ILink }) => {
         w="full"
         gap="0"
         cursor="pointer"
-        color={isActive ? `${theme.mainColour}` : `${theme.accentColour}.300`}
+        color={isActive ? `${theme.mainColour}` : `${theme.accentColour}.600`}
         _hover={{
-          color: `${theme.accentColour}.600`,
+          color: `${theme.mainColour}`,
         }}
         transition="0.5s"
       >
