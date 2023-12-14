@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import { InputSelect, InputSelectProps } from "../InputSelect";
 import { IOption } from "@/client/interfaces";
 import * as C from "@chakra-ui/react";
-import { theme } from "@/client/config/theme";
+import { useState } from "react";
+import { InputSelect, InputSelectProps } from "../InputSelect";
+import { Tag } from "../Tag";
 
 interface InputSelectMultipleProps extends InputSelectProps {
   updateOptions: (options: IOption[]) => void;
@@ -60,17 +60,9 @@ export const InputSelectMultiple = ({
       />
       <C.HStack justify="flex-start" flexFlow="wrap" w="full">
         {selectedOptions.map((selected) => (
-          <C.Tag
-            key={selected.key}
-            bg={theme.mainColour}
-            color="white"
-            fontWeight="regular"
-            fontSize="xs"
-            onClick={() => onRemove(selected.key)}
-            cursor="pointer"
-          >
+          <Tag key={selected.key} onClick={() => onRemove(selected.key)}>
             {selected.value}
-          </C.Tag>
+          </Tag>
         ))}
       </C.HStack>
     </C.VStack>
