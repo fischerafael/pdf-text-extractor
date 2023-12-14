@@ -32,6 +32,13 @@ export const pages = {
     href: "/app/prompts",
     icon: Icon.HiOutlineLibrary,
   },
+  prompt: {
+    isPublic: false,
+    isPrivate: false,
+    label: "Prompt",
+    href: "/app/prompts/prompt",
+    icon: Icon.HiOutlineLibrary,
+  },
   settings: {
     isPublic: false,
     isPrivate: true,

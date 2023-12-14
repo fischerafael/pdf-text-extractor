@@ -1,22 +1,19 @@
+import { AccordionContainer } from "@/client/components/AccordionContainer";
+import { AccordionItem } from "@/client/components/AccordionItem";
 import { Avatar } from "@/client/components/Avatar";
-import { Button } from "@/client/components/Button";
+import { CardContainer } from "@/client/components/CardContainer";
 import { ContentVStack } from "@/client/components/ContentVStack";
 import { DashboardTemplate } from "@/client/components/DashboardTemplate";
 import { Footer } from "@/client/components/Footer";
-import { Header } from "@/client/components/Header";
+import { HeaderAppFactory } from "@/client/components/HeaderFactory";
 import { InputSelectMultiple } from "@/client/components/InputSelectMultiple";
 import { InputText } from "@/client/components/InputText";
-import { LinksContainer } from "@/client/components/LinksContainer";
 import { LinksContainerWithIcons } from "@/client/components/LinksContainerWithIcons";
 import { Logo } from "@/client/components/Logo";
+import { Tag } from "@/client/components/Tag";
 import { Text } from "@/client/components/Text";
 import * as C from "@chakra-ui/react";
 import { usePageApp } from "./hook";
-import { CardContainer } from "@/client/components/CardContainer";
-import { Tag } from "@/client/components/Tag";
-import { theme } from "@/client/config/theme";
-import { AccordionContainer } from "@/client/components/AccordionContainer";
-import { AccordionItem } from "@/client/components/AccordionItem";
 
 export const PageApp = () => {
   const { controllers, presenters } = usePageApp();
@@ -25,22 +22,7 @@ export const PageApp = () => {
     <DashboardTemplate
       logoSlot={<Logo />}
       linksSlot={<LinksContainerWithIcons />}
-      headerSlot={
-        <Header
-          logoSlot={
-            <Avatar
-              title={presenters.userName}
-              subTitle={presenters.userEmail}
-              src={presenters.userName}
-            />
-          }
-          linksSlot={<LinksContainer />}
-          actionSlot={
-            <Button onClick={controllers.handleLogOut}>Log Out</Button>
-          }
-          isDisplayLinksOnWeb={false}
-        />
-      }
+      headerSlot={<HeaderAppFactory />}
       mainSlot={
         <ContentVStack align="flex-start">
           <Text variant="h1">Prompts</Text>
@@ -84,7 +66,10 @@ export const PageApp = () => {
 
           <ContentVStack px="0" spacing="8">
             {presenters.prompts.map((pr) => (
-              <CardContainer key={pr.id}>
+              <CardContainer
+                key={pr.id}
+                onClick={() => controllers.handleNavigateToPrompt(pr.id)}
+              >
                 <Text variant="h1">{pr.title}</Text>
                 <Text>{pr.description}</Text>
                 <C.Divider py="2" />

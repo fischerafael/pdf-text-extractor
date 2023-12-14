@@ -5,9 +5,11 @@ import React from "react";
 export const CardContainer = ({
   children,
   spacing = "2",
+  onClick,
 }: {
   children: React.ReactNode;
   spacing?: string;
+  onClick?: () => void;
 }) => {
   return (
     <C.VStack
@@ -23,6 +25,7 @@ export const CardContainer = ({
       bg={"white"}
       transition="0.5s"
       _hover={{ shadow: "md" }}
+      onClick={onClick}
     >
       {children}
     </C.VStack>

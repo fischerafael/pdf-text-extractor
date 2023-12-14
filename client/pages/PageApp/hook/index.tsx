@@ -1,7 +1,9 @@
+import { pages } from "@/client/config/links";
 import { useGetPrompts } from "@/client/hooks/general/useGetPrompts";
 import { useAuthentication } from "@/client/hooks/global/useAuthenticationGlobal";
 import { useGlobalCache } from "@/client/hooks/global/useGlobalCache";
 import { IOption } from "@/client/interfaces";
+import { utils } from "@/client/utils";
 import { useDisclosure } from "@chakra-ui/react";
 import { useState } from "react";
 
@@ -23,12 +25,8 @@ const INITIAL_STATE: IState = {
 
 export const usePageApp = () => {
   const { isOpen, onClose, onOpen } = useDisclosure();
-  const { controllers: authControllers, presenters: authPresenters } =
-    useAuthentication();
-  const {
-    controllers: globalCacheControllers,
-    presenters: globalCachePresenters,
-  } = useGlobalCache();
+  const { presenters: authPresenters } = useAuthentication();
+  const { presenters: globalCachePresenters } = useGlobalCache();
   const { prompts } = useGetPrompts({ access: authPresenters.access });
 
   const [state, setState] = useState<IState>(INITIAL_STATE);
@@ -63,22 +61,15 @@ export const usePageApp = () => {
       selectedAuthors: options,
     });
   };
+  const handleNavigateToPrompt = (promptId: string) => {
+    utils.handleNavigateTo(`${pages.prompt.href}?id=${promptId}`);
+  };
 
   console.log("PAGE STATE ", state);
-
-  const handleLogOut = async () => {
-    try {
-      await authControllers.logOut();
-    } catch (e: any) {
-      console.log(e.message);
-    }
-  };
 
   return {
     presenters: {
       isOpen,
-      userName: globalCachePresenters.userFullName,
-      userEmail: globalCachePresenters.userEmail,
       categoryOptions: globalCachePresenters.categoryOptions,
       departmentOptions: globalCachePresenters.departmentOptions,
       aiModelOptions: globalCachePresenters.aiModelOptions,
@@ -89,12 +80,12 @@ export const usePageApp = () => {
     controllers: {
       onClose,
       onOpen,
-      handleLogOut,
       updateCategories,
       updateAIModels,
       updateDepartments,
       updateAuthors,
       onChangeSearchInput,
+      handleNavigateToPrompt,
     },
   };
 };
