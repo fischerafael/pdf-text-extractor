@@ -54,6 +54,7 @@ export const usePageAppPrompt = () => {
       temperature: prompt.temperature,
       maxResponse: prompt.maxResponse,
       promptHTML: state,
+      finalPrompt: finalPrompt,
     },
     controllers: { handleNavigateBackToPrompts, handleUpdatePrompt },
   };

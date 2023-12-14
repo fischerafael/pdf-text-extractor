@@ -24,7 +24,7 @@ export const PageApp = () => {
       linksSlot={<LinksContainerWithIcons />}
       headerSlot={<HeaderAppFactory />}
       mainSlot={
-        <ContentVStack align="flex-start">
+        <ContentVStack align="flex-start" maxW="container.lg">
           <Text variant="h1">Prompts</Text>
           <InputText
             label="Search"

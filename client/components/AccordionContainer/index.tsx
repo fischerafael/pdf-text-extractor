@@ -7,7 +7,7 @@ export const AccordionContainer = ({
   children: React.ReactNode;
 }) => {
   return (
-    <C.Accordion w="full" py="4" defaultIndex={[0]} allowToggle>
+    <C.Accordion w="full" py="4" allowToggle>
       {children}
     </C.Accordion>
   );
