@@ -44,16 +44,14 @@ export const PageApp = () => {
       mainSlot={
         <ContentVStack align="flex-start">
           <Text variant="h1">Prompts</Text>
+          <InputText
+            label="Search"
+            value={presenters.searchInputValue}
+            onChange={(e) => controllers.onChangeSearchInput(e.target.value)}
+          />
           <AccordionContainer>
-            <AccordionItem title="Advanced Search">
+            <AccordionItem title="More Filters">
               <C.VStack w="full" spacing="4" pb="8">
-                <InputText
-                  label="Prompt Title"
-                  value={presenters.searchInputValue}
-                  onChange={(e) =>
-                    controllers.onChangeSearchInput(e.target.value)
-                  }
-                />
                 <C.Grid
                   w="full"
                   gap="4"
@@ -80,7 +78,6 @@ export const PageApp = () => {
                     updateOptions={controllers.updateAuthors}
                   />
                 </C.Grid>
-                <Button alignSelf="flex-end">Search</Button>
               </C.VStack>
             </AccordionItem>
           </AccordionContainer>
