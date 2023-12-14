@@ -93,10 +93,8 @@ export const usePageAppPrompt = () => {
 function parseText(prompt: string): ParsedElement[] {
   const parts = splitPrompt(prompt);
   const parsedElements: ParsedElement[] = [];
-
   for (const part of parts) {
-    const isInput = part.startsWith("{") && part.endsWith("}");
-    if (isInput) {
+    if (isInput(part)) {
       parsedElements.push({
         element: {
           html: "input",
@@ -116,9 +114,12 @@ function parseText(prompt: string): ParsedElement[] {
       });
     }
   }
-
   return parsedElements;
 }
+
+const isInput = (promptPart: string): boolean => {
+  return promptPart.startsWith("{") && promptPart.endsWith("}");
+};
 
 const splitPrompt = (prompt: string): string[] => {
   const regex = /(\{[^}]+\})/g;
