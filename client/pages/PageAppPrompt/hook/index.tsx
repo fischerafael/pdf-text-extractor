@@ -28,10 +28,16 @@ export const usePageAppPrompt = () => {
 
   const [state, setState] = useState(parsePromptToHTML(prompt.promptText));
 
-  const handleChange = (label: string, value: string) => {};
+  const handleUpdatePrompt = (label: string, value: string) => {
+    const updatedState = state.map((el) => {
+      if (el.label === label) {
+        return { ...el, value: value };
+      }
+      return el;
+    });
+    setState(updatedState);
+  };
 
-  console.log("original ", prompt.promptText);
-  console.log("parsed ", parsePromptToHTML(prompt.promptText));
   console.log("state - ", state);
 
   return {
@@ -47,7 +53,7 @@ export const usePageAppPrompt = () => {
       maxResponse: prompt.maxResponse,
       promptHTML: state,
     },
-    controllers: { handleNavigateBackToPrompts },
+    controllers: { handleNavigateBackToPrompts, handleUpdatePrompt },
   };
 };
 

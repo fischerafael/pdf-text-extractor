@@ -85,7 +85,17 @@ export const PageAppPrompt = () => {
               <C.VStack w="full" align="flex-start">
                 {presenters.promptHTML.map((el) => {
                   if (el.element.html === "input") {
-                    return <InputTextArea label={el.label} />;
+                    return (
+                      <InputTextArea
+                        label={el.label}
+                        onChange={(e) =>
+                          controllers.handleUpdatePrompt(
+                            el.label,
+                            e.target.value
+                          )
+                        }
+                      />
+                    );
                   }
                   return (
                     <Text fontSize={"lg"} key={el.label}>
