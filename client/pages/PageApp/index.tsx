@@ -12,6 +12,7 @@ import { Logo } from "@/client/components/Logo";
 import { Text } from "@/client/components/Text";
 import * as C from "@chakra-ui/react";
 import { usePageApp } from "./hook";
+import { CardContainer } from "@/client/components/CardContainer";
 
 export const PageApp = () => {
   const { controllers, presenters } = usePageApp();
@@ -62,7 +63,9 @@ export const PageApp = () => {
             </C.VStack>
           </ContentVStack>
           <ContentVStack px="0">
-            <p>hi</p>
+            <CardContainer>
+              <p>hi</p>
+            </CardContainer>
           </ContentVStack>
         </ContentVStack>
       }

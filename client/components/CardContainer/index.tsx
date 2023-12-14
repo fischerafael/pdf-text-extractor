@@ -1,6 +1,5 @@
-import React from "react";
 import * as C from "@chakra-ui/react";
-import { theme } from "@/client/config/theme";
+import React from "react";
 
 export const CardContainer = ({
   children,
@@ -15,14 +14,14 @@ export const CardContainer = ({
       align="flex-start"
       p="8"
       spacing={spacing}
-      borderRadius="16"
+      borderRadius="8"
       border="solid"
       borderWidth="1px"
-      borderColor={`${theme.accentColour}.200`}
+      borderColor={`gray.200`}
       cursor="pointer"
-      bg={`${theme.accentColour}.50`}
+      bg={"white"}
       transition="0.5s"
-      _hover={{ bg: `${theme.accentColour}.100` }}
+      _hover={{ bg: "gray.50" }}
     >
       {children}
     </C.VStack>
