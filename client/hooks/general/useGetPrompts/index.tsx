@@ -4,10 +4,10 @@ import { useQuery } from "react-query";
 interface Input {
   access?: string;
   title?: string;
-  departmentId?: number[];
-  categoryId?: number[];
-  aiModelId?: number[];
-  authorId?: number[];
+  departmentIds?: number[];
+  categoryIds?: number[];
+  aiModelIds?: number[];
+  authorsIds?: number[];
 }
 
 interface Output {

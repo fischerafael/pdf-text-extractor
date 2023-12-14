@@ -43,7 +43,11 @@ export const PageApp = () => {
             <Text variant="h2">Search</Text>
             <C.VStack w="full" spacing="4" pb="8">
               <InputText label="Prompt Title" />
-              <C.HStack w="full" spacing="8" align="flex-start">
+              <C.Grid
+                w="full"
+                gap="4"
+                templateColumns={["1fr", "1fr", "1fr 1fr"]}
+              >
                 <InputSelectMultiple
                   label="Categories"
                   options={presenters.categoryOptions}
@@ -59,12 +63,17 @@ export const PageApp = () => {
                   options={presenters.aiModelOptions}
                   updateOptions={controllers.updateAIModels}
                 />
-              </C.HStack>
+                <InputSelectMultiple
+                  label="Authors"
+                  options={presenters.authorOptions}
+                  updateOptions={controllers.updateAuthors}
+                />
+              </C.Grid>
             </C.VStack>
           </ContentVStack>
           <ContentVStack px="0">
             <CardContainer>
-              <p>hi</p>
+              <C.HStack></C.HStack>
             </CardContainer>
           </ContentVStack>
         </ContentVStack>

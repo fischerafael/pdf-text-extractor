@@ -1,4 +1,5 @@
 import { useGetAIModels } from "../../general/useGetAIModels";
+import { useGetAuthors } from "../../general/useGetAuthors";
 import { useGetCategories } from "../../general/useGetCategories";
 import { useGetDepartments } from "../../general/useGetDepartments";
 import { useGetUser } from "../../general/useGetUser";
@@ -16,6 +17,9 @@ export const useGlobalCache = () => {
   const { options: aiModelOptions } = useGetAIModels({
     access: presenters.access,
   });
+  const { options: authorOptions } = useGetAuthors({
+    access: presenters.access,
+  });
 
   return {
     presenters: {
@@ -24,6 +28,7 @@ export const useGlobalCache = () => {
       departmentOptions,
       categoryOptions,
       aiModelOptions,
+      authorOptions,
     },
     controllers: {},
   };

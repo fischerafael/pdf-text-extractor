@@ -12,14 +12,17 @@ export const usePageApp = () => {
     controllers: globalCacheControllers,
     presenters: globalCachePresenters,
   } = useGlobalCache();
+
   const [state, setState] = useState<{
     selectedCategories: IOption[];
     selectedAIModels: IOption[];
     selectedDepartments: IOption[];
+    selectedAuthors: IOption[];
   }>({
     selectedCategories: [],
     selectedAIModels: [],
     selectedDepartments: [],
+    selectedAuthors: [],
   });
 
   const updateCategories = (options: IOption[]) => {
@@ -38,6 +41,12 @@ export const usePageApp = () => {
     setState({
       ...state,
       selectedDepartments: options,
+    });
+  };
+  const updateAuthors = (options: IOption[]) => {
+    setState({
+      ...state,
+      selectedAuthors: options,
     });
   };
 
@@ -59,6 +68,7 @@ export const usePageApp = () => {
       categoryOptions: globalCachePresenters.categoryOptions,
       departmentOptions: globalCachePresenters.departmentOptions,
       aiModelOptions: globalCachePresenters.aiModelOptions,
+      authorOptions: globalCachePresenters.authorOptions,
     },
     controllers: {
       onClose,
@@ -67,6 +77,7 @@ export const usePageApp = () => {
       updateCategories,
       updateAIModels,
       updateDepartments,
+      updateAuthors,
     },
   };
 };
