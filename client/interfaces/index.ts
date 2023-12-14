@@ -11,5 +11,9 @@ export interface IPrompt {
   departments: string[];
   categories: string[];
   aiModel: string;
+  promptText: string;
   author: string;
+  temperature: number;
+  topP: number;
+  maxResponse: number;
 }

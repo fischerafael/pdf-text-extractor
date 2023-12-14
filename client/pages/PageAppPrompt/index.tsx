@@ -30,7 +30,7 @@ export const PageAppPrompt = () => {
             </Button>
           </C.HStack>
 
-          <ContentVStack px="0" spacing="8">
+          <ContentVStack px="0" spacing="8" w="full" align="flex-start">
             <Text variant="h1">Prompt </Text>
           </ContentVStack>
         </ContentVStack>
