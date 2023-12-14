@@ -11,6 +11,8 @@ import { usePageAppPrompt } from "./hook";
 import { Tag } from "@/client/components/Tag";
 import { Avatar } from "@/client/components/Avatar";
 import { CardContainer } from "@/client/components/CardContainer";
+import { InputText } from "@/client/components/InputText";
+import { InputTextArea } from "@/client/components/InputTextArea";
 
 export const PageAppPrompt = () => {
   const { controllers, presenters } = usePageAppPrompt();
@@ -76,6 +78,22 @@ export const PageAppPrompt = () => {
               <C.Divider py="2" />
               <Text variant="xs">Author</Text>
               <Avatar title={presenters.author} />
+            </CardContainer>
+
+            <CardContainer spacing="4">
+              <Tag>Customize Prompt</Tag>
+              <C.VStack w="full" align="flex-start">
+                {presenters.promptHTML.map((el) => {
+                  if (el.element.html === "input") {
+                    return <InputTextArea label={el.label} />;
+                  }
+                  return (
+                    <Text fontSize={"lg"} key={el.label}>
+                      {el.label}
+                    </Text>
+                  );
+                })}
+              </C.VStack>
             </CardContainer>
           </ContentVStack>
         </ContentVStack>
