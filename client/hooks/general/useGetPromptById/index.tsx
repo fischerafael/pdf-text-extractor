@@ -25,7 +25,7 @@ const MOCK_PROMPT: IPrompt = {
   categories: ["Technology", "Testing"],
   aiModel: "GPT 3.5 Turbo",
   promptText:
-    "Write a series of unit tests for Redux reducers to verify that data manipulation is working correctly.",
+    "Write at lest {Amount of Tests} tests for {React Framework} to verify that data manipulation is working correctly.",
   author: "Ana Silva",
   temperature: 0.7,
   topP: 0.8,
