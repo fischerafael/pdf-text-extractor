@@ -3,6 +3,7 @@ import { useGetPromptById } from "@/client/hooks/general/useGetPromptById";
 import { useAuthentication } from "@/client/hooks/global/useAuthenticationGlobal";
 import { utils } from "@/client/utils";
 import { useRouter } from "next/router";
+import { useState } from "react";
 
 interface ParsedElement {
   element: {
@@ -25,54 +26,13 @@ export const usePageAppPrompt = () => {
     promptId: promptId,
   });
 
-  console.log("original ", prompt.promptText);
-  console.log("parsed ", parseText(prompt.promptText));
-
-  console.log(prompt.promptText);
-  // const html: ParsedElement[] = [
-  //   {
-  //     element: {
-  //       html: "p",
-  //       type: "",
-  //     },
-  //     label: "Write at lest",
-  //     value: "",
-  //   },
-  //   {
-  //     element: {
-  //       html: "input",
-  //       type: "text",
-  //     },
-  //     label: "Amount of Tests",
-  //     value: "",
-  //   },
-  //   {
-  //     element: {
-  //       html: "p",
-  //       type: "",
-  //     },
-  //     label: "tests for",
-  //     value: "",
-  //   },
-  //   {
-  //     element: {
-  //       html: "input",
-  //       type: "text",
-  //     },
-  //     label: "React Framework",
-  //     value: "",
-  //   },
-  //   {
-  //     element: {
-  //       html: "p",
-  //       type: "",
-  //     },
-  //     label: "to verify that data manipulation is working correctly.",
-  //     value: "",
-  //   },
-  // ];
+  const [state, setState] = useState(parsePromptToHTML(prompt.promptText));
 
   const handleChange = (label: string, value: string) => {};
+
+  console.log("original ", prompt.promptText);
+  console.log("parsed ", parsePromptToHTML(prompt.promptText));
+  console.log("state - ", state);
 
   return {
     presenters: {
@@ -85,12 +45,13 @@ export const usePageAppPrompt = () => {
       topP: prompt.topP,
       temperature: prompt.temperature,
       maxResponse: prompt.maxResponse,
+      promptHTML: state,
     },
     controllers: { handleNavigateBackToPrompts },
   };
 };
 
-function parseText(prompt: string): ParsedElement[] {
+function parsePromptToHTML(prompt: string): ParsedElement[] {
   const parts = splitPrompt(prompt);
   const parsedElements: ParsedElement[] = [];
   for (const part of parts) {
