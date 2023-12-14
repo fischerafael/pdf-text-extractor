@@ -9,13 +9,13 @@ interface LogIn {
 
 const logIn: LogIn = async ({ email, password }) => {
   const url = ``;
-  const { data } = await api.backend.post<{
-    access: string;
-    refresh: string;
-  }>(url, {
-    email,
-    password,
-  });
+  // const { data } = await api.backend.post<{
+  //   access: string;
+  //   refresh: string;
+  // }>(url, {
+  //   email,
+  //   password,
+  // });
   const mockReturn = {
     access: "test",
     refresh: "test",
@@ -29,11 +29,11 @@ interface LogOut {
 
 const logOut: LogOut = async ({ refresh }) => {
   const url = `/logout`;
-  const { data } = await api.backend.post<{
-    refresh: string;
-  }>(url, {
-    refresh,
-  });
+  // const { data } = await api.backend.post<{
+  //   refresh: string;
+  // }>(url, {
+  //   refresh,
+  // });
 };
 
 interface GetUser {
@@ -45,14 +45,14 @@ interface GetUser {
 
 const user: GetUser = async ({ access }) => {
   const url = ``;
-  const { data } = await api.backend.get<{
-    email: string;
-    fullName: string;
-  }>(url, {
-    headers: {
-      Authorization: `Bearer ${access}`,
-    },
-  });
+  // const { data } = await api.backend.get<{
+  //   email: string;
+  //   fullName: string;
+  // }>(url, {
+  //   headers: {
+  //     Authorization: `Bearer ${access}`,
+  //   },
+  // });
   const mockReturn = {
     email: "rafael@gmail.com",
     fullName: "Rafael Fischer",
