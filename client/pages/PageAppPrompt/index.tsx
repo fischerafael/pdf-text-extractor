@@ -117,7 +117,12 @@ export const PageAppPrompt = () => {
               <Tag>Your Final Prompt</Tag>
               <Text>{presenters.finalPrompt}</Text>
               <C.Divider py="2" />
-              <Button alignSelf="flex-end">Copy To Clipboard</Button>
+              <Button
+                alignSelf="flex-end"
+                onClick={controllers.handleCopyPromptToClipBoard}
+              >
+                Copy To Clipboard
+              </Button>
             </CardContainer>
           </ContentVStack>
         </ContentVStack>

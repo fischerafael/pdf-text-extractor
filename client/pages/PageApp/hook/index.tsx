@@ -65,8 +65,6 @@ export const usePageApp = () => {
     utils.handleNavigateTo(`${pages.prompt.href}?id=${promptId}`);
   };
 
-  console.log("PAGE STATE ", state);
-
   return {
     presenters: {
       isOpen,

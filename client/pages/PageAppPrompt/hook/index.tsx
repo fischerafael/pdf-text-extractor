@@ -40,6 +40,10 @@ export const usePageAppPrompt = () => {
 
   const finalPrompt = getFinalPrompt(state);
 
+  const handleCopyPromptToClipBoard = () => {
+    navigator.clipboard.writeText(finalPrompt);
+  };
+
   console.log("state - ", finalPrompt);
 
   return {
@@ -56,7 +60,11 @@ export const usePageAppPrompt = () => {
       promptHTML: state,
       finalPrompt: finalPrompt,
     },
-    controllers: { handleNavigateBackToPrompts, handleUpdatePrompt },
+    controllers: {
+      handleNavigateBackToPrompts,
+      handleUpdatePrompt,
+      handleCopyPromptToClipBoard,
+    },
   };
 };
 
