@@ -1,20 +1,21 @@
+import { AccordionContainer } from "@/client/components/AccordionContainer";
+import { AccordionItem } from "@/client/components/AccordionItem";
+import { Avatar } from "@/client/components/Avatar";
 import { Button } from "@/client/components/Button";
+import { CardContainer } from "@/client/components/CardContainer";
 import { ContentVStack } from "@/client/components/ContentVStack";
 import { DashboardTemplate } from "@/client/components/DashboardTemplate";
 import { Footer } from "@/client/components/Footer";
 import { HeaderAppFactory } from "@/client/components/HeaderFactory";
+import { InputTextArea } from "@/client/components/InputTextArea";
 import { LinksContainerWithIcons } from "@/client/components/LinksContainerWithIcons";
 import { Logo } from "@/client/components/Logo";
+import { Tag } from "@/client/components/Tag";
 import { Text } from "@/client/components/Text";
 import * as C from "@chakra-ui/react";
 import { usePageAppPrompt } from "./hook";
-import { Tag } from "@/client/components/Tag";
-import { Avatar } from "@/client/components/Avatar";
-import { CardContainer } from "@/client/components/CardContainer";
-import { InputText } from "@/client/components/InputText";
-import { InputTextArea } from "@/client/components/InputTextArea";
-import { AccordionContainer } from "@/client/components/AccordionContainer";
-import { AccordionItem } from "@/client/components/AccordionItem";
+import * as Icon from "react-icons/hi";
+import { TagWithIcon } from "@/client/components/TagWithIcon";
 
 export const PageAppPrompt = () => {
   const { controllers, presenters } = usePageAppPrompt();
@@ -40,11 +41,11 @@ export const PageAppPrompt = () => {
               Back
             </Button>
           </C.HStack>
-          <CardContainer>
+          <CardContainer cursor="normal">
             <Tag>Use Case</Tag>
             <Text>{presenters.description}</Text>
             <AccordionContainer>
-              <AccordionItem title="More Details">
+              <AccordionItem title="Details">
                 <Text variant="xs">Categories</Text>
                 <C.HStack>
                   {presenters.categories.map((entry) => (
@@ -85,7 +86,7 @@ export const PageAppPrompt = () => {
           </CardContainer>
 
           <ContentVStack px="0" w="full" align="flex-start">
-            <CardContainer spacing="4">
+            <CardContainer cursor="normal" spacing="4">
               <Tag>Customize Prompt</Tag>
               <C.Divider py="2" />
               <C.VStack w="full" align="flex-start">
@@ -113,16 +114,57 @@ export const PageAppPrompt = () => {
               <C.Divider py="2" />
             </CardContainer>
 
-            <CardContainer spacing="4">
+            <CardContainer cursor="normal" spacing="4">
               <Tag>Your Final Prompt</Tag>
               <Text>{presenters.finalPrompt}</Text>
-              <C.Divider py="2" />
               <Button
                 alignSelf="flex-end"
-                onClick={controllers.handleCopyPromptToClipBoard}
+                onClick={() =>
+                  controllers.handleCopyToClipboard(presenters.finalPrompt)
+                }
               >
-                Copy To Clipboard
+                Copy Prompt
               </Button>
+              <C.Divider py="2" />
+              <C.Grid
+                w="full"
+                gap="8"
+                templateColumns={["1fr", "1fr 1fr", "1fr 1fr 1fr"]}
+              >
+                <C.VStack w="full" align="flex-start">
+                  <Text variant="xs">Max Response</Text>
+                  <TagWithIcon
+                    icon={Icon.HiOutlineDuplicate}
+                    onClick={() =>
+                      controllers.handleCopyToClipboard(presenters.maxResponse)
+                    }
+                  >
+                    {presenters.maxResponse}
+                  </TagWithIcon>
+                </C.VStack>
+                <C.VStack w="full" align="flex-start">
+                  <Text variant="xs">Top P</Text>
+                  <TagWithIcon
+                    icon={Icon.HiOutlineDuplicate}
+                    onClick={() =>
+                      controllers.handleCopyToClipboard(presenters.topP)
+                    }
+                  >
+                    {presenters.topP}
+                  </TagWithIcon>
+                </C.VStack>
+                <C.VStack w="full" align="flex-start">
+                  <Text variant="xs">Temperature</Text>
+                  <TagWithIcon
+                    icon={Icon.HiOutlineDuplicate}
+                    onClick={() =>
+                      controllers.handleCopyToClipboard(presenters.temperature)
+                    }
+                  >
+                    {presenters.temperature}
+                  </TagWithIcon>
+                </C.VStack>
+              </C.Grid>
             </CardContainer>
           </ContentVStack>
         </ContentVStack>

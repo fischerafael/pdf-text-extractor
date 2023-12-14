@@ -2,6 +2,7 @@ import { pages } from "@/client/config/links";
 import { useGetPromptById } from "@/client/hooks/general/useGetPromptById";
 import { useAuthentication } from "@/client/hooks/global/useAuthenticationGlobal";
 import { utils } from "@/client/utils";
+import { useToast } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useState } from "react";
 
@@ -18,6 +19,8 @@ export const usePageAppPrompt = () => {
   const { query } = useRouter();
   const promptId = query.id as string | undefined;
   const { presenters } = useAuthentication();
+  const toast = useToast();
+
   const handleNavigateBackToPrompts = () => {
     utils.handleNavigateTo(pages.prompts.href);
   };
@@ -40,11 +43,16 @@ export const usePageAppPrompt = () => {
 
   const finalPrompt = getFinalPrompt(state);
 
-  const handleCopyPromptToClipBoard = () => {
-    navigator.clipboard.writeText(finalPrompt);
+  const handleCopyToClipboard = (text: string | number) => {
+    navigator.clipboard.writeText(String(text));
+    toast({
+      title: `Copied to ClipBoard`,
+      description: text,
+      position: "top-right",
+      colorScheme: "blue",
+      isClosable: true,
+    });
   };
-
-  console.log("state - ", finalPrompt);
 
   return {
     presenters: {
@@ -63,7 +71,7 @@ export const usePageAppPrompt = () => {
     controllers: {
       handleNavigateBackToPrompts,
       handleUpdatePrompt,
-      handleCopyPromptToClipBoard,
+      handleCopyToClipboard: handleCopyToClipboard,
     },
   };
 };

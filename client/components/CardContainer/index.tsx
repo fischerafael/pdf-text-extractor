@@ -5,10 +5,12 @@ import React from "react";
 export const CardContainer = ({
   children,
   spacing = "2",
+  cursor = "pointer",
   onClick,
 }: {
   children: React.ReactNode;
   spacing?: string;
+  cursor?: string;
   onClick?: () => void;
 }) => {
   return (
@@ -21,7 +23,7 @@ export const CardContainer = ({
       border="solid"
       borderWidth="1px"
       borderColor={`gray.200`}
-      cursor="pointer"
+      cursor={cursor}
       bg={"white"}
       transition="0.5s"
       _hover={{ shadow: "md" }}
