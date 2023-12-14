@@ -41,7 +41,7 @@ export const PageAppPrompt = () => {
 
           <ContentVStack px="0" w="full" align="flex-start">
             <CardContainer>
-              <Text variant="xs">Use Case</Text>
+              <Tag>Use Case</Tag>
               <Text>{presenters.description}</Text>
               <C.Divider py="2" />
               <Text variant="xs">Categories</Text>

@@ -38,7 +38,9 @@ export const usePageAppPrompt = () => {
     setState(updatedState);
   };
 
-  console.log("state - ", state);
+  const finalPrompt = getFinalPrompt(state);
+
+  console.log("state - ", finalPrompt);
 
   return {
     presenters: {
@@ -96,4 +98,14 @@ const splitPrompt = (prompt: string): string[] => {
 
 const removeCurlyBracketsFromString = (string: string): string => {
   return string.replace(/{|}/g, "");
+};
+
+const getFinalPrompt = (parsedElements: ParsedElement[]): string => {
+  const textOnly = parsedElements.map((el) => {
+    if (el.element.html === "input") {
+      return el.value;
+    }
+    return el.label;
+  });
+  return textOnly.join(" ");
 };
