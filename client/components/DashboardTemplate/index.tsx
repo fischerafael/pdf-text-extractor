@@ -15,7 +15,7 @@ export const DashboardTemplate = ({
   footerSlot?: React.ReactElement;
 }) => {
   return (
-    <C.Grid w="full" h="100vh" templateColumns={["1fr", "1fr", "96px 1fr"]}>
+    <C.Grid w="full" h="100vh" templateColumns={["1fr", "1fr", "80px 1fr"]}>
       <C.VStack
         px="4"
         bg="white"

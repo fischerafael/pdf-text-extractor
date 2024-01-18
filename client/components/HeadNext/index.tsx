@@ -8,7 +8,7 @@ export const HeadNext = ({ title }: { title: string }) => {
       <meta property="og:title" content={title} key={title} />
       <link
         rel="icon"
-        href={appConfig.logoUrl ? appConfig.logoUrl : "/log.png"}
+        href={appConfig.logoUrl ? appConfig.logoUrl : "/log.svg"}
         sizes="any"
       />
     </Head>
