@@ -17,7 +17,7 @@ export const HeroSection = ({
 }: HeroSectionProps) => {
   return (
     <C.VStack w="full">
-      <C.VStack w="full" maxW="container.lg" align="center" pt="20" gap="8">
+      <C.VStack w="full" maxW="container.lg" align="center" pt="12" gap="4">
         <C.Text
           lineHeight="1.15"
           fontSize="6xl"
@@ -27,7 +27,7 @@ export const HeroSection = ({
         >
           {headline}
         </C.Text>
-        <C.Text textAlign="center" fontSize="xl" maxW="400px">
+        <C.Text textAlign="center" fontSize="xl" maxW="600px">
           {subHeadline}
         </C.Text>
         {ctaSlot}
