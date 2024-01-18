@@ -1,5 +1,4 @@
 import { Button } from "@/client/components/Button";
-import { Footer } from "@/client/components/Footer";
 import { Header } from "@/client/components/Header";
 import { Image } from "@/client/components/HeroImage";
 import { HeroSection } from "@/client/components/HeroSection";

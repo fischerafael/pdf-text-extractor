@@ -26,7 +26,7 @@ export const useAuthentication = () => {
       email: email!,
       password: password!,
     });
-    utils.handleNavigateTo(pages.prompts.href);
+    utils.handleNavigateTo(pages.timesheets.href);
     updateStateAndCookie({ access: access, refresh: refresh });
   };
 
@@ -84,7 +84,7 @@ const useSyncAuthorizationFromCookies = (
         console.log("Has cookie");
       } catch (e: any) {
         reset();
-        utils.handleNavigateTo(pages.landingPage.href);
+        // utils.handleNavigateTo(pages.landingPage.href);
         console.log("No cookie found");
       }
     })();
