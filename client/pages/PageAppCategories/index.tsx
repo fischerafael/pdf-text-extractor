@@ -1,13 +1,12 @@
 import { Button } from "@/client/components/Button";
-import { ContentVStack } from "@/client/components/ContentVStack";
 import { DashboardTemplate } from "@/client/components/DashboardTemplate";
-import { Footer } from "@/client/components/Footer";
 import { HeaderAppFactory } from "@/client/components/HeaderFactory";
 import { InputText } from "@/client/components/InputText";
 import { LinksContainerWithIcons } from "@/client/components/LinksContainerWithIcons";
 import { Logo } from "@/client/components/Logo";
-import { Text } from "@/client/components/Text";
+import * as C from "@chakra-ui/react";
 import { usePageAppCategories } from "./hook";
+import { Tag } from "@/client/components/Tag";
 
 export const PageAppCategories = () => {
   const { presenters, controllers } = usePageAppCategories();
@@ -18,16 +17,39 @@ export const PageAppCategories = () => {
       linksSlot={<LinksContainerWithIcons />}
       headerSlot={<HeaderAppFactory />}
       mainSlot={
-        <ContentVStack maxW="container.lg">
-          <ContentVStack minH="40vh" align="flex-start">
-            <Text variant="h3">Change Password</Text>
-            <InputText label="New Password" isDisabled />
-            <InputText label="Confirm New Password" isDisabled />
-            <Button isDisabled>Change Password</Button>
-          </ContentVStack>
-        </ContentVStack>
+        <C.VStack w="full" align="center" p="8">
+          <C.VStack w="full" maxW="container.sm" align="flex-start" gap="8">
+            <C.Text fontSize="xl" color="purple.600">
+              Categories
+            </C.Text>
+
+            <C.HStack
+              w="full"
+              justify="space-between"
+              spacing="4"
+              align="flex-end"
+            >
+              <InputText label="New Category" />
+              <Button
+                variant="outline"
+                color="purple.600"
+                borderColor="purple.600"
+                bg="transparent"
+              >
+                Add
+              </Button>
+            </C.HStack>
+
+            <C.HStack wrap="wrap" gap="2">
+              <Tag>Vehicle</Tag>
+              <Tag>Vehicle</Tag>
+              <Tag>Vehicle</Tag>
+              <Tag>Vehicle</Tag>
+              <Tag>Vehicle</Tag>
+            </C.HStack>
+          </C.VStack>
+        </C.VStack>
       }
-      footerSlot={<Footer />}
     />
   );
 };
