@@ -1,6 +1,4 @@
-import { theme } from "@/client/config/theme";
 import * as C from "@chakra-ui/react";
-import { Button } from "../Button";
 
 interface HeroSectionProps {
   headline?: string;
