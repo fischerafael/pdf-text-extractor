@@ -1,6 +1,5 @@
-import React from "react";
 import * as C from "@chakra-ui/react";
-import { theme } from "@/client/config/theme";
+import React from "react";
 
 export const DashboardTemplate = ({
   logoSlot,
@@ -9,11 +8,11 @@ export const DashboardTemplate = ({
   mainSlot,
   footerSlot,
 }: {
-  logoSlot: React.ReactElement;
-  headerSlot: React.ReactElement;
-  linksSlot: React.ReactElement;
-  mainSlot: React.ReactElement;
-  footerSlot: React.ReactElement;
+  logoSlot?: React.ReactElement;
+  headerSlot?: React.ReactElement;
+  linksSlot?: React.ReactElement;
+  mainSlot?: React.ReactElement;
+  footerSlot?: React.ReactElement;
 }) => {
   return (
     <C.Grid w="full" h="100vh" templateColumns={["1fr", "1fr", "96px 1fr"]}>

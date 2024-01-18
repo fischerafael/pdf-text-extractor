@@ -19,18 +19,26 @@ export const PageLandingPage = () => {
         linksSlot={<LinksContainer />}
       />
       <HeroSection
-        headline="Guildhawk's Prompt Manager"
-        subHeadline="Supercharge Your Workflow with AI: Access our Library of Professional Prompts."
+        headline="Very Simple Timesheets"
+        subHeadline="Manage your timesheets in a very simple way."
         ctaSlot={
           <Button onClick={controllers.handleLogIn} size="lg">
             Sign In
           </Button>
         }
         heroVisualSlot={
-          <Image heroImage={"/PROMPT-MANAGER-IMAGE.png"} borderRadius={"16"} />
+          <Image
+            heroImage={
+              "https://images.unsplash.com/photo-1434494878577-86c23bcb06b9?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            }
+            borderTopRadius={"16"}
+            h="400px"
+            objectFit="cover"
+            w="full"
+            shadow="lg"
+          />
         }
       />
-      <Footer />
     </ContainerPagePublic>
   );
 };

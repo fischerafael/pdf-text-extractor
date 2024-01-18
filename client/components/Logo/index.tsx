@@ -1,5 +1,5 @@
 import * as C from "@chakra-ui/react";
 
 export const Logo = () => {
-  return <C.Image w="36px" src="/girl.light.svg" />;
+  return <C.Image w="36px" src="/log.png" />;
 };

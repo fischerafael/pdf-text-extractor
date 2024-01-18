@@ -10,8 +10,8 @@ export const Button = ({ children, ...props }: ButtonProps) => {
   return (
     <C.Button
       colorScheme={theme.accentColour}
-      bg={theme.mainColour}
-      borderRadius="4"
+      bgGradient="linear(to-r, purple.400, purple.600)"
+      borderRadius="full"
       fontSize="md"
       {...props}
     >

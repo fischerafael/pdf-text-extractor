@@ -93,7 +93,6 @@ export const PageApp = () => {
           </ContentVStack>
         </ContentVStack>
       }
-      footerSlot={<Footer />}
     />
   );
 };

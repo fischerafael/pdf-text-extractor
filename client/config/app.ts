@@ -1,4 +1,4 @@
 export const appConfig = {
-  name: "Prompt Manager",
-  logoUrl: "/girl.light.svg",
+  name: "Very Simple Timesheet",
+  logoUrl: "/log.png",
 };

@@ -23,7 +23,7 @@ export const HeroSection = ({
           fontSize="6xl"
           fontWeight="bold"
           textAlign="center"
-          color={theme.mainColour}
+          color="purple.600"
         >
           {headline}
         </C.Text>
@@ -31,7 +31,7 @@ export const HeroSection = ({
           {subHeadline}
         </C.Text>
         {ctaSlot}
-        <C.HStack w="full" maxW="container.lg" justify="center">
+        <C.HStack pt="8" w="full" maxW="container.lg" justify="center">
           {heroVisualSlot}
         </C.HStack>
       </C.VStack>

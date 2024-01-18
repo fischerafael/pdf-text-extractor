@@ -12,39 +12,18 @@ export interface ILink {
 
 export const pages = {
   landingPage: {
-    isPublic: true,
+    isPublic: false,
     isPrivate: false,
     label: "Home",
     href: "/",
     icon: Icon.HiOutlineHome,
   },
-  signIn: {
-    isPublic: true,
-    isPrivate: false,
-    label: "Sign In",
-    href: "/sign-in",
-    icon: Icon.HiOutlineKey,
-  },
-  prompts: {
-    isPublic: false,
-    isPrivate: true,
-    label: "Prompts",
-    href: "/app/prompts",
-    icon: Icon.HiOutlineLibrary,
-  },
-  prompt: {
+  timesheets: {
     isPublic: false,
     isPrivate: false,
-    label: "Prompt",
-    href: "/app/prompts/prompt",
-    icon: Icon.HiOutlineLibrary,
-  },
-  settings: {
-    isPublic: false,
-    isPrivate: true,
-    label: "Settings",
-    href: "/app/settings",
-    icon: Icon.HiOutlineCog,
+    label: "App",
+    href: "/app/timesheets",
+    icon: Icon.HiOutlineTable,
   },
 };
 

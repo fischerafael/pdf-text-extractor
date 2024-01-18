@@ -6,7 +6,7 @@ export const ContainerPagePublic = ({
 }: {
   children: React.ReactNode;
 }) => (
-  <C.VStack w="full" spacing="8" px="8">
+  <C.VStack w="full" spacing="8" px="8" fontFamily="sans-serif">
     {children}
   </C.VStack>
 );
