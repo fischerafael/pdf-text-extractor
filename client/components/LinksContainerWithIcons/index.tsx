@@ -1,5 +1,4 @@
 import { ILink, links } from "@/client/config/links";
-import { theme } from "@/client/config/theme";
 import { utils } from "@/client/utils";
 import * as C from "@chakra-ui/react";
 import NextLink from "next/link";
@@ -27,14 +26,14 @@ export const LinkWithIcon = ({ lk }: { lk: ILink }) => {
         w="full"
         gap="0"
         cursor="pointer"
-        color={isActive ? `${theme.mainColour}` : `${theme.accentColour}.600`}
+        color={isActive ? `purple.600` : `purple.300`}
         _hover={{
-          color: `${theme.mainColour}`,
+          color: `purple.600`,
         }}
         transition="0.5s"
       >
         <C.Icon w="6" h="6" as={lk.icon} />
-        <C.Text textAlign="center" fontSize="xs" fontWeight="medium">
+        <C.Text textAlign="center" fontSize="10px" fontWeight="medium">
           {lk.label}
         </C.Text>
       </C.VStack>

@@ -20,10 +20,17 @@ export const pages = {
   },
   timesheets: {
     isPublic: false,
-    isPrivate: false,
+    isPrivate: true,
     label: "App",
     href: "/app/timesheets",
     icon: Icon.HiOutlineTable,
+  },
+  categories: {
+    isPublic: false,
+    isPrivate: true,
+    label: "Categories",
+    href: "/app/categories",
+    icon: Icon.HiOutlineChartBar,
   },
 };
 
