@@ -4,4 +4,7 @@ export const api = {
   backend: axios.create({
     baseURL: "/",
   }),
+  entities: axios.create({
+    baseURL: "https://entity-manager-api.vercel.app/api",
+  }),
 };

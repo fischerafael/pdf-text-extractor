@@ -29,12 +29,20 @@ export const PageAppCategories = () => {
               spacing="4"
               align="flex-end"
             >
-              <InputText label="New Category" />
+              <InputText
+                label="New Category"
+                value={presenters.inputCategory}
+                onChange={(e) =>
+                  controllers.onChangeInputCategory(e.target.value)
+                }
+              />
               <Button
                 variant="outline"
                 color="purple.600"
                 borderColor="purple.600"
                 bg="transparent"
+                onClick={controllers.createCategory}
+                isLoading={presenters.isLoading}
               >
                 Add
               </Button>
