@@ -17,7 +17,7 @@ class CategoriesGateway {
       },
       {
         headers: {
-          api_key: "5efdad0e-a567-4487-8ed4-b5070fbbf153",
+          api_key: process.env.NEXT_PUBLIC_ENTITIES_API_KEY,
         },
       }
     );
