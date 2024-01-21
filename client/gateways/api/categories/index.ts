@@ -5,22 +5,36 @@ class CategoriesGateway {
   private app: string = `${appConfig.appPrefix}.categories`;
 
   async create(user: string, title: string) {
-    console.log(process.env.NEXT_PUBLIC_ENTITIES_API_KEY);
-    const { data } = await api.entities.post<{ id: string }>(
-      `/entities`,
-      {
-        user: user,
-        app: this.app,
-        details: {
-          title: "test",
-        },
+    const { data } = await api.entities.post<{ id: string }>(`/entities`, {
+      user: user,
+      app: this.app,
+      details: {
+        title: title,
       },
-      {
-        headers: {
-          api_key: process.env.NEXT_PUBLIC_ENTITIES_API_KEY,
-        },
-      }
-    );
+    });
+    return data;
+  }
+
+  async listByUser(user: string) {
+    const { data } = await api.entities.get<{
+      message: string;
+      count: number;
+      data: { id: string; details: { title: string } }[];
+    }>(`/entities`, {
+      headers: {
+        app: this.app,
+        user: user,
+      },
+    });
+    return data;
+  }
+
+  async remove(catId: string) {
+    const { data } = await api.entities.delete(`/entities`, {
+      headers: {
+        id: catId,
+      },
+    });
     return data;
   }
 }
