@@ -48,13 +48,18 @@ export const PageAppCategories = () => {
               </Button>
             </C.HStack>
 
-            <C.HStack wrap="wrap" gap="2">
-              <Tag>Vehicle</Tag>
-              <Tag>Vehicle</Tag>
-              <Tag>Vehicle</Tag>
-              <Tag>Vehicle</Tag>
-              <Tag>Vehicle</Tag>
-            </C.HStack>
+            {!presenters.isLoading && (
+              <C.HStack wrap="wrap" gap="2">
+                {presenters.existingCategoryes.map((cat) => (
+                  <Tag
+                    key={cat.id}
+                    onClick={() => controllers.removeCategory(cat.id)}
+                  >
+                    {cat.title}
+                  </Tag>
+                ))}
+              </C.HStack>
+            )}
           </C.VStack>
         </C.VStack>
       }
