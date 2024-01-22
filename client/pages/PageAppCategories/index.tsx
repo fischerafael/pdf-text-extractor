@@ -7,6 +7,7 @@ import { Logo } from "@/client/components/Logo";
 import * as C from "@chakra-ui/react";
 import { usePageAppCategories } from "./hook";
 import { Tag } from "@/client/components/Tag";
+import { Text } from "@/client/components/Text";
 
 export const PageAppCategories = () => {
   const { presenters, controllers } = usePageAppCategories();
@@ -19,9 +20,7 @@ export const PageAppCategories = () => {
       mainSlot={
         <C.VStack w="full" align="center" p="8">
           <C.VStack w="full" maxW="container.sm" align="flex-start" gap="8">
-            <C.Text fontSize="xl" color="purple.600">
-              Categories
-            </C.Text>
+            <Text variant="h1">Categories</Text>
 
             <C.HStack
               w="full"

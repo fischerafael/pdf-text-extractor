@@ -4,9 +4,10 @@ import React from "react";
 
 interface TagProps extends C.TagProps {
   children: React.ReactNode;
+  hasIconLeft?: boolean;
 }
 
-export const Tag = ({ children, ...props }: TagProps) => {
+export const Tag = ({ children, hasIconLeft = true, ...props }: TagProps) => {
   return (
     <C.Tag
       bgGradient="linear(to-r, purple.400, purple.600)"
@@ -19,7 +20,7 @@ export const Tag = ({ children, ...props }: TagProps) => {
       py="2"
       {...props}
     >
-      <C.TagLeftIcon boxSize="12px" as={Icon.HiOutlineX} />
+      {hasIconLeft && <C.TagLeftIcon boxSize="12px" as={Icon.HiOutlineX} />}
       {children}
     </C.Tag>
   );

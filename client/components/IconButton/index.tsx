@@ -7,6 +7,12 @@ interface IconProps extends C.IconButtonProps {
   ariaLabel?: string;
 }
 
-export const IconButton = ({ ariaLabel = "" }: IconProps) => {
-  return <C.IconButton bg={theme.mainColour} aria-label={ariaLabel} />;
+export const IconButton = ({ ariaLabel = "", ...props }: IconProps) => {
+  return (
+    <C.IconButton
+      bgGradient="linear(to-r, purple.400, purple.600)"
+      {...props}
+      aria-label={ariaLabel}
+    />
+  );
 };

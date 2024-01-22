@@ -11,12 +11,19 @@ interface InputTextProps extends C.NumberInputProps {
 export const InputNumber = ({ label, helpText, ...props }: InputTextProps) => {
   return (
     <FormControl label={label}>
-      <C.NumberInput fontSize="xs" w="full" bg="white" {...props}>
+      <C.NumberInput
+        fontSize="xs"
+        w="full"
+        bg="white"
+        {...props}
+        borderRadius="full"
+      >
         <C.NumberInputField
-          _focus={{ ring: "none", borderColor: theme.accentColour }}
+          _focus={{ ring: "none", borderColor: theme.mainColour }}
           w="full"
+          borderRadius="full"
         />
-        <C.NumberInputStepper>
+        <C.NumberInputStepper borderRadius="full">
           <C.NumberIncrementStepper color={`${theme.accentColour}.500`} />
           <C.NumberDecrementStepper color={`${theme.accentColour}.500`} />
         </C.NumberInputStepper>
