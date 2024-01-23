@@ -31,6 +31,7 @@ export const PageApp = () => {
                 icon={<Icon.HiChevronLeft color="white" />}
                 aria-label="Previous Day"
                 borderRadius="full"
+                onClick={controllers.onSubDate}
               />
               <Text variant="h2" w="full" textAlign="center">
                 {presenters.date}
@@ -39,6 +40,7 @@ export const PageApp = () => {
                 icon={<Icon.HiChevronRight color="white" />}
                 aria-label="Next Day"
                 borderRadius="full"
+                onClick={controllers.onAddDate}
               />
             </C.HStack>
 

@@ -19,22 +19,37 @@ export const usePageApp = () => {
 
   const [isLoading, setLoading] = useState(false);
 
-  const [state, setState] = useState<IState>(INITIAL_STATE);
+  const [inputState, setInputState] = useState<IState>(INITIAL_STATE);
+  const [stateUi, setStateUi] = useState({ currentDate: new Date() });
 
   const onChangeStateString = (key: keyof IState, value: string) => {
-    setState((prev) => ({ ...prev, [key]: value }));
+    setInputState((prev) => ({ ...prev, [key]: value }));
   };
+
+  const onAddDate = () => {
+    const currentDate = stateUi.currentDate;
+    currentDate.setDate(currentDate.getDate() + 1);
+    setStateUi((prev) => ({ ...prev, currentDate }));
+  };
+
+  const onSubDate = () => {
+    const currentDate = stateUi.currentDate;
+    currentDate.setDate(currentDate.getDate() - 1);
+    setStateUi((prev) => ({ ...prev, currentDate }));
+  };
+
+  console.log("[current date]", stateUi);
 
   const onSubmit = async () => {
     setLoading(true);
     try {
       await tasksGateway.create(
         loggedUser,
-        state.task,
-        state.duration,
-        state.category
+        inputState.task,
+        inputState.duration,
+        inputState.category
       );
-      setState(INITIAL_STATE);
+      setInputState(INITIAL_STATE);
       await refetch();
     } catch (e: any) {
     } finally {
@@ -53,29 +68,36 @@ export const usePageApp = () => {
     }
   };
 
-  const date = formatDate(new Date());
+  const date = formatDate(stateUi.currentDate);
 
   const {
     data: tasks,
     isLoading: isLoadingTasks,
     refetch,
   } = useQuery(
-    ["/tasks", loggedUser],
+    ["/tasks", loggedUser, date],
     async () => await tasksGateway.listByUserByDate(loggedUser, date),
     {
       enabled: !!loggedUser && !!date,
     }
   );
 
-  const isEnabled = !!state.category && !!state.duration && !!state.task;
+  const isEnabled =
+    !!inputState.category && !!inputState.duration && !!inputState.task;
 
   return {
-    controllers: { onChangeState: onChangeStateString, onSubmit, onRemove },
+    controllers: {
+      onChangeState: onChangeStateString,
+      onSubmit,
+      onRemove,
+      onAddDate,
+      onSubDate,
+    },
     presenters: {
       optionsCategories: [{ key: "", value: "" }, ...categories],
-      task: state.task,
-      duration: state.duration,
-      category: state.category,
+      task: inputState.task,
+      duration: inputState.duration,
+      category: inputState.category,
       isLoading: isLoading || isLoadingTasks,
       isDisabled: !isEnabled,
       tasks: tasks,
