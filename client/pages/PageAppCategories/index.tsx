@@ -28,13 +28,16 @@ export const PageAppCategories = () => {
               spacing="4"
               align="flex-end"
             >
-              <InputText
-                label="New Category"
-                value={presenters.inputCategory}
-                onChange={(e) =>
-                  controllers.onChangeInputCategory(e.target.value)
-                }
-              />
+              <C.HStack w="full">
+                <InputText
+                  label="New Category"
+                  value={presenters.inputCategory}
+                  onChange={(e) =>
+                    controllers.onChangeInputCategory(e.target.value)
+                  }
+                />
+              </C.HStack>
+
               <Button
                 variant="outline"
                 color="purple.600"

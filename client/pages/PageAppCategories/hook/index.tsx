@@ -4,8 +4,25 @@ import { useState } from "react";
 
 const loggedUser = "rafaelsanfischer@gmail.com";
 
+const colourOptions = [
+  "gray",
+  "red",
+  "orange",
+  "yellow",
+  "green",
+  "teal",
+  "blue",
+  "cyan",
+  "purple",
+  "pink",
+];
+
 export const usePageAppCategories = () => {
-  const [state, setState] = useState({ isLoading: false, inputCategory: "" });
+  const [state, setState] = useState({
+    isLoading: false,
+    inputCategory: "",
+    colour: "",
+  });
 
   const onChangeInputCategory = (value: string) => {
     setState((prev) => ({ ...prev, inputCategory: value }));
