@@ -5,7 +5,13 @@ import { format } from "date-fns";
 class TasksGateway {
   private app: string = `${appConfig.appPrefix}.tasks`;
 
-  async create(user: string, task: string, duration: string, category: string) {
+  async create(
+    user: string,
+    task: string,
+    duration: string,
+    category: string,
+    createdAt: string
+  ) {
     const { data } = await api.entities.post<{ id: string }>(`/entities`, {
       user: user,
       app: this.app,
@@ -13,7 +19,7 @@ class TasksGateway {
         task,
         duration,
         category,
-        createdAt: formatDate(),
+        createdAt,
       },
     });
     return data;

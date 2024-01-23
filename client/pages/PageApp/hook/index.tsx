@@ -48,7 +48,8 @@ export const usePageApp = () => {
         loggedUser,
         inputState.task,
         inputState.duration,
-        inputState.category
+        inputState.category,
+        dateAPI
       );
       setInputState(INITIAL_STATE);
       await refetch();
@@ -90,8 +91,6 @@ export const usePageApp = () => {
     const currentTaskDuration = parseFloat(currentTask.details.duration);
     return total + currentTaskDuration;
   }, 0);
-
-  console.log("[TOTAL TIME]", totalTime);
 
   return {
     controllers: {

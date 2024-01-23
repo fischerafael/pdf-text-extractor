@@ -86,7 +86,8 @@ export const PageApp = () => {
             </C.VStack>
 
             <C.HStack w="full" pb="8">
-              <TagHour>Total: {presenters.totalTime} h</TagHour>
+              <TagHour>Tasks: {presenters.tasks?.count}</TagHour>
+              <TagHour>Duration: {presenters.totalTime} h</TagHour>
             </C.HStack>
 
             <C.VStack w="full">
