@@ -19,7 +19,6 @@ export const InputTextArea = ({
         fontSize="xs"
         _focus={{ ring: "none", borderColor: theme.mainColour }}
         {...props}
-        borderRadius="16"
       />
     </FormControl>
   );

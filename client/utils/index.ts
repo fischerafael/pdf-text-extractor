@@ -1,5 +1,13 @@
 import Router from "next/router";
 import { ILink } from "../config/links";
+import { format } from "date-fns";
+
+export const formatDate = (
+  date: Date = new Date(),
+  separator: string = "-"
+) => {
+  return format(date, `dd${separator}MM${separator}yyyy`);
+};
 
 export const utils = {
   handleNavigateTo: (url: string) => {
@@ -16,4 +24,5 @@ export const utils = {
   isPasswordValid: (password: string): boolean => {
     return password.length >= 8;
   },
+  formatDate,
 };

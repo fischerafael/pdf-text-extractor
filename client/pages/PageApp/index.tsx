@@ -14,6 +14,7 @@ import { InputSelect } from "@/client/components/InputSelect";
 import { InputTextArea } from "@/client/components/InputTextArea";
 import { Tag } from "@/client/components/Tag";
 import { Button } from "@/client/components/Button";
+import { TagHour } from "@/client/components/TagHour";
 
 export const PageApp = () => {
   const { controllers, presenters } = usePageApp();
@@ -32,8 +33,9 @@ export const PageApp = () => {
                 aria-label="Previous Day"
                 borderRadius="full"
                 onClick={controllers.onSubDate}
+                size="sm"
               />
-              <Text variant="h2" w="full" textAlign="center">
+              <Text w="full" textAlign="center">
                 {presenters.date}
               </Text>
               <IconButton
@@ -41,6 +43,7 @@ export const PageApp = () => {
                 aria-label="Next Day"
                 borderRadius="full"
                 onClick={controllers.onAddDate}
+                size="sm"
               />
             </C.HStack>
 
@@ -60,16 +63,7 @@ export const PageApp = () => {
 
                   <C.HStack w="full" spacing="4" justify="space-between">
                     <C.HStack w="full" spacing="2">
-                      <Tag
-                        bg="transparent"
-                        border="1px"
-                        color="purple.600"
-                        borderColor="purple.600"
-                        py="0"
-                        hasIconLeft={false}
-                      >
-                        {task.details.duration} h
-                      </Tag>
+                      <TagHour>{task.details.duration} h</TagHour>
                       <Tag py="0" hasIconLeft={false}>
                         {task.details.category}
                       </Tag>
@@ -90,6 +84,10 @@ export const PageApp = () => {
                 </C.VStack>
               ))}
             </C.VStack>
+
+            <C.HStack w="full" pb="8">
+              <TagHour>Total: {presenters.totalTime} h</TagHour>
+            </C.HStack>
 
             <C.VStack w="full">
               <InputTextArea

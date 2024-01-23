@@ -1,6 +1,7 @@
 import { formatDate, tasksGateway } from "@/client/gateways/api/tasks";
 import { useGetCategories } from "@/client/hooks/general/useGetCategories";
 import { IOption } from "@/client/interfaces";
+import { utils } from "@/client/utils";
 import { useState } from "react";
 import { useQuery } from "react-query";
 
@@ -68,22 +69,29 @@ export const usePageApp = () => {
     }
   };
 
-  const date = formatDate(stateUi.currentDate);
+  const dateAPI = utils.formatDate(stateUi.currentDate);
 
   const {
     data: tasks,
     isLoading: isLoadingTasks,
     refetch,
   } = useQuery(
-    ["/tasks", loggedUser, date],
-    async () => await tasksGateway.listByUserByDate(loggedUser, date),
+    ["/tasks", loggedUser, dateAPI],
+    async () => await tasksGateway.listByUserByDate(loggedUser, dateAPI),
     {
-      enabled: !!loggedUser && !!date,
+      enabled: !!loggedUser && !!dateAPI,
     }
   );
 
   const isEnabled =
     !!inputState.category && !!inputState.duration && !!inputState.task;
+
+  const totalTime = tasks?.data.reduce((total, currentTask) => {
+    const currentTaskDuration = parseFloat(currentTask.details.duration);
+    return total + currentTaskDuration;
+  }, 0);
+
+  console.log("[TOTAL TIME]", totalTime);
 
   return {
     controllers: {
@@ -101,7 +109,8 @@ export const usePageApp = () => {
       isLoading: isLoading || isLoadingTasks,
       isDisabled: !isEnabled,
       tasks: tasks,
-      date: date,
+      date: utils.formatDate(stateUi.currentDate, "/"),
+      totalTime: totalTime,
     },
   };
 };
