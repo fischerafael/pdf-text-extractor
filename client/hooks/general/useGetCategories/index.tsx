@@ -1,20 +1,27 @@
+import { categoriesGateway } from "@/client/gateways/api/categories";
 import { IOption } from "@/client/interfaces";
+import { useQuery } from "react-query";
 
-interface Input {
-  access?: string;
-}
+export const useGetCategories = (loggedUser?: string) => {
+  const { data, isLoading, refetch } = useQuery(
+    ["/list", loggedUser],
+    async () => {
+      return await categoriesGateway.listByUser(loggedUser!);
+    },
+    {
+      enabled: !!loggedUser,
+    }
+  );
 
-interface Output {
-  options: IOption[];
-}
+  const categories: IOption[] =
+    data?.data.map((cat) => ({
+      key: cat.id,
+      value: cat.details.title,
+    })) || [];
 
-export const useGetCategories = ({ access }: Input): Output => {
   return {
-    options: [
-      { key: "1", value: "Testing" },
-      { key: "2", value: "Code Creation" },
-      { key: "3", value: "Mocks" },
-      { key: "4", value: "User Stories" },
-    ],
+    isLoading,
+    categories: [...categories],
+    refetch,
   };
 };

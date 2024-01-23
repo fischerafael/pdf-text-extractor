@@ -51,10 +51,10 @@ export const PageAppCategories = () => {
               <C.HStack wrap="wrap" gap="2">
                 {presenters.existingCategoryes.map((cat) => (
                   <Tag
-                    key={cat.id}
-                    onClick={() => controllers.removeCategory(cat.id)}
+                    key={cat.key}
+                    onClick={() => controllers.removeCategory(cat.key)}
                   >
-                    {cat.title}
+                    {cat.value}
                   </Tag>
                 ))}
               </C.HStack>

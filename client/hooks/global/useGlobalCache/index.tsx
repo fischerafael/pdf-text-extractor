@@ -11,9 +11,7 @@ export const useGlobalCache = () => {
   const { options: departmentOptions } = useGetDepartments({
     access: presenters.access,
   });
-  const { options: categoryOptions } = useGetCategories({
-    access: presenters.access,
-  });
+
   const { options: aiModelOptions } = useGetAIModels({
     access: presenters.access,
   });
@@ -26,7 +24,7 @@ export const useGlobalCache = () => {
       userEmail: email,
       userFullName: fullName,
       departmentOptions,
-      categoryOptions,
+
       aiModelOptions,
       authorOptions,
     },

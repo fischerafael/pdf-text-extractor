@@ -1,6 +1,6 @@
 import { categoriesGateway } from "@/client/gateways/api/categories";
+import { useGetCategories } from "@/client/hooks/general/useGetCategories";
 import { useState } from "react";
-import { useQuery } from "react-query";
 
 const loggedUser = "rafaelsanfischer@gmail.com";
 
@@ -19,7 +19,7 @@ export const usePageAppCategories = () => {
         state.inputCategory
       );
       setState((prev) => ({ ...prev, inputCategory: "" }));
-      await refetchCategories();
+      await refetch();
       console.log("[success - id]", id);
     } catch (e: any) {
       console.log("[error - id]", e.message);
@@ -32,7 +32,7 @@ export const usePageAppCategories = () => {
     setState((prev) => ({ ...prev, isLoading: true }));
     try {
       const data = await categoriesGateway.remove(id);
-      await refetchCategories();
+      await refetch();
       console.log("[REMOVE DATA]", data);
     } catch (e: any) {
       console.log("[error - id]", e.message);
@@ -42,26 +42,10 @@ export const usePageAppCategories = () => {
   };
 
   const {
-    data: categories,
     isLoading: isLoadingCategories,
-    refetch: refetchCategories,
-  } = useQuery(
-    ["/list"],
-    async () => {
-      return await categoriesGateway.listByUser(loggedUser);
-    },
-    {
-      enabled: !!loggedUser,
-    }
-  );
-
-  console.log("[data]", categories);
-
-  const existingCategoryes =
-    categories?.data.map((cat) => ({
-      id: cat.id,
-      title: cat.details.title,
-    })) || [];
+    categories,
+    refetch,
+  } = useGetCategories(loggedUser);
 
   const isLoading = state.isLoading || isLoadingCategories;
 
@@ -69,7 +53,7 @@ export const usePageAppCategories = () => {
     presenters: {
       inputCategory: state.inputCategory,
       isLoading: isLoading,
-      existingCategoryes: existingCategoryes,
+      existingCategoryes: categories,
     },
     controllers: {
       onChangeInputCategory,

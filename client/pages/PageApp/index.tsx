@@ -13,6 +13,7 @@ import { InputNumber } from "@/client/components/InputNumber";
 import { InputSelect } from "@/client/components/InputSelect";
 import { InputTextArea } from "@/client/components/InputTextArea";
 import { Tag } from "@/client/components/Tag";
+import { Button } from "@/client/components/Button";
 
 export const PageApp = () => {
   const { controllers, presenters } = usePageApp();
@@ -32,7 +33,7 @@ export const PageApp = () => {
                 borderRadius="full"
               />
               <Text variant="h2" w="full" textAlign="center">
-                22/01/2024
+                {presenters.date}
               </Text>
               <IconButton
                 icon={<Icon.HiChevronRight color="white" />}
@@ -41,60 +42,89 @@ export const PageApp = () => {
               />
             </C.HStack>
 
-            <C.VStack w="full">
-              <C.VStack
-                bg="white"
-                p="4"
-                border="1px"
-                borderColor="gray.200"
-                w="full"
-                align="flex-start"
-                spacing="8"
-                shadow="md"
-              >
-                <Text>Completar esse todo list</Text>
+            <C.VStack w="full" spacing="0" shadow="md">
+              {presenters.tasks?.data.map((task) => (
+                <C.VStack
+                  bg="white"
+                  p="4"
+                  w="full"
+                  align="flex-start"
+                  spacing="8"
+                  key={task.id}
+                  border="1px"
+                  borderColor="gray.100"
+                >
+                  <Text>{task.details.task}</Text>
 
-                <C.HStack w="full" spacing="4" justify="space-between">
-                  <C.HStack w="full" spacing="2">
-                    <Tag
+                  <C.HStack w="full" spacing="4" justify="space-between">
+                    <C.HStack w="full" spacing="2">
+                      <Tag
+                        bg="transparent"
+                        border="1px"
+                        color="purple.600"
+                        borderColor="purple.600"
+                        py="0"
+                        hasIconLeft={false}
+                      >
+                        {task.details.duration} h
+                      </Tag>
+                      <Tag py="0" hasIconLeft={false}>
+                        {task.details.category}
+                      </Tag>
+                    </C.HStack>
+                    <IconButton
+                      icon={<Icon.HiOutlineX color="purple.600" />}
+                      aria-label="Remove"
                       bg="transparent"
+                      borderRadius="full"
                       border="1px"
-                      color="purple.600"
                       borderColor="purple.600"
-                      py="0"
-                      hasIconLeft={false}
-                    >
-                      0.5 h
-                    </Tag>
-                    <Tag py="0" hasIconLeft={false}>
-                      Design
-                    </Tag>
+                      w="6"
+                      h="6"
+                      isLoading={presenters.isLoading}
+                      onClick={() => controllers.onRemove(task.id)}
+                    />
                   </C.HStack>
-                  <IconButton
-                    icon={<Icon.HiOutlineX color="purple.600" />}
-                    aria-label="Remove"
-                    bg="transparent"
-                    borderRadius="full"
-                    border="1px"
-                    borderColor="purple.600"
-                    w="6"
-                    h="6"
-                  />
-                </C.HStack>
-              </C.VStack>
+                </C.VStack>
+              ))}
             </C.VStack>
 
             <C.VStack w="full">
-              <InputTextArea label="New Task" />
-              <C.HStack w="full" spacing="8">
+              <InputTextArea
+                label="New Task"
+                value={presenters.task}
+                onChange={(e) =>
+                  controllers.onChangeState("task", e.target.value)
+                }
+              />
+              <C.HStack w="full" spacing="8" pb="4">
                 <InputNumber
                   min={0}
                   max={24}
                   step={0.25}
                   label="Duration (h)"
+                  value={presenters.duration}
+                  onChange={(value) =>
+                    controllers.onChangeState("duration", value)
+                  }
                 />
-                <InputSelect label="Category" />
+                <InputSelect
+                  options={presenters.optionsCategories}
+                  label="Category"
+                  value={presenters.category}
+                  onChange={(e) =>
+                    controllers.onChangeState("category", e.target.value)
+                  }
+                />
               </C.HStack>
+              <Button
+                isDisabled={presenters.isDisabled}
+                alignSelf="flex-end"
+                onClick={controllers.onSubmit}
+                isLoading={presenters.isLoading}
+              >
+                Add
+              </Button>
             </C.VStack>
           </C.VStack>
         </C.VStack>
