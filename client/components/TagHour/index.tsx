@@ -10,6 +10,7 @@ export const TagHour = ({ children }: { children: React.ReactNode }) => {
       borderColor="purple.600"
       py="0"
       hasIconLeft={false}
+      fontSize="10px"
     >
       {children}
     </Tag>

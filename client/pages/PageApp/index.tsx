@@ -61,13 +61,11 @@ export const PageApp = () => {
                 >
                   <Text>{task.details.task}</Text>
 
-                  <C.HStack w="full" spacing="4" justify="space-between">
-                    <C.HStack w="full" spacing="2">
-                      <TagHour>{task.details.duration} h</TagHour>
-                      <Tag py="0" hasIconLeft={false}>
-                        {task.details.category}
-                      </Tag>
-                    </C.HStack>
+                  <C.HStack w="full" spacing="4" justify="flex-end">
+                    <TagHour>{task.details.duration} h</TagHour>
+                    <Tag py="0" hasIconLeft={false}>
+                      {task.details.category}
+                    </Tag>
                     <IconButton
                       icon={<Icon.HiOutlineX color="purple.600" />}
                       aria-label="Remove"
@@ -85,7 +83,7 @@ export const PageApp = () => {
               ))}
             </C.VStack>
 
-            <C.HStack w="full" pb="8">
+            <C.HStack w="full" pb="8" justify="flex-end">
               <TagHour>Tasks: {presenters.tasks?.count}</TagHour>
               <TagHour>Duration: {presenters.totalTime} h</TagHour>
             </C.HStack>
