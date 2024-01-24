@@ -1,5 +1,4 @@
 import { pages } from "@/client/config/links";
-import { apiGateway } from "@/client/gateways/api";
 import { useAuthentication } from "@/client/hooks/global/useAuthenticationGlobal";
 import { utils } from "@/client/utils";
 import { useState } from "react";
@@ -18,7 +17,7 @@ export const usePageSignIn = () => {
     try {
       setLoading(true);
       e.preventDefault();
-      await controllers.logIn(state.email, state.password);
+      // await controllers.logIn(state.email, state.password);
     } catch (e: any) {
       console.log(e.message);
     } finally {
