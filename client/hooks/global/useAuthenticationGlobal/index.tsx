@@ -4,6 +4,8 @@ import { useEffect } from "react";
 import { atom, useRecoilState } from "recoil";
 import { useGetIsPublicPage as useIsPublic } from "../../general/useGetIsPublicPage";
 import { usersGateway } from "@/client/gateways/api/users";
+import { utils } from "@/client/utils";
+import { pages } from "@/client/config/links";
 
 interface AuthAtom {
   email: string;
@@ -35,39 +37,44 @@ export const useAuthentication = () => {
       firebaseUser.email
     );
     console.log("[apiUser]", apiUser);
-    if (!apiUser) {
-      console.log("[user does not exist, creating]");
-      const { data } = await usersGateway.create(
-        firebaseUser.email!,
-        firebaseUser.displayName!,
-        firebaseUser.photoURL!
-      );
-      console.log("[user does not exist, id]", data);
+
+    if (!!apiUser?.id) {
+      console.log("[user exists]", apiUser.id);
+      updateStateAndCookie({
+        avatar: apiUser.details.avatar,
+        email: apiUser.createdBy,
+        name: apiUser.details.name,
+        userId: apiUser.id,
+      });
+      utils.handleNavigateTo(pages.timesheets.href);
       return;
     }
-    console.log("[user exist, not creating]");
-
-    // utils.handleNavigateTo(pages.timesheets.href);
-    // updateStateAndCookie({ avatar: "", email: "", name: "", userId: "" });
+    console.log("[user does not exist, creating]");
+    const { data } = await usersGateway.create(
+      firebaseUser.email!,
+      firebaseUser.displayName!,
+      firebaseUser.photoURL!
+    );
+    updateStateAndCookie({
+      avatar: data.details.avatar,
+      email: data.createdBy,
+      name: data.details.name,
+      userId: data.id,
+    });
+    utils.handleNavigateTo(pages.timesheets.href);
   };
 
   const logOut = async () => {
-    // try {
-    //   await apiGateway.post.logOut({ refresh: state.refresh });
-    // } catch (e: any) {
-    //   console.log(e);
-    // } finally {
-    //   reset();
-    //   utils.handleNavigateTo(pages.landingPage.href);
-    // }
+    reset();
+    utils.handleNavigateTo(pages.landingPage.href);
   };
 
   return {
     presenters: {
-      user: "",
-      email: "",
-      userId: "",
-      avatar: "",
+      user: state.name,
+      email: state.email,
+      userId: state.userId,
+      avatar: state.avatar,
     },
     controllers: {
       logIn: logIn,

@@ -6,7 +6,7 @@ import { Button } from "../Button";
 import { LinksContainer } from "../LinksContainer";
 
 export const HeaderAppFactory = () => {
-  const { controllers } = useAuthentication();
+  const { controllers, presenters } = useAuthentication();
 
   const handleLogOut = async () => {
     try {
@@ -19,7 +19,11 @@ export const HeaderAppFactory = () => {
   return (
     <Header
       logoSlot={
-        <Avatar title={"userName"} subTitle={"userEmail"} src={"userName"} />
+        <Avatar
+          title={presenters.user}
+          subTitle={presenters.email}
+          src={presenters.avatar}
+        />
       }
       linksSlot={<LinksContainer />}
       actionSlot={<Button onClick={handleLogOut}>Log Out</Button>}
