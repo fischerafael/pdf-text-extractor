@@ -1,8 +1,9 @@
 import { categoriesGateway } from "@/client/gateways/api/categories";
 import { useGetCategories } from "@/client/hooks/general/useGetCategories";
+import { useAuthentication } from "@/client/hooks/global/useAuthenticationGlobal";
 import { useState } from "react";
 
-const loggedUser = "rafaelsanfischer@gmail.com";
+// const loggedUser = "rafaelsanfischer@gmail.com";
 
 const colourOptions = [
   "gray",
@@ -18,6 +19,8 @@ const colourOptions = [
 ];
 
 export const usePageAppCategories = () => {
+  const { presenters } = useAuthentication();
+  const loggedUser = presenters.email;
   const [state, setState] = useState({
     isLoading: false,
     inputCategory: "",

@@ -1,10 +1,9 @@
 import { tasksGateway } from "@/client/gateways/api/tasks";
 import { useGetCategories } from "@/client/hooks/general/useGetCategories";
+import { useAuthentication } from "@/client/hooks/global/useAuthenticationGlobal";
 import { utils } from "@/client/utils";
 import { useState } from "react";
 import { useQuery } from "react-query";
-
-const loggedUser = "rafaelsanfischer@gmail.com";
 
 interface IState {
   task: string;
@@ -15,6 +14,8 @@ interface IState {
 const INITIAL_STATE: IState = { task: "", duration: "", category: "" };
 
 export const usePageApp = () => {
+  const { presenters } = useAuthentication();
+  const loggedUser = presenters.email;
   const { categories } = useGetCategories(loggedUser);
 
   const [isLoading, setLoading] = useState(false);
