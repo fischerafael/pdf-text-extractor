@@ -1,9 +1,10 @@
-import { pages } from "@/client/config/links";
-import { utils } from "@/client/utils";
+import { useAuthentication } from "@/client/hooks/global/useAuthenticationGlobal";
 
 export const usePageLandingPage = () => {
-  const handleSignIn = () => {
-    utils.handleNavigateTo(pages.timesheets.href);
+  const { controllers } = useAuthentication();
+
+  const handleSignIn = async () => {
+    await controllers.logIn();
   };
 
   return {

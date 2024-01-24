@@ -1,6 +1,5 @@
-import { formatDate, tasksGateway } from "@/client/gateways/api/tasks";
+import { tasksGateway } from "@/client/gateways/api/tasks";
 import { useGetCategories } from "@/client/hooks/general/useGetCategories";
-import { IOption } from "@/client/interfaces";
 import { utils } from "@/client/utils";
 import { useState } from "react";
 import { useQuery } from "react-query";

@@ -1,15 +1,20 @@
-import { pages } from "@/client/config/links";
 import { cookieGateway } from "@/client/gateways/cookie";
-import { utils } from "@/client/utils";
+import { signUpWithGoogle } from "@/client/gateways/firebase";
 import { useEffect } from "react";
 import { atom, useRecoilState } from "recoil";
 import { useGetIsPublicPage as useIsPublic } from "../../general/useGetIsPublicPage";
-import { apiGateway } from "@/client/gateways/api";
+
+interface AuthAtom {
+  email: string;
+  userId: string;
+  name: string;
+  avatar: string;
+}
 
 export const useAuthentication = () => {
   const [state, setState] = useRecoilState(tokenState);
 
-  const updateStateAndCookie = (value: { access: string; refresh: string }) => {
+  const updateStateAndCookie = (value: AuthAtom) => {
     setState((prev) => ({ ...prev, ...value }));
     cookieGateway.set(value);
   };
@@ -21,30 +26,30 @@ export const useAuthentication = () => {
 
   useSyncAuthorizationFromCookies(updateStateAndCookie, reset);
 
-  const logIn = async (email?: string, password?: string) => {
-    const { access, refresh } = await apiGateway.post.logIn({
-      email: email!,
-      password: password!,
-    });
-    utils.handleNavigateTo(pages.timesheets.href);
-    updateStateAndCookie({ access: access, refresh: refresh });
+  const logIn = async () => {
+    const { user } = await signUpWithGoogle();
+    console.log("[user]", user);
+    // utils.handleNavigateTo(pages.timesheets.href);
+    updateStateAndCookie({ avatar: "", email: "", name: "", userId: "" });
   };
 
   const logOut = async () => {
-    try {
-      await apiGateway.post.logOut({ refresh: state.refresh });
-    } catch (e: any) {
-      console.log(e);
-    } finally {
-      reset();
-      utils.handleNavigateTo(pages.landingPage.href);
-    }
+    // try {
+    //   await apiGateway.post.logOut({ refresh: state.refresh });
+    // } catch (e: any) {
+    //   console.log(e);
+    // } finally {
+    //   reset();
+    //   utils.handleNavigateTo(pages.landingPage.href);
+    // }
   };
 
   return {
     presenters: {
-      refresh: state.refresh,
-      access: state.access,
+      user: "",
+      email: "",
+      userId: "",
+      avatar: "",
     },
     controllers: {
       logIn: logIn,
@@ -53,23 +58,20 @@ export const useAuthentication = () => {
   };
 };
 
-interface IAuthAtom {
-  access: string;
-  refresh: string;
-}
-
-const INITIAL_STATE_TOKEN = {
-  refresh: "",
-  access: "",
+const INITIAL_STATE_TOKEN: AuthAtom = {
+  avatar: "",
+  email: "",
+  name: "",
+  userId: "",
 };
 
-const tokenState = atom<IAuthAtom>({
+const tokenState = atom<AuthAtom>({
   key: "tokenAtom",
   default: INITIAL_STATE_TOKEN,
 });
 
 const useSyncAuthorizationFromCookies = (
-  updateStateAndCookie: (value: { access: string; refresh: string }) => void,
+  updateStateAndCookie: (value: AuthAtom) => void,
   reset: () => void
 ) => {
   const isPublic = useIsPublic();
@@ -78,7 +80,7 @@ const useSyncAuthorizationFromCookies = (
       try {
         if (isPublic) return;
         if (!updateStateAndCookie || !reset) throw new Error();
-        const result: IAuthAtom = cookieGateway.get();
+        const result: AuthAtom = cookieGateway.get();
         if (!result) throw new Error("No Cookie");
         updateStateAndCookie(result);
         console.log("Has cookie");
