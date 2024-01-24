@@ -3,6 +3,7 @@ import { signUpWithGoogle } from "@/client/gateways/firebase";
 import { useEffect } from "react";
 import { atom, useRecoilState } from "recoil";
 import { useGetIsPublicPage as useIsPublic } from "../../general/useGetIsPublicPage";
+import { usersGateway } from "@/client/gateways/api/users";
 
 interface AuthAtom {
   email: string;
@@ -27,10 +28,27 @@ export const useAuthentication = () => {
   useSyncAuthorizationFromCookies(updateStateAndCookie, reset);
 
   const logIn = async () => {
-    const { user } = await signUpWithGoogle();
-    console.log("[user]", user);
+    console.log("here");
+    const { user: firebaseUser } = await signUpWithGoogle();
+    console.log("[firebaseUser]", firebaseUser);
+    const { user: apiUser } = await usersGateway.findByEmail(
+      firebaseUser.email
+    );
+    console.log("[apiUser]", apiUser);
+    if (!apiUser) {
+      console.log("[user does not exist, creating]");
+      const { data } = await usersGateway.create(
+        firebaseUser.email!,
+        firebaseUser.displayName!,
+        firebaseUser.photoURL!
+      );
+      console.log("[user does not exist, id]", data);
+      return;
+    }
+    console.log("[user exist, not creating]");
+
     // utils.handleNavigateTo(pages.timesheets.href);
-    updateStateAndCookie({ avatar: "", email: "", name: "", userId: "" });
+    // updateStateAndCookie({ avatar: "", email: "", name: "", userId: "" });
   };
 
   const logOut = async () => {

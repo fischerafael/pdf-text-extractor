@@ -19,8 +19,36 @@ class UsersGateway {
     return data.data;
   }
 
+  async findByEmail(email: string | null | undefined) {
+    if (!email) throw new Error("No email provided");
+    const { data } = await api.entities.get<{
+      data: {
+        id: string;
+        app: string;
+        createdBy: string;
+        details: { name: string; avatar: string };
+      }[];
+    }>(`/entities`, {
+      headers: {
+        app: this.app,
+        user: email,
+      },
+    });
+    return {
+      data,
+      user: data.data[0] || undefined,
+    };
+  }
+
   async create(email: string, name: string, avatar: string) {
-    const { data } = await api.entities.post<{ id: string }>(`/entities`, {
+    const { data } = await api.entities.post<{
+      data: {
+        id: string;
+        app: string;
+        createdBy: string;
+        details: { name: string; avatar: string };
+      };
+    }>(`/entities`, {
       user: email,
       app: this.app,
       details: {
