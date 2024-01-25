@@ -4,6 +4,7 @@ import { format } from "date-fns";
 
 class TasksGateway {
   private app: string = `${appConfig.appPrefix}.tasks`;
+  private resource: string = "/entities";
 
   async create(
     user: string,
@@ -51,6 +52,23 @@ class TasksGateway {
     const { data } = await api.entities.delete(`/entities`, {
       headers: {
         id: id,
+      },
+    });
+    return data;
+  }
+
+  async update(
+    id: string,
+    payload: {
+      task: string;
+      duration: string;
+      category: string;
+    }
+  ) {
+    const { data } = await api.entities.put(this.resource, payload, {
+      headers: {
+        id,
+        data: "details",
       },
     });
     return data;

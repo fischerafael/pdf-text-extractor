@@ -15,6 +15,7 @@ import { InputTextArea } from "@/client/components/InputTextArea";
 import { Tag } from "@/client/components/Tag";
 import { Button } from "@/client/components/Button";
 import { TagHour } from "@/client/components/TagHour";
+import { Modal } from "@/client/components/Modal";
 
 export const PageApp = () => {
   const { controllers, presenters } = usePageApp();
@@ -48,39 +49,107 @@ export const PageApp = () => {
             </C.HStack>
 
             <C.VStack w="full" spacing="0" shadow="md">
-              {presenters.tasks?.data.map((task) => (
-                <C.VStack
-                  bg="white"
-                  p="4"
-                  w="full"
-                  align="flex-start"
-                  spacing="8"
-                  key={task.id}
-                  border="1px"
-                  borderColor="gray.100"
-                >
-                  <Text>{task.details.task}</Text>
+              {presenters.tasks?.data.map((task) => {
+                const TASK_ID = task.id;
 
-                  <C.HStack w="full" spacing="4" justify="flex-end">
-                    <TagHour>{task.details.duration} h</TagHour>
-                    <Tag py="0" hasIconLeft={false}>
-                      {task.details.category}
-                    </Tag>
-                    <IconButton
-                      icon={<Icon.HiOutlineX color="purple.600" />}
-                      aria-label="Remove"
-                      bg="transparent"
-                      borderRadius="full"
-                      border="1px"
-                      borderColor="purple.600"
-                      w="6"
-                      h="6"
-                      isLoading={presenters.isLoading}
-                      onClick={() => controllers.onRemove(task.id)}
-                    />
-                  </C.HStack>
-                </C.VStack>
-              ))}
+                return (
+                  <C.VStack
+                    bg="white"
+                    p="4"
+                    w="full"
+                    align="flex-start"
+                    spacing="8"
+                    key={task.id}
+                    border="1px"
+                    borderColor="gray.100"
+                  >
+                    <Text
+                      onClick={() => {
+                        console.log("[innput state] [taskId]", TASK_ID);
+                        controllers.onOpenEdit(
+                          TASK_ID,
+                          task.details.task,
+                          task.details.duration,
+                          task.details.category
+                        );
+                      }}
+                      cursor={"pointer"}
+                    >
+                      {task.details.task}
+                    </Text>
+
+                    <C.HStack w="full" spacing="4" justify="space-between">
+                      <TagHour>{task.id}</TagHour>
+                      <C.HStack spacing="4">
+                        <TagHour>{task.details.duration} h</TagHour>
+                        <Tag py="0" hasIconLeft={false}>
+                          {task.details.category}
+                        </Tag>
+                        <IconButton
+                          icon={<Icon.HiOutlineX color="purple.600" />}
+                          aria-label="Remove"
+                          bg="transparent"
+                          borderRadius="full"
+                          border="1px"
+                          borderColor="purple.600"
+                          w="6"
+                          h="6"
+                          isLoading={presenters.isLoading}
+                          onClick={() => controllers.onRemove(TASK_ID)}
+                        />
+                      </C.HStack>
+                    </C.HStack>
+
+                    {/* EDIT MODAL */}
+
+                    <Modal
+                      isOpen={presenters.isOpenEditModal}
+                      onClose={controllers.onCloseEdit}
+                    >
+                      <C.VStack w="full">
+                        <InputTextArea
+                          label="New Task"
+                          value={presenters.task}
+                          onChange={(e) =>
+                            controllers.onChangeState("task", e.target.value)
+                          }
+                        />
+                        <C.HStack w="full" spacing="8" pb="4">
+                          <InputNumber
+                            min={0}
+                            max={24}
+                            step={0.25}
+                            label="Duration (h)"
+                            value={presenters.duration}
+                            onChange={(value) =>
+                              controllers.onChangeState("duration", value)
+                            }
+                          />
+                          <InputSelect
+                            options={presenters.optionsCategories}
+                            label="Category"
+                            value={presenters.category}
+                            onChange={(e) =>
+                              controllers.onChangeState(
+                                "category",
+                                e.target.value
+                              )
+                            }
+                          />
+                        </C.HStack>
+                        <Button
+                          isDisabled={presenters.isDisabled}
+                          alignSelf="flex-end"
+                          onClick={controllers.onEditTask}
+                          isLoading={presenters.isLoading}
+                        >
+                          Save
+                        </Button>
+                      </C.VStack>
+                    </Modal>
+                  </C.VStack>
+                );
+              })}
             </C.VStack>
 
             <C.HStack w="full" pb="8" justify="flex-end">
@@ -88,43 +157,47 @@ export const PageApp = () => {
               <TagHour>Duration: {presenters.totalTime} h</TagHour>
             </C.HStack>
 
-            <C.VStack w="full">
-              <InputTextArea
-                label="New Task"
-                value={presenters.task}
-                onChange={(e) =>
-                  controllers.onChangeState("task", e.target.value)
-                }
-              />
-              <C.HStack w="full" spacing="8" pb="4">
-                <InputNumber
-                  min={0}
-                  max={24}
-                  step={0.25}
-                  label="Duration (h)"
-                  value={presenters.duration}
-                  onChange={(value) =>
-                    controllers.onChangeState("duration", value)
-                  }
-                />
-                <InputSelect
-                  options={presenters.optionsCategories}
-                  label="Category"
-                  value={presenters.category}
+            {/* INPUTS */}
+
+            {!presenters.isOpenEditModal && (
+              <C.VStack w="full">
+                <InputTextArea
+                  label="New Task"
+                  value={presenters.task}
                   onChange={(e) =>
-                    controllers.onChangeState("category", e.target.value)
+                    controllers.onChangeState("task", e.target.value)
                   }
                 />
-              </C.HStack>
-              <Button
-                isDisabled={presenters.isDisabled}
-                alignSelf="flex-end"
-                onClick={controllers.onSubmit}
-                isLoading={presenters.isLoading}
-              >
-                Add
-              </Button>
-            </C.VStack>
+                <C.HStack w="full" spacing="8" pb="4">
+                  <InputNumber
+                    min={0}
+                    max={24}
+                    step={0.25}
+                    label="Duration (h)"
+                    value={presenters.duration}
+                    onChange={(value) =>
+                      controllers.onChangeState("duration", value)
+                    }
+                  />
+                  <InputSelect
+                    options={presenters.optionsCategories}
+                    label="Category"
+                    value={presenters.category}
+                    onChange={(e) =>
+                      controllers.onChangeState("category", e.target.value)
+                    }
+                  />
+                </C.HStack>
+                <Button
+                  isDisabled={presenters.isDisabled}
+                  alignSelf="flex-end"
+                  onClick={controllers.onSubmit}
+                  isLoading={presenters.isLoading}
+                >
+                  Add
+                </Button>
+              </C.VStack>
+            )}
           </C.VStack>
         </C.VStack>
       }
