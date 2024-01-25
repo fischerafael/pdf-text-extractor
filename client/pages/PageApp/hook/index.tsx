@@ -140,8 +140,6 @@ export const usePageApp = () => {
     onOpen();
   };
 
-  console.log("[innput state]", inputState);
-
   const onCloseEdit = () => {
     setInputState(INITIAL_STATE);
     utils.handleNavigateTo(pages.timesheets.href);

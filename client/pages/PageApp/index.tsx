@@ -157,43 +157,47 @@ export const PageApp = () => {
               <TagHour>Duration: {presenters.totalTime} h</TagHour>
             </C.HStack>
 
-            <C.VStack w="full">
-              <InputTextArea
-                label="New Task"
-                value={presenters.task}
-                onChange={(e) =>
-                  controllers.onChangeState("task", e.target.value)
-                }
-              />
-              <C.HStack w="full" spacing="8" pb="4">
-                <InputNumber
-                  min={0}
-                  max={24}
-                  step={0.25}
-                  label="Duration (h)"
-                  value={presenters.duration}
-                  onChange={(value) =>
-                    controllers.onChangeState("duration", value)
-                  }
-                />
-                <InputSelect
-                  options={presenters.optionsCategories}
-                  label="Category"
-                  value={presenters.category}
+            {/* INPUTS */}
+
+            {!presenters.isOpenEditModal && (
+              <C.VStack w="full">
+                <InputTextArea
+                  label="New Task"
+                  value={presenters.task}
                   onChange={(e) =>
-                    controllers.onChangeState("category", e.target.value)
+                    controllers.onChangeState("task", e.target.value)
                   }
                 />
-              </C.HStack>
-              <Button
-                isDisabled={presenters.isDisabled}
-                alignSelf="flex-end"
-                onClick={controllers.onSubmit}
-                isLoading={presenters.isLoading}
-              >
-                Add
-              </Button>
-            </C.VStack>
+                <C.HStack w="full" spacing="8" pb="4">
+                  <InputNumber
+                    min={0}
+                    max={24}
+                    step={0.25}
+                    label="Duration (h)"
+                    value={presenters.duration}
+                    onChange={(value) =>
+                      controllers.onChangeState("duration", value)
+                    }
+                  />
+                  <InputSelect
+                    options={presenters.optionsCategories}
+                    label="Category"
+                    value={presenters.category}
+                    onChange={(e) =>
+                      controllers.onChangeState("category", e.target.value)
+                    }
+                  />
+                </C.HStack>
+                <Button
+                  isDisabled={presenters.isDisabled}
+                  alignSelf="flex-end"
+                  onClick={controllers.onSubmit}
+                  isLoading={presenters.isLoading}
+                >
+                  Add
+                </Button>
+              </C.VStack>
+            )}
           </C.VStack>
         </C.VStack>
       }
