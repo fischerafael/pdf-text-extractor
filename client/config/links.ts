@@ -32,6 +32,13 @@ export const pages = {
     href: "/app/categories",
     icon: Icon.HiOutlineChartBar,
   },
+  clients: {
+    isPublic: false,
+    isPrivate: true,
+    label: "Clients",
+    href: "/app/clients",
+    icon: Icon.HiOutlineBriefcase,
+  },
 };
 
 export const links: ILink[] = Object.entries(pages).map(
