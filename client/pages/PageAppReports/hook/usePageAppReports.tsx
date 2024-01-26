@@ -1,3 +1,3 @@
 export const usePageAppReports = () => {
-  return { controller: {}, presenters: {} };
+  return { controllers: {}, presenters: {} };
 };
