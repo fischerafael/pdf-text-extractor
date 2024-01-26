@@ -30,7 +30,21 @@ export const pages = {
     isPrivate: true,
     label: "Categories",
     href: "/app/categories",
-    icon: Icon.HiOutlineChartBar,
+    icon: Icon.HiOutlineTag,
+  },
+  clients: {
+    isPublic: false,
+    isPrivate: true,
+    label: "Clients",
+    href: "/app/clients",
+    icon: Icon.HiOutlineBriefcase,
+  },
+  reports: {
+    isPublic: false,
+    isPrivate: true,
+    label: "Reports",
+    href: "/app/reports",
+    icon: Icon.HiOutlineDocumentReport,
   },
 };
 
