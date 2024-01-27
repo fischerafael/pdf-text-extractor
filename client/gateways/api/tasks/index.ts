@@ -1,6 +1,21 @@
 import { appConfig } from "@/client/config/app";
 import { api } from "@/client/config/axios";
+import { utils } from "@/client/utils";
 import { format } from "date-fns";
+
+interface ListByUserByDateResponse {
+  message: string;
+  count: number;
+  data: {
+    id: string;
+    details: {
+      duration: string;
+      createdAt: string;
+      task: string;
+      category: string;
+    };
+  }[];
+}
 
 class TasksGateway {
   private app: string = `${appConfig.appPrefix}.tasks`;
@@ -27,24 +42,15 @@ class TasksGateway {
   }
 
   async listByUserByDate(user: string, createdAt: string) {
-    const { data } = await api.entities.get<{
-      message: string;
-      count: number;
-      data: {
-        id: string;
-        details: {
-          duration: string;
-          createdAt: string;
-          task: string;
-          category: string;
-        };
-      }[];
-    }>(`/entities?createdAt=${createdAt}`, {
-      headers: {
-        app: this.app,
-        user: user,
-      },
-    });
+    const { data } = await api.entities.get<ListByUserByDateResponse>(
+      `/entities?createdAt=${createdAt}`,
+      {
+        headers: {
+          app: this.app,
+          user: user,
+        },
+      }
+    );
     return data;
   }
 
@@ -73,10 +79,39 @@ class TasksGateway {
     });
     return data;
   }
+
+  async getLasWeekTasks(user: string) {
+    try {
+      const today = new Date();
+      const lastWeekRawDates = returnLastWeek(today);
+      const lastWeekFormattedDates = lastWeekRawDates.map((date) =>
+        utils.formatDate(date)
+      );
+      const apiCallsArray = lastWeekFormattedDates.map((date) =>
+        this.listByUserByDate(user, date)
+      );
+      const response = await Promise.all(apiCallsArray);
+      const formattedResponse = response.map((day, index) => ({
+        ...day,
+        dayOfTheWeek: lastWeekFormattedDates[index],
+      }));
+      return formattedResponse;
+    } catch (e: any) {
+      console.log("[result]", e.message);
+    }
+  }
 }
 
 export const tasksGateway = new TasksGateway();
 
-export const formatDate = (date: Date = new Date()) => {
-  return format(date, "dd-MM-yyyy");
+const returnLastWeek = (today: Date) => {
+  const lastSevenDays: Date[] = [];
+  lastSevenDays.push(new Date(today));
+  for (let i = 1; i < 7; i++) {
+    const diaAnterior = new Date(today);
+    diaAnterior.setDate(today.getDate() - i);
+    lastSevenDays.push(diaAnterior);
+  }
+  lastSevenDays.reverse();
+  return lastSevenDays;
 };

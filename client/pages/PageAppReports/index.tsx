@@ -28,6 +28,7 @@ export const PageAppReports = () => {
                 border="1px"
                 borderColor="gray.200"
                 cursor="pointer"
+                onClick={controllers.getLastWeekData}
               >
                 <C.VStack w="full" align="flex-start">
                   <C.Icon
