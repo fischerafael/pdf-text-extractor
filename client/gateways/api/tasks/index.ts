@@ -98,6 +98,7 @@ class TasksGateway {
       return formattedResponse;
     } catch (e: any) {
       console.log("[result]", e.message);
+      throw new Error(e.message);
     }
   }
 }
