@@ -24,6 +24,8 @@ export const usePageAppReports = () => {
     ),
   };
 
+  const handleDownloadReport = async () => {};
+
   // const getLastWeekData = async () => {
   //   try {
   //     const data = await tasksGateway.getLasWeekTasks(presenters.email);
