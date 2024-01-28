@@ -1,13 +1,12 @@
+import { Button } from "@/client/components/Button";
 import { DashboardTemplate } from "@/client/components/DashboardTemplate";
 import { HeaderAppFactory } from "@/client/components/HeaderFactory";
 import { LinksContainerWithIcons } from "@/client/components/LinksContainerWithIcons";
 import { Logo } from "@/client/components/Logo";
-import * as C from "@chakra-ui/react";
-import * as Icon from "react-icons/hi";
+import { TagHour } from "@/client/components/TagHour";
 import { Text } from "@/client/components/Text";
+import * as C from "@chakra-ui/react";
 import { usePageAppReports } from "./hook/usePageAppReports";
-import { utils } from "@/client/utils";
-import { Button } from "@/client/components/Button";
 
 export const PageAppReports = () => {
   const { controllers, presenters } = usePageAppReports();
@@ -21,7 +20,12 @@ export const PageAppReports = () => {
         <C.VStack w="full" align="center" p="8">
           <C.VStack w="full" maxW="container.sm" align="flex-start" gap="8">
             <C.HStack w="full" justify="space-between">
-              <Text fontSize="xl">Last 7 Days</Text>
+              <C.HStack>
+                <Text fontSize="xl">Last 7 Days</Text>
+                <TagHour>{presenters.stats.totalTasks} tasks</TagHour>
+                <TagHour>{presenters.stats.time} hours</TagHour>
+              </C.HStack>
+
               <Button>Download CSV</Button>
             </C.HStack>
             <C.VStack w="full" spacing="8">

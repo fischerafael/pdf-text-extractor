@@ -11,6 +11,19 @@ export const usePageAppReports = () => {
     enabled: !!presenters.email,
   });
 
+  const stats = {
+    totalTasks: data?.reduce((acc, current) => acc + current.count, 0),
+    time: data?.reduce(
+      (acc, current) =>
+        acc +
+        current.data?.reduce(
+          (acc, curr) => Number(curr?.details?.duration) + acc,
+          0
+        ),
+      0
+    ),
+  };
+
   // const getLastWeekData = async () => {
   //   try {
   //     const data = await tasksGateway.getLasWeekTasks(presenters.email);
@@ -23,6 +36,7 @@ export const usePageAppReports = () => {
     controllers: {},
     presenters: {
       tasks: data,
+      stats,
     },
   };
 };
