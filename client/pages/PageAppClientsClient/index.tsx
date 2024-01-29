@@ -79,7 +79,12 @@ export const PageAppClientsClient = () => {
               />
             </C.VStack>
 
-            <Button alignSelf="flex-end" isDisabled={!presenters.isValid}>
+            <Button
+              isLoading={presenters.isLoading}
+              alignSelf="flex-end"
+              isDisabled={!presenters.isValid}
+              onClick={controllers.handleCreateClient}
+            >
               Save
             </Button>
           </C.VStack>

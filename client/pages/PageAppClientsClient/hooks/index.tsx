@@ -1,3 +1,7 @@
+import { pages } from "@/client/config/links";
+import { clientsGateway } from "@/client/gateways/api/clients";
+import { useAuthentication } from "@/client/hooks/global/useAuthenticationGlobal";
+import { utils } from "@/client/utils";
 import { useState } from "react";
 
 interface IStateClient {
@@ -23,7 +27,14 @@ interface IState {
   contactMain: IStateContactMain;
 }
 
+export interface ICreateClient
+  extends IStateClient,
+    IStateAddress,
+    IStateContactMain {}
+
 export const usePageAppClientsClient = () => {
+  const { presenters } = useAuthentication();
+  const [isLoading, setLoading] = useState(false);
   const [state, setState] = useState<IState>({
     client: { name: "", avatar: "" },
     address: { address: "", city: "", country: "", postalCode: "" },
@@ -65,8 +76,29 @@ export const usePageAppClientsClient = () => {
 
   console.log("[isvalid]", isValid);
 
+  const handleCreateClient = async () => {
+    setLoading(true);
+    try {
+      const { id } = await clientsGateway.create(presenters.email, {
+        ...state.client,
+        ...state.address,
+        ...state.contactMain,
+      });
+      utils.handleNavigateTo(pages.clients.href);
+    } catch (e: any) {
+      console.log("[error creating client]", e.value);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return {
-    presenters: { ...state, isValid },
-    controllers: { onChangeClient, onChangeAddress, onChangeContactMain },
+    presenters: { ...state, isValid, isLoading },
+    controllers: {
+      onChangeClient,
+      onChangeAddress,
+      onChangeContactMain,
+      handleCreateClient,
+    },
   };
 };
