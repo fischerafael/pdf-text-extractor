@@ -26,14 +26,6 @@ export const usePageAppReports = () => {
 
   const handleDownloadReport = async () => {};
 
-  // const getLastWeekData = async () => {
-  //   try {
-  //     const data = await tasksGateway.getLasWeekTasks(presenters.email);
-  //   } catch (e: any) {}
-  // };
-
-  console.log("[queries]", data);
-
   return {
     controllers: {},
     presenters: {
