@@ -41,8 +41,6 @@ export const usePageAppClientsClient = () => {
     contactMain: { firstName: "", lastName: "", email: "", role: "" },
   });
 
-  console.log("[state]", state);
-
   const onChangeClient = (field: keyof IStateClient) => {
     return (e: any) =>
       setState((prev) => ({
@@ -74,8 +72,6 @@ export const usePageAppClientsClient = () => {
   );
   const isValid = isValidClient && isValidAddress && isValidContactMain;
 
-  console.log("[isvalid]", isValid);
-
   const handleCreateClient = async () => {
     setLoading(true);
     try {
@@ -92,6 +88,10 @@ export const usePageAppClientsClient = () => {
     }
   };
 
+  const handleCancel = () => {
+    utils.handleNavigateTo(pages.clients.href);
+  };
+
   return {
     presenters: { ...state, isValid, isLoading },
     controllers: {
@@ -99,6 +99,7 @@ export const usePageAppClientsClient = () => {
       onChangeAddress,
       onChangeContactMain,
       handleCreateClient,
+      handleCancel,
     },
   };
 };

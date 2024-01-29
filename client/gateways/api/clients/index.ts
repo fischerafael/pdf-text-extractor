@@ -2,6 +2,18 @@ import { appConfig } from "@/client/config/app";
 import { api } from "@/client/config/axios";
 import { ICreateClient } from "@/client/pages/PageAppClientsClient/hooks";
 
+export interface IClientAPIData {
+  message: string;
+  count: number;
+  data: { id: string; details: ICreateClient }[];
+}
+
+export const INITIAL_DATA_CLIENT_API: IClientAPIData = {
+  count: 0,
+  data: [],
+  message: "",
+};
+
 class ClientsGateway {
   private app: string = `${appConfig.appPrefix}.clients`;
 
@@ -15,11 +27,7 @@ class ClientsGateway {
   }
 
   async listByUser(user: string) {
-    const { data } = await api.entities.get<{
-      message: string;
-      count: number;
-      data: { id: string; details: ICreateClient }[];
-    }>(`/entities`, {
+    const { data } = await api.entities.get<IClientAPIData>(`/entities`, {
       headers: {
         app: this.app,
         user: user,

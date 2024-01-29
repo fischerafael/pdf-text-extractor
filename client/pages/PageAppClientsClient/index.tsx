@@ -18,8 +18,17 @@ export const PageAppClientsClient = () => {
       headerSlot={<HeaderAppFactory />}
       mainSlot={
         <C.VStack w="full" align="center" p="8">
+          <C.HStack
+            w="full"
+            maxW="container.sm"
+            justify="space-between"
+            align="flex-start"
+            gap="8"
+          >
+            <Text variant="h1">New Client</Text>
+            <Button onClick={controllers.handleCancel}>Cancel</Button>
+          </C.HStack>
           <C.VStack w="full" maxW="container.sm" align="flex-start" gap="8">
-            <Text variant="h1">Client</Text>
             <C.VStack w="full" justify="center">
               <InputText
                 label="Name"
