@@ -3,6 +3,7 @@ import {
   INITIAL_DATA_CLIENT_API,
   clientsGateway,
 } from "@/client/gateways/api/clients";
+import { IOption } from "@/client/interfaces";
 import { useQuery, useQueryClient } from "react-query";
 
 export const useGetClients = (email?: string) => {
@@ -27,8 +28,17 @@ export const useGetClients = (email?: string) => {
     );
   };
 
+  const clientsOptions: IOption[] =
+    data.data?.data.map((client) => ({
+      key: client.id,
+      value: client.details.name,
+    })) || [];
+
   return {
-    presenters: data,
+    presenters: {
+      ...data,
+      clientsOptions: clientsOptions,
+    },
     controllers: {
       removeFromHttpCache,
     },
