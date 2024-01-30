@@ -90,7 +90,18 @@ export const PageAppReports = () => {
 
             <C.VStack w="full" spacing="8">
               {presenters.tasks?.map((task) => (
-                <C.VStack key={task.dayOfTheWeek} w="full" align="flex-start">
+                <C.VStack
+                  key={task.dayOfTheWeek}
+                  w="full"
+                  bg="white"
+                  border="1px"
+                  borderColor="gray.200"
+                  p="8"
+                  spacing="4"
+                  align="flex-start"
+                  color="purple.600"
+                  justify="space-between"
+                >
                   <C.HStack w="full" justify="space-between">
                     <Text variant="h3">{task.dayOfTheWeek}</Text>
                   </C.HStack>
