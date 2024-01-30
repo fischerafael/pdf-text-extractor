@@ -35,7 +35,7 @@ export const usePageAppClients = () => {
   const [isLoading, setLoading] = useState(false);
   const queryClient = useQueryClient();
 
-  const { data } = useGetClients(presenters.email);
+  const { presenters: presentersClients } = useGetClients(presenters.email);
 
   const handleRemoveFromCache = (id: string) => {
     queryClient.setQueryData(
@@ -67,8 +67,8 @@ export const usePageAppClients = () => {
 
   return {
     presenters: {
-      clients: data?.data || [],
-      count: data?.count || 0,
+      clients: presentersClients.data?.data || [],
+      count: presentersClients.data?.count || 0,
       isLoading,
     },
     controllers: { handleDelete, handleNavigateToAdd },

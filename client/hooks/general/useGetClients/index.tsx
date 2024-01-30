@@ -8,5 +8,7 @@ export const useGetClients = (email?: string) => {
     enabled: !!email,
   });
 
-  return data;
+  return {
+    presenters: data,
+  };
 };
