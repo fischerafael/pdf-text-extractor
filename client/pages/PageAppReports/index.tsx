@@ -10,6 +10,7 @@ import * as Icon from "react-icons/hi";
 import { usePageAppReports } from "./hook/usePageAppReports";
 import { InputSelect } from "@/client/components/InputSelect";
 import { IconButton } from "@/client/components/IconButton";
+import { CSVDownload, CSVLink } from "react-csv";
 
 export const PageAppReports = () => {
   const { controllers, presenters } = usePageAppReports();
@@ -29,7 +30,14 @@ export const PageAppReports = () => {
                 <TagHour>{presenters.stats.time} hours</TagHour>
               </C.HStack>
 
-              <Button>Download CSV</Button>
+              <CSVLink
+                enclosingCharacter=""
+                filename="Report"
+                data={presenters.repportData}
+              >
+                <Button>Download CSV</Button>
+              </CSVLink>
+              {/* <CSVDownload enclosingCharacter="" /> */}
             </C.HStack>
 
             <C.HStack align="flex-start" w="full" justify="space-between">
