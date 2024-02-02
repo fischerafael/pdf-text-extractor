@@ -4,11 +4,17 @@ import { useAuthentication } from "@/client/hooks/global/useAuthenticationGlobal
 import { useState } from "react";
 import { useQuery } from "react-query";
 
+const initialState = {};
+
 export const usePageAppReports = () => {
   const { presenters: presenterAuth } = useAuthentication();
   const { presenters: presentersClients } = useGetClients(presenterAuth.email);
-  const [state, setState] = useState<{ selectedClient: string }>({
+  const [state, setState] = useState<{
+    selectedClient: string;
+    daysAgo: number;
+  }>({
     selectedClient: "",
+    daysAgo: 5,
   });
 
   const onSelectClient = (id: string) => {
@@ -16,9 +22,10 @@ export const usePageAppReports = () => {
   };
 
   const { data } = useQuery({
-    queryKey: ["reports", presenterAuth.email],
-    queryFn: () => tasksGateway.getLasWeekTasks(presenterAuth.email),
-    enabled: !!presenterAuth.email,
+    queryKey: ["reports", presenterAuth.email, state.daysAgo],
+    queryFn: () =>
+      tasksGateway.getTasksUntilDaysAgo(presenterAuth.email, state.daysAgo),
+    enabled: !!presenterAuth.email && !!state.selectedClient,
   });
 
   const stats = {
@@ -39,7 +46,11 @@ export const usePageAppReports = () => {
   );
 
   const onDeselectClient = () => {
-    setState({ selectedClient: "" });
+    setState((prev) => ({ ...prev, selectedClient: "" }));
+  };
+
+  const onSelectDays = (value: string) => {
+    setState((prev) => ({ ...prev, daysAgo: Number(value) }));
   };
 
   const columnTitle = data?.map((data) => data.dayOfTheWeek) || [];
@@ -80,8 +91,11 @@ export const usePageAppReports = () => {
     hoursWorked,
   ];
 
+  const isDownloadEnabled =
+    !!presenterAuth.email && !!state.daysAgo && !!state.selectedClient;
+
   return {
-    controllers: { onSelectClient, onDeselectClient },
+    controllers: { onSelectClient, onDeselectClient, onSelectDays },
     presenters: {
       tasks: data,
       stats,
@@ -91,7 +105,9 @@ export const usePageAppReports = () => {
       ],
       selectedClient: state.selectedClient,
       selectedClientData: selectedClientData,
+      selectedDaysAgo: state.daysAgo,
       repportData,
+      isDownloadEnabled,
     },
   };
 };

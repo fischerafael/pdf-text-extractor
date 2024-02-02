@@ -11,6 +11,7 @@ import { usePageAppReports } from "./hook/usePageAppReports";
 import { InputSelect } from "@/client/components/InputSelect";
 import { IconButton } from "@/client/components/IconButton";
 import { CSVDownload, CSVLink } from "react-csv";
+import { InputNumber } from "@/client/components/InputNumber";
 
 export const PageAppReports = () => {
   const { controllers, presenters } = usePageAppReports();
@@ -35,7 +36,9 @@ export const PageAppReports = () => {
                 filename="Report"
                 data={presenters.repportData}
               >
-                <Button>Download CSV</Button>
+                <Button isDisabled={!presenters.isDownloadEnabled}>
+                  Download CSV
+                </Button>
               </CSVLink>
               {/* <CSVDownload enclosingCharacter="" /> */}
             </C.HStack>
@@ -44,12 +47,23 @@ export const PageAppReports = () => {
               <Text fontSize="xl" w="full">
                 Client
               </Text>
-              <InputSelect
-                options={presenters.clientOptions}
-                label="Select a Client"
-                value={presenters.selectedClient}
-                onChange={(e) => controllers.onSelectClient(e.target.value)}
-              />
+              <C.HStack spacing="4">
+                <InputNumber
+                  minW="120px"
+                  label="Period (Days Ago)"
+                  value={presenters.selectedDaysAgo}
+                  onChange={(value) => controllers.onSelectDays(value)}
+                  min={1}
+                  max={7}
+                />
+                <InputSelect
+                  minW="120px"
+                  options={presenters.clientOptions}
+                  label="Select a Client"
+                  value={presenters.selectedClient}
+                  onChange={(e) => controllers.onSelectClient(e.target.value)}
+                />
+              </C.HStack>
             </C.HStack>
 
             {presenters.selectedClientData?.details && (

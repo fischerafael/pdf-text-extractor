@@ -80,10 +80,10 @@ class TasksGateway {
     return data;
   }
 
-  async getLasWeekTasks(user: string) {
+  async getTasksUntilDaysAgo(user: string, daysAgo: number = 7) {
     try {
       const today = new Date();
-      const lastWeekRawDates = returnLastWeek(today);
+      const lastWeekRawDates = getPastDates(today, daysAgo);
       const lastWeekFormattedDates = lastWeekRawDates.map((date) =>
         utils.formatDate(date)
       );
@@ -105,14 +105,15 @@ class TasksGateway {
 
 export const tasksGateway = new TasksGateway();
 
-const returnLastWeek = (today: Date) => {
-  const lastSevenDays: Date[] = [];
-  lastSevenDays.push(new Date(today));
-  for (let i = 1; i < 7; i++) {
-    const diaAnterior = new Date(today);
-    diaAnterior.setDate(today.getDate() - i);
-    lastSevenDays.push(diaAnterior);
+const getPastDates = (today: Date, days: number = 7) => {
+  const daysBefore = days <= 7 ? days : 7;
+  const lastDays: Date[] = [];
+  lastDays.push(new Date(today));
+  for (let dayIndex = 1; dayIndex < daysBefore; dayIndex++) {
+    const dayBefore = new Date(today);
+    dayBefore.setDate(today.getDate() - dayIndex);
+    lastDays.push(dayBefore);
   }
-  lastSevenDays.reverse();
-  return lastSevenDays;
+  lastDays.reverse();
+  return lastDays;
 };
