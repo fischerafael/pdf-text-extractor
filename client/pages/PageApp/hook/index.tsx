@@ -47,8 +47,6 @@ export const usePageApp = () => {
     setStateUi((prev) => ({ ...prev, currentDate }));
   };
 
-  console.log("[current date]", stateUi);
-
   const onSubmit = async () => {
     setLoading(true);
     try {
