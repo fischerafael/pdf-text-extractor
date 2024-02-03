@@ -1,7 +1,6 @@
 import { appConfig } from "@/client/config/app";
 import { api } from "@/client/config/axios";
 import { utils } from "@/client/utils";
-import { format } from "date-fns";
 
 interface ListByUserByDateResponse {
   message: string;
@@ -13,6 +12,7 @@ interface ListByUserByDateResponse {
       createdAt: string;
       task: string;
       category: string;
+      version?: string;
     };
   }[];
 }

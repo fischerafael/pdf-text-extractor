@@ -4,11 +4,11 @@ import { HeaderAppFactory } from "@/client/components/HeaderFactory";
 import { InputText } from "@/client/components/InputText";
 import { LinksContainerWithIcons } from "@/client/components/LinksContainerWithIcons";
 import { Logo } from "@/client/components/Logo";
+import { Tag } from "@/client/components/Tag";
+import { TextTitleMain } from "@/client/components/Text";
+import { theme } from "@/client/config/theme";
 import * as C from "@chakra-ui/react";
 import { usePageAppCategories } from "./hook";
-import { Tag } from "@/client/components/Tag";
-import { Text, TextTitleMain } from "@/client/components/Text";
-import { theme } from "@/client/config/theme";
 
 export const PageAppCategories = () => {
   const { presenters, controllers } = usePageAppCategories();
