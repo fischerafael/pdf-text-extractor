@@ -27,8 +27,9 @@ export const InputSelect = ({
   return (
     <FormControl label={label}>
       <C.Select
-        fontSize="xs"
+        fontSize="12px"
         bg="white"
+        size={"sm"}
         _focus={{ ring: "none", borderColor: theme.color.primary }}
         isDisabled={!isEnabled}
         borderRadius={theme.border.radius.regular}

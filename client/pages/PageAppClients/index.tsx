@@ -1,15 +1,15 @@
+import { Button } from "@/client/components/Button";
 import { DashboardTemplate } from "@/client/components/DashboardTemplate";
 import { HeaderAppFactory } from "@/client/components/HeaderFactory";
+import { IconButton } from "@/client/components/IconButton";
 import { LinksContainerWithIcons } from "@/client/components/LinksContainerWithIcons";
 import { Logo } from "@/client/components/Logo";
+import { TagHour } from "@/client/components/TagHour";
+import { Text, TextTitleMain } from "@/client/components/Text";
+import { theme } from "@/client/config/theme";
 import * as C from "@chakra-ui/react";
 import * as Icon from "react-icons/hi";
-import { Text } from "@/client/components/Text";
 import { usePageAppClients } from "./hooks/usePageAppClients";
-import { TagHour } from "@/client/components/TagHour";
-import { IconButton } from "@/client/components/IconButton";
-import { Button } from "@/client/components/Button";
-import { theme } from "@/client/config/theme";
 
 export const PageAppClients = () => {
   const { presenters, controllers } = usePageAppClients();
@@ -27,7 +27,7 @@ export const PageAppClients = () => {
             align="flex-start"
             gap="8"
           >
-            <Text variant="h1">Clients ({presenters.count})</Text>
+            <TextTitleMain>Clients ({presenters.count})</TextTitleMain>
             <Button onClick={controllers.handleNavigateToAdd}>Add</Button>
           </C.HStack>
           <C.VStack

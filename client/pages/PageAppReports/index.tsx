@@ -7,7 +7,11 @@ import { InputSelect } from "@/client/components/InputSelect";
 import { LinksContainerWithIcons } from "@/client/components/LinksContainerWithIcons";
 import { Logo } from "@/client/components/Logo";
 import { TagHour } from "@/client/components/TagHour";
-import { Text } from "@/client/components/Text";
+import {
+  Text,
+  TextTitleMain,
+  TextTitleSecondary,
+} from "@/client/components/Text";
 import { theme } from "@/client/config/theme";
 import * as C from "@chakra-ui/react";
 import { CSVLink } from "react-csv";
@@ -32,7 +36,7 @@ export const PageAppReports = () => {
           >
             <C.HStack w="full" justify="space-between">
               <C.HStack w="full">
-                <Text fontSize="xl">Last 7 Days</Text>
+                <TextTitleMain>Last 7 Days</TextTitleMain>
                 <TagHour>{presenters.stats.totalTasks} tasks</TagHour>
                 <TagHour>{presenters.stats.time} hours</TagHour>
               </C.HStack>
@@ -46,13 +50,10 @@ export const PageAppReports = () => {
                   Download CSV
                 </Button>
               </CSVLink>
-              {/* <CSVDownload enclosingCharacter="" /> */}
             </C.HStack>
 
             <C.HStack align="flex-start" w="full" justify="space-between">
-              <Text fontSize="xl" w="full">
-                Client
-              </Text>
+              <TextTitleSecondary>Client</TextTitleSecondary>
               <C.HStack spacing="4">
                 <InputNumber
                   minW="120px"

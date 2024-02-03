@@ -7,7 +7,7 @@ import { Logo } from "@/client/components/Logo";
 import * as C from "@chakra-ui/react";
 import { usePageAppCategories } from "./hook";
 import { Tag } from "@/client/components/Tag";
-import { Text } from "@/client/components/Text";
+import { Text, TextTitleMain } from "@/client/components/Text";
 import { theme } from "@/client/config/theme";
 
 export const PageAppCategories = () => {
@@ -26,7 +26,7 @@ export const PageAppCategories = () => {
             align="flex-start"
             gap="8"
           >
-            <Text variant="h1">Categories</Text>
+            <TextTitleMain variant="h1">Categories</TextTitleMain>
 
             <C.HStack
               w="full"

@@ -12,7 +12,8 @@ export const Button = ({ children, ...props }: ButtonProps) => {
       colorScheme={theme.color.primary}
       bgGradient={`linear(to-r, ${theme.color.secondary}, ${theme.color.primary})`}
       borderRadius={theme.border.radius.regular}
-      fontSize="md"
+      fontSize="sm"
+      size={"sm"}
       fontFamily={theme.font.family}
       fontWeight="semi-bold"
       {...props}

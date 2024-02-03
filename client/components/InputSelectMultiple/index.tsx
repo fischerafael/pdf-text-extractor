@@ -57,6 +57,7 @@ export const InputSelectMultiple = ({
         onChange={(e) => onSelect(e.target.value)}
         options={filteredOptions}
         value={value}
+        size={"sm"}
         {...props}
       />
       <C.HStack justify="flex-start" flexFlow="wrap" w="full">

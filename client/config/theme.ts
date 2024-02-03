@@ -3,6 +3,7 @@ export const theme = {
   color: {
     primary: "gray.900",
     secondary: "gray.700",
+    light600: "gray.600",
     light400: "gray.400",
     light200: "gray.200",
     accent: "purple.400",
@@ -19,6 +20,9 @@ export const theme = {
   },
   font: {
     family: "sans-serif",
+    weight: {
+      title: "bold",
+    },
   },
   width: {
     container: {

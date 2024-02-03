@@ -17,7 +17,7 @@ export const InputTextArea = ({
       <C.Textarea
         fontFamily={theme.font.family}
         bg="white"
-        fontSize="xs"
+        fontSize="12px"
         _focus={{ ring: "none", borderColor: theme.color.primary }}
         {...props}
       />

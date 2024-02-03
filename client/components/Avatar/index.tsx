@@ -1,6 +1,6 @@
-import React from "react";
-import * as C from "@chakra-ui/react";
 import { theme } from "@/client/config/theme";
+import * as C from "@chakra-ui/react";
+import { TextRegular, TextSubTitle } from "../Text";
 
 interface AvatarProps {
   src?: string;
@@ -19,13 +19,13 @@ export const Avatar = (props: AvatarProps) => {
         size="xs"
       />
       <C.VStack spacing="0" align="flex-start">
-        <C.Text fontFamily={theme.font.family} lineHeight="1">
+        <TextSubTitle fontFamily={theme.font.family} lineHeight="1">
           {props.title}
-        </C.Text>
+        </TextSubTitle>
         {props.subTitle && (
-          <C.Text fontFamily={theme.font.family} fontSize="xs">
+          <TextRegular color={theme.color.light600}>
             {props.subTitle}
-          </C.Text>
+          </TextRegular>
         )}
       </C.VStack>
     </C.HStack>

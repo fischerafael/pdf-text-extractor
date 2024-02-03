@@ -12,9 +12,10 @@ export const InputNumber = ({ label, helpText, ...props }: InputTextProps) => {
   return (
     <FormControl label={label}>
       <C.NumberInput
-        fontSize="xs"
+        fontSize="12px"
         w="full"
         bg="white"
+        size={"sm"}
         {...props}
         borderRadius={theme.border.radius.regular}
       >

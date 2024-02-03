@@ -11,6 +11,8 @@ export const IconButton = ({ ariaLabel = "", ...props }: IconProps) => {
   return (
     <C.IconButton
       bgGradient={`linear(to-r, ${theme.color.secondary}, ${theme.color.primary})`}
+      size="sm"
+      borderRadius={theme.border.radius.regular}
       {...props}
       aria-label={ariaLabel}
     />

@@ -7,6 +7,72 @@ interface TextProps extends C.TextProps {
   variant?: "h1" | "h2" | "h3" | "p" | "xs";
 }
 
+export const TextTitleMain = ({ children, ...props }: TextProps) => {
+  return (
+    <C.Text
+      color={theme.color.primary}
+      fontWeight="medium"
+      fontFamily={theme.font.family}
+      fontSize="xl"
+      {...props}
+    >
+      {children}
+    </C.Text>
+  );
+};
+
+export const TextTitleSecondary = ({ children, ...props }: TextProps) => {
+  return (
+    <C.Text
+      color={theme.color.primary}
+      fontFamily={theme.font.family}
+      fontSize={"lg"}
+      {...props}
+    >
+      {children}
+    </C.Text>
+  );
+};
+
+export const TextTitleTertiary = ({ children, ...props }: TextProps) => {
+  return (
+    <C.Text
+      color={theme.color.primary}
+      fontFamily={theme.font.family}
+      fontSize={"md"}
+      {...props}
+    >
+      {children}
+    </C.Text>
+  );
+};
+
+export const TextSubTitle = ({ children, ...props }: TextProps) => {
+  return (
+    <C.Text
+      color={theme.color.primary}
+      fontFamily={theme.font.family}
+      fontSize={"sm"}
+      {...props}
+    >
+      {children}
+    </C.Text>
+  );
+};
+
+export const TextRegular = ({ children, ...props }: TextProps) => {
+  return (
+    <C.Text
+      color={theme.color.primary}
+      fontFamily={theme.font.family}
+      fontSize={"xs"}
+      {...props}
+    >
+      {children}
+    </C.Text>
+  );
+};
+
 export const Text = ({ children, variant = "p", ...props }: TextProps) => {
   if (variant === "h1")
     return (

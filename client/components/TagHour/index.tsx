@@ -9,8 +9,9 @@ export const TagHour = ({ children }: { children: React.ReactNode }) => {
       border="1px"
       color={theme.color.primary}
       borderColor={theme.border.color}
-      py="0"
+      py="1"
       hasIconLeft={false}
+      size="sm"
       fontSize="10px"
     >
       {children}

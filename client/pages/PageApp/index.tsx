@@ -4,7 +4,7 @@ import { HeaderAppFactory } from "@/client/components/HeaderFactory";
 import { InputText } from "@/client/components/InputText";
 import { LinksContainerWithIcons } from "@/client/components/LinksContainerWithIcons";
 import { Logo } from "@/client/components/Logo";
-import { Text } from "@/client/components/Text";
+import { Text, TextTitleMain } from "@/client/components/Text";
 import { usePageApp } from "./hook";
 import * as C from "@chakra-ui/react";
 import * as Icon from "react-icons/hi";
@@ -32,9 +32,9 @@ export const PageApp = () => {
             w="full"
             maxW={theme.width.container.regular}
             align="flex-start"
-            gap="8"
+            gap="4"
           >
-            <C.HStack w="full">
+            <C.HStack w="full" justify="space-between">
               <IconButton
                 icon={<Icon.HiChevronLeft color="white" />}
                 aria-label="Previous Day"
@@ -42,9 +42,7 @@ export const PageApp = () => {
                 onClick={controllers.onSubDate}
                 size="sm"
               />
-              <Text w="full" textAlign="center">
-                {presenters.date}
-              </Text>
+              <TextTitleMain>{presenters.date}</TextTitleMain>
               <IconButton
                 icon={<Icon.HiChevronRight color="white" />}
                 aria-label="Next Day"
@@ -54,7 +52,13 @@ export const PageApp = () => {
               />
             </C.HStack>
 
-            <C.VStack w="full" spacing="0" shadow={theme.shadow.regular}>
+            <C.VStack
+              w="full"
+              spacing="0"
+              shadow={theme.shadow.regular}
+              border="1px"
+              borderColor={theme.border.color}
+            >
               {presenters.tasks?.data.map((task) => {
                 const TASK_ID = task.id;
 
@@ -66,7 +70,7 @@ export const PageApp = () => {
                     align="flex-start"
                     spacing="8"
                     key={task.id}
-                    border="1px"
+                    borderBottom="1px"
                     borderColor={theme.border.color}
                   >
                     <Text
