@@ -1,3 +1,4 @@
+import { theme } from "@/client/config/theme";
 import * as C from "@chakra-ui/react";
 import React from "react";
 
@@ -23,8 +24,10 @@ export const DashboardTemplate = ({
         h="full"
         spacing="0"
         display={["none", "none", "flex"]}
-        shadow="md"
+        shadow={theme.shadow.regular}
         zIndex="10"
+        borderRight="1px"
+        borderColor={theme.border.color}
       >
         <C.VStack h="10vh" justify="center">
           {logoSlot}

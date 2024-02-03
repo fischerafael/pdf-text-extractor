@@ -7,6 +7,7 @@ import { InputText } from "@/client/components/InputText";
 import { LinksContainerWithIcons } from "@/client/components/LinksContainerWithIcons";
 import { Logo } from "@/client/components/Logo";
 import { Text } from "@/client/components/Text";
+import { theme } from "@/client/config/theme";
 import { usePageAppSettings } from "./hook";
 
 export const PageAppSettings = () => {
@@ -17,7 +18,7 @@ export const PageAppSettings = () => {
       linksSlot={<LinksContainerWithIcons />}
       headerSlot={<HeaderAppFactory />}
       mainSlot={
-        <ContentVStack maxW="container.lg">
+        <ContentVStack maxW={theme.width.container.regular}>
           <ContentVStack minH="40vh" align="flex-start">
             <Text variant="h3">Change Password</Text>
             <InputText label="New Password" isDisabled />

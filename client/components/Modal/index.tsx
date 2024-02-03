@@ -25,7 +25,10 @@ export const Modal = ({
             {header}
           </C.ModalHeader>
         )}
-        <C.ModalCloseButton borderRadius="4" color={theme.mainColour} />
+        <C.ModalCloseButton
+          borderRadius={theme.border.radius.regular}
+          color={theme.color.primary}
+        />
         <C.ModalBody w="full" py="8">
           {children}
         </C.ModalBody>

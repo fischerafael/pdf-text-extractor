@@ -14,7 +14,7 @@ export const FormControl = ({
   return (
     <C.FormControl as={C.VStack} align="flex-start" w="full" spacing="0">
       <C.FormLabel
-        color={theme.mainColour}
+        color={theme.color.primary}
         fontWeight="regular"
         fontSize="xs"
         w="full"

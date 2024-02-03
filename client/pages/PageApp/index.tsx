@@ -16,6 +16,7 @@ import { Tag } from "@/client/components/Tag";
 import { Button } from "@/client/components/Button";
 import { TagHour } from "@/client/components/TagHour";
 import { Modal } from "@/client/components/Modal";
+import { theme } from "@/client/config/theme";
 
 export const PageApp = () => {
   const { controllers, presenters } = usePageApp();
@@ -27,12 +28,17 @@ export const PageApp = () => {
       headerSlot={<HeaderAppFactory />}
       mainSlot={
         <C.VStack w="full" align="center" p="8">
-          <C.VStack w="full" maxW="container.sm" align="flex-start" gap="8">
+          <C.VStack
+            w="full"
+            maxW={theme.width.container.regular}
+            align="flex-start"
+            gap="8"
+          >
             <C.HStack w="full">
               <IconButton
                 icon={<Icon.HiChevronLeft color="white" />}
                 aria-label="Previous Day"
-                borderRadius="full"
+                borderRadius={theme.border.radius.regular}
                 onClick={controllers.onSubDate}
                 size="sm"
               />
@@ -42,13 +48,13 @@ export const PageApp = () => {
               <IconButton
                 icon={<Icon.HiChevronRight color="white" />}
                 aria-label="Next Day"
-                borderRadius="full"
+                borderRadius={theme.border.radius.regular}
                 onClick={controllers.onAddDate}
                 size="sm"
               />
             </C.HStack>
 
-            <C.VStack w="full" spacing="0" shadow="md">
+            <C.VStack w="full" spacing="0" shadow={theme.shadow.regular}>
               {presenters.tasks?.data.map((task) => {
                 const TASK_ID = task.id;
 
@@ -61,7 +67,7 @@ export const PageApp = () => {
                     spacing="8"
                     key={task.id}
                     border="1px"
-                    borderColor="gray.100"
+                    borderColor={theme.border.color}
                   >
                     <Text
                       onClick={() => {
@@ -86,12 +92,12 @@ export const PageApp = () => {
                           {task.details.category}
                         </Tag>
                         <IconButton
-                          icon={<Icon.HiOutlineX color="purple.600" />}
+                          icon={<Icon.HiOutlineX color={theme.color.primary} />}
                           aria-label="Remove"
                           bg="transparent"
-                          borderRadius="full"
+                          borderRadius={theme.border.radius.regular}
                           border="1px"
-                          borderColor="purple.600"
+                          borderColor={theme.border.color}
                           w="6"
                           h="6"
                           isLoading={presenters.isLoading}

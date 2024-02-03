@@ -10,7 +10,7 @@ interface IconProps extends C.IconButtonProps {
 export const IconButton = ({ ariaLabel = "", ...props }: IconProps) => {
   return (
     <C.IconButton
-      bgGradient="linear(to-r, purple.400, purple.600)"
+      bgGradient={`linear(to-r, ${theme.color.secondary}, ${theme.color.primary})`}
       {...props}
       aria-label={ariaLabel}
     />

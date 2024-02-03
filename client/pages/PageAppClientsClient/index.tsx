@@ -1,12 +1,13 @@
+import { Button } from "@/client/components/Button";
 import { DashboardTemplate } from "@/client/components/DashboardTemplate";
 import { HeaderAppFactory } from "@/client/components/HeaderFactory";
+import { InputText } from "@/client/components/InputText";
 import { LinksContainerWithIcons } from "@/client/components/LinksContainerWithIcons";
 import { Logo } from "@/client/components/Logo";
-import * as C from "@chakra-ui/react";
 import { Text } from "@/client/components/Text";
-import { InputText } from "@/client/components/InputText";
+import { theme } from "@/client/config/theme";
+import * as C from "@chakra-ui/react";
 import { usePageAppClientsClient } from "./hooks";
-import { Button } from "@/client/components/Button";
 
 export const PageAppClientsClient = () => {
   const { presenters, controllers } = usePageAppClientsClient();
@@ -20,7 +21,7 @@ export const PageAppClientsClient = () => {
         <C.VStack w="full" align="center" p="8">
           <C.HStack
             w="full"
-            maxW="container.sm"
+            maxW={theme.width.container.regular}
             justify="space-between"
             align="flex-start"
             gap="8"
@@ -28,7 +29,12 @@ export const PageAppClientsClient = () => {
             <Text variant="h1">New Client</Text>
             <Button onClick={controllers.handleCancel}>Cancel</Button>
           </C.HStack>
-          <C.VStack w="full" maxW="container.sm" align="flex-start" gap="8">
+          <C.VStack
+            w="full"
+            maxW={theme.width.container.regular}
+            align="flex-start"
+            gap="8"
+          >
             <C.VStack w="full" justify="center">
               <InputText
                 label="Name"

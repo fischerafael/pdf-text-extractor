@@ -6,6 +6,7 @@ import { LinksContainer } from "@/client/components/LinksContainer";
 import { Logo } from "@/client/components/Logo";
 import { ContainerPagePublic } from "@/client/components/PublicPageContainer";
 import { usePageLandingPage } from "./hook";
+import { theme } from "@/client/config/theme";
 
 export const PageLandingPage = () => {
   const { controllers } = usePageLandingPage();
@@ -34,7 +35,7 @@ export const PageLandingPage = () => {
             h="400px"
             objectFit="cover"
             w="full"
-            shadow="lg"
+            shadow={theme.shadow.regular}
           />
         }
       />

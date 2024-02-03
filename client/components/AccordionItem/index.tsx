@@ -1,6 +1,7 @@
 import React from "react";
 import * as C from "@chakra-ui/react";
 import { Text } from "../Text";
+import { theme } from "@/client/config/theme";
 
 interface AccordionItemProps {
   title: string;
@@ -12,8 +13,8 @@ export const AccordionItem = ({ title, children }: AccordionItemProps) => {
     <C.AccordionItem
       w="full"
       border="1px"
-      borderRadius="4"
-      borderColor="gray.200"
+      borderRadius={theme.border.radius.regular}
+      borderColor={theme.border.color}
     >
       <C.AccordionButton w="full">
         <Text flex="1" fontSize="xs" textAlign="left">

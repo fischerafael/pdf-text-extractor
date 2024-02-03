@@ -1,6 +1,7 @@
 import * as C from "@chakra-ui/react";
 import { useState } from "react";
 import { CompaniesCarouselContainer } from "../CompaniesCarouselContainer";
+import { theme } from "@/client/config/theme";
 
 const getCurrentView = (logos: string[] = [], centralIndex: number = 0) => {
   const isLogosShorterOrEqual3 = logos.length <= 3;
@@ -59,7 +60,7 @@ const CarouselList = ({ logos, centralIndex }: LogosRendererProps) => {
     <C.HStack
       display={["none", "none", "flex"]}
       w="full"
-      maxW="container.sm"
+      maxW={theme.width.container.regular}
       justify="space-between"
       px="16"
     >
@@ -76,7 +77,7 @@ const SingleLogo = ({ logos, centralIndex }: LogosRendererProps) => {
     <C.HStack
       display={["flex", "flex", "none"]}
       w="full"
-      maxW="container.sm"
+      maxW={theme.width.container.regular}
       justify="center"
     >
       <LogoImage url={renderedLogo} />

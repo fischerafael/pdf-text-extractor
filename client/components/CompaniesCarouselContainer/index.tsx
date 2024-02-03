@@ -16,9 +16,13 @@ export const CompaniesCarouselContainer = ({
 }) => {
   return (
     <C.HStack w="full" justify="center" py="8">
-      <C.VStack w="full" maxW="container.lg" spacing="16">
+      <C.VStack w="full" maxW={theme.width.container.regular} spacing="16">
         {!!title && (
-          <C.Heading fontSize="xl" color={theme.mainColour} fontWeight="medium">
+          <C.Heading
+            fontSize="xl"
+            color={theme.color.primary}
+            fontWeight="medium"
+          >
             {title}
           </C.Heading>
         )}
@@ -26,14 +30,14 @@ export const CompaniesCarouselContainer = ({
           <C.IconButton
             variant="transparent"
             aria-label="left"
-            icon={<HiOutlineChevronLeft color={theme.mainColour} />}
+            icon={<HiOutlineChevronLeft color={theme.color.primary} />}
             onClick={decrement}
           />
           {children}
           <C.IconButton
             variant="transparent"
             aria-label="right"
-            icon={<HiOutlineChevronRight color={theme.mainColour} />}
+            icon={<HiOutlineChevronRight color={theme.color.primary} />}
             onClick={increment}
           />
         </C.HStack>

@@ -16,16 +16,16 @@ export const InputNumber = ({ label, helpText, ...props }: InputTextProps) => {
         w="full"
         bg="white"
         {...props}
-        borderRadius="full"
+        borderRadius={theme.border.radius.regular}
       >
         <C.NumberInputField
-          _focus={{ ring: "none", borderColor: theme.mainColour }}
+          _focus={{ ring: "none", borderColor: theme.color.primary }}
           w="full"
-          borderRadius="full"
+          borderRadius={theme.border.radius.regular}
         />
-        <C.NumberInputStepper borderRadius="full">
-          <C.NumberIncrementStepper color={`${theme.accentColour}.500`} />
-          <C.NumberDecrementStepper color={`${theme.accentColour}.500`} />
+        <C.NumberInputStepper borderRadius={theme.border.radius.regular}>
+          <C.NumberIncrementStepper color={`${theme.color.primary}`} />
+          <C.NumberDecrementStepper color={`${theme.color.primary}`} />
         </C.NumberInputStepper>
       </C.NumberInput>
     </FormControl>

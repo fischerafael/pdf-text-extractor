@@ -14,8 +14,8 @@ export const InputText = ({ label, helpText, ...props }: InputTextProps) => {
       <C.Input
         bg="white"
         fontSize="xs"
-        _focus={{ ring: "none", borderColor: theme.mainColour }}
-        borderRadius="full"
+        _focus={{ ring: "none", borderColor: theme.color.primary }}
+        borderRadius={theme.border.radius.regular}
         {...props}
       />
     </FormControl>

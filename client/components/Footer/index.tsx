@@ -20,7 +20,7 @@ export const Footer = ({ year = currentYear }: { year?: number }) => {
         <Logo />
         <LinksContainer />
       </C.HStack>
-      <C.Text pb="8" fontSize="xs">
+      <C.Text fontFamily={theme.font.family} pb="8" fontSize="xs">
         {appConfig.name} © {year}
       </C.Text>
     </C.VStack>

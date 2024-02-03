@@ -22,7 +22,7 @@ export const Drawer = ({
       <C.DrawerContent>
         <C.DrawerCloseButton />
         {!!headerSlot && (
-          <C.DrawerHeader color={theme.accentColour}>
+          <C.DrawerHeader color={theme.color.primary}>
             {headerSlot}
           </C.DrawerHeader>
         )}

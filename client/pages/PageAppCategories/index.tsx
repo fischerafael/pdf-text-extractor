@@ -8,6 +8,7 @@ import * as C from "@chakra-ui/react";
 import { usePageAppCategories } from "./hook";
 import { Tag } from "@/client/components/Tag";
 import { Text } from "@/client/components/Text";
+import { theme } from "@/client/config/theme";
 
 export const PageAppCategories = () => {
   const { presenters, controllers } = usePageAppCategories();
@@ -19,7 +20,12 @@ export const PageAppCategories = () => {
       headerSlot={<HeaderAppFactory />}
       mainSlot={
         <C.VStack w="full" align="center" p="8">
-          <C.VStack w="full" maxW="container.sm" align="flex-start" gap="8">
+          <C.VStack
+            w="full"
+            maxW={theme.width.container.regular}
+            align="flex-start"
+            gap="8"
+          >
             <Text variant="h1">Categories</Text>
 
             <C.HStack
@@ -40,8 +46,8 @@ export const PageAppCategories = () => {
 
               <Button
                 variant="outline"
-                color="purple.600"
-                borderColor="purple.600"
+                color={theme.color.primary}
+                borderColor={theme.border.color}
                 bg="transparent"
                 onClick={controllers.createCategory}
                 isLoading={presenters.isLoading}

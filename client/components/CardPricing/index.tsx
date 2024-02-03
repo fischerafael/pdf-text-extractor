@@ -15,20 +15,22 @@ interface PricingCardProps {
 export const PricingCard = (props: PricingCardProps) => {
   return (
     <CardContainer>
-      <C.Tag colorScheme={theme.accentColour}>{props.plan}</C.Tag>
-      <C.Heading py="4" fontSize="4xl" color={theme.mainColour}>
+      <C.Tag colorScheme={theme.color.primary}>{props.plan}</C.Tag>
+      <C.Heading py="4" fontSize="4xl" color={theme.color.primary}>
         {props.heading}
       </C.Heading>
-      <C.Text>{props.subHeading}</C.Text>
+      <C.Text fontFamily={theme.font.family}>{props.subHeading}</C.Text>
       <br />
       {props.features?.length &&
         props.features.map((feature) => (
           <C.HStack key={feature.id}>
             <C.Icon
-              color={`${theme.accentColour}`}
+              color={`${theme.color.primary}`}
               as={Icon.HiOutlineCheckCircle}
             />
-            <C.Text>{feature.description}</C.Text>
+            <C.Text fontFamily={theme.font.family}>
+              {feature.description}
+            </C.Text>
           </C.HStack>
         ))}
       <br />

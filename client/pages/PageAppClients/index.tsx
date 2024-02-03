@@ -9,6 +9,7 @@ import { usePageAppClients } from "./hooks/usePageAppClients";
 import { TagHour } from "@/client/components/TagHour";
 import { IconButton } from "@/client/components/IconButton";
 import { Button } from "@/client/components/Button";
+import { theme } from "@/client/config/theme";
 
 export const PageAppClients = () => {
   const { presenters, controllers } = usePageAppClients();
@@ -21,7 +22,7 @@ export const PageAppClients = () => {
         <C.VStack w="full" align="center" p="8">
           <C.HStack
             w="full"
-            maxW="container.sm"
+            maxW={theme.width.container.regular}
             justify="space-between"
             align="flex-start"
             gap="8"
@@ -32,7 +33,7 @@ export const PageAppClients = () => {
           <C.VStack
             w="full"
             justify="center"
-            maxW="container.sm"
+            maxW={theme.width.container.regular}
             py="8"
             spacing="0"
           >
@@ -42,17 +43,17 @@ export const PageAppClients = () => {
                 w="full"
                 bg="white"
                 border="1px"
-                borderColor="gray.200"
+                borderColor={theme.border.color}
                 p="8"
                 spacing="4"
                 align="flex-start"
-                color="purple.600"
+                color={theme.color.primary}
                 justify="space-between"
               >
                 <C.Avatar
                   name={client.details.name}
                   src={client.details.avatar}
-                  bg="purple.600"
+                  bg={theme.color.primary}
                   color="white"
                   size="sm"
                 />

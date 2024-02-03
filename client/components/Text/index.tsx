@@ -11,9 +11,10 @@ export const Text = ({ children, variant = "p", ...props }: TextProps) => {
   if (variant === "h1")
     return (
       <C.Text
-        color={theme.mainColour}
+        color={theme.color.primary}
         fontSize="2xl"
         fontWeight="medium"
+        fontFamily={theme.font.family}
         {...props}
       >
         {children}
@@ -22,9 +23,10 @@ export const Text = ({ children, variant = "p", ...props }: TextProps) => {
   if (variant === "h2")
     return (
       <C.Text
-        color={theme.mainColour}
+        color={theme.color.primary}
         fontSize="xl"
         fontWeight="medium"
+        fontFamily={theme.font.family}
         {...props}
       >
         {children}
@@ -33,9 +35,10 @@ export const Text = ({ children, variant = "p", ...props }: TextProps) => {
   if (variant === "h3")
     return (
       <C.Text
-        color={theme.mainColour}
+        color={theme.color.primary}
         fontSize="lg"
         fontWeight="medium"
+        fontFamily={theme.font.family}
         {...props}
       >
         {children}
@@ -43,12 +46,21 @@ export const Text = ({ children, variant = "p", ...props }: TextProps) => {
     );
   if (variant === "xs")
     return (
-      <C.Text color={theme.mainColour} fontSize="xs" {...props}>
+      <C.Text
+        color={theme.color.primary}
+        fontSize="xs"
+        fontFamily={theme.font.family}
+        {...props}
+      >
         {children}
       </C.Text>
     );
   return (
-    <C.Text color={theme.mainColour} {...props}>
+    <C.Text
+      color={theme.color.primary}
+      fontFamily={theme.font.family}
+      {...props}
+    >
       {children}
     </C.Text>
   );

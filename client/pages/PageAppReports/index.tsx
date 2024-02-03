@@ -1,17 +1,18 @@
 import { Button } from "@/client/components/Button";
 import { DashboardTemplate } from "@/client/components/DashboardTemplate";
 import { HeaderAppFactory } from "@/client/components/HeaderFactory";
+import { IconButton } from "@/client/components/IconButton";
+import { InputNumber } from "@/client/components/InputNumber";
+import { InputSelect } from "@/client/components/InputSelect";
 import { LinksContainerWithIcons } from "@/client/components/LinksContainerWithIcons";
 import { Logo } from "@/client/components/Logo";
 import { TagHour } from "@/client/components/TagHour";
 import { Text } from "@/client/components/Text";
+import { theme } from "@/client/config/theme";
 import * as C from "@chakra-ui/react";
+import { CSVLink } from "react-csv";
 import * as Icon from "react-icons/hi";
 import { usePageAppReports } from "./hook/usePageAppReports";
-import { InputSelect } from "@/client/components/InputSelect";
-import { IconButton } from "@/client/components/IconButton";
-import { CSVDownload, CSVLink } from "react-csv";
-import { InputNumber } from "@/client/components/InputNumber";
 
 export const PageAppReports = () => {
   const { controllers, presenters } = usePageAppReports();
@@ -23,7 +24,12 @@ export const PageAppReports = () => {
       headerSlot={<HeaderAppFactory />}
       mainSlot={
         <C.VStack w="full" align="center" p="8">
-          <C.VStack w="full" maxW="container.sm" align="flex-start" gap="8">
+          <C.VStack
+            w="full"
+            maxW={theme.width.container.regular}
+            align="flex-start"
+            gap="8"
+          >
             <C.HStack w="full" justify="space-between">
               <C.HStack w="full">
                 <Text fontSize="xl">Last 7 Days</Text>
@@ -71,17 +77,17 @@ export const PageAppReports = () => {
                 w="full"
                 bg="white"
                 border="1px"
-                borderColor="gray.200"
+                borderColor={theme.border.color}
                 p="8"
                 spacing="4"
                 align="flex-start"
-                color="purple.600"
+                color={theme.color.primary}
                 justify="space-between"
               >
                 <C.Avatar
                   name={presenters.selectedClientData?.details.name}
                   src={presenters.selectedClientData?.details.avatar}
-                  bg="purple.600"
+                  bg={theme.color.primary}
                   color="white"
                   size="sm"
                 />
@@ -117,11 +123,11 @@ export const PageAppReports = () => {
                   w="full"
                   bg="white"
                   border="1px"
-                  borderColor="gray.200"
+                  borderColor={theme.border.color}
                   p="8"
                   spacing="4"
                   align="flex-start"
-                  color="purple.600"
+                  color={theme.color.primary}
                   justify="space-between"
                 >
                   <C.HStack w="full" justify="space-between">
@@ -149,7 +155,7 @@ export const PageAppReports = () => {
     bg="white"
     p="8"
     border="1px"
-    borderColor="gray.200"
+    borderColor={theme.border.color}
     cursor="pointer"
     onClick={controllers.getLastWeekData}
   >
@@ -157,12 +163,12 @@ export const PageAppReports = () => {
       <C.Icon
         w="6"
         h="6"
-        color="purple.600"
+        color={theme.color.primary}
         as={Icon.HiOutlineDocumentReport}
       />
       <Text>Last Week</Text>
     </C.VStack>
-    <C.Icon w="4" h="4" color="purple.600" as={Icon.HiOutlineChevronRight} />
+    <C.Icon w="4" h="4" color={theme.color.primary} as={Icon.HiOutlineChevronRight} />
   </C.HStack>
 </C.VStack>; */
 }

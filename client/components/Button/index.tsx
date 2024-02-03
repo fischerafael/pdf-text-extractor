@@ -9,10 +9,12 @@ interface ButtonProps extends C.ButtonProps {
 export const Button = ({ children, ...props }: ButtonProps) => {
   return (
     <C.Button
-      colorScheme={theme.accentColour}
-      bgGradient="linear(to-r, purple.400, purple.600)"
-      borderRadius="full"
+      colorScheme={theme.color.primary}
+      bgGradient={`linear(to-r, ${theme.color.secondary}, ${theme.color.primary})`}
+      borderRadius={theme.border.radius.regular}
       fontSize="md"
+      fontFamily={theme.font.family}
+      fontWeight="semi-bold"
       {...props}
     >
       {children}

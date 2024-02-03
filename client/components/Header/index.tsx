@@ -20,7 +20,7 @@ export const Header = ({ isTransparent = true, ...props }: HeaderProps) => {
     <C.HStack
       w="full"
       justify="center"
-      bg={isTransparent ? "transparent" : `${theme.mainColour}`}
+      bg={isTransparent ? "transparent" : `${theme.color.primary}`}
     >
       <WebHeader {...props} />
       <MobileHeader {...props} />
@@ -40,7 +40,7 @@ const WebHeader = ({
       w="full"
       h="10vh"
       justify="space-between"
-      maxW="container.xl"
+      maxW={theme.width.container.regular}
     >
       {logoSlot}
       {!!isDisplayLinksOnWeb && linksSlot}
@@ -78,9 +78,9 @@ const MobileHeader = ({ logoSlot, linksSlot, actionSlot }: HeaderProps) => {
       {logoSlot}
       <C.IconButton
         aria-label="Hamburguer Menu"
-        bg={theme.mainColour}
+        bg={theme.color.primary}
         icon={<Icon.HiOutlineMenu />}
-        colorScheme={theme.accentColour}
+        colorScheme={theme.color.primary}
         onClick={onOpen}
       />
       <Drawer isOpen={isOpen} onClose={onClose} headerSlot={<Logo />}>

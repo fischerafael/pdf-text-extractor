@@ -1,5 +1,6 @@
 import React from "react";
 import * as C from "@chakra-ui/react";
+import { theme } from "@/client/config/theme";
 
 export interface FeatureSectionContentProps {
   heading: string;
@@ -17,7 +18,7 @@ export const FeatureSectionContent = ({
       <C.Heading fontSize="xl" fontWeight="medium">
         {heading}
       </C.Heading>
-      <C.Text>{content}</C.Text>
+      <C.Text fontFamily={theme.font.family}>{content}</C.Text>
       {ctaSlot}
     </C.VStack>
   );

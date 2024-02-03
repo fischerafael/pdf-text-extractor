@@ -1,5 +1,6 @@
 import React from "react";
 import * as C from "@chakra-ui/react";
+import { theme } from "@/client/config/theme";
 
 export const FeatureSectionContainer = ({
   leftSlot,
@@ -17,7 +18,7 @@ export const FeatureSectionContainer = ({
         templateColumns={["1fr", "1fr", "1fr 1fr"]}
         w="full"
         gap="8"
-        maxW="container.lg"
+        maxW={theme.width.container.regular}
       >
         {leftSlot}
         {rightSlot}
@@ -28,7 +29,7 @@ export const FeatureSectionContainer = ({
           templateColumns={"1fr"}
           w="full"
           gap="8"
-          maxW="container.lg"
+          maxW={theme.width.container.regular}
         >
           {leftSlot}
           {rightSlot}
@@ -39,7 +40,7 @@ export const FeatureSectionContainer = ({
           templateColumns={"1fr"}
           w="full"
           gap="8"
-          maxW="container.lg"
+          maxW={theme.width.container.regular}
         >
           {rightSlot}
           {leftSlot}
