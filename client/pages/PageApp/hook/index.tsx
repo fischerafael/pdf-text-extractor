@@ -165,6 +165,7 @@ export const usePageApp = () => {
       onEditTask,
       onOpenEdit: onOpenEdit,
       onCloseEdit: onCloseEdit,
+      findColorOfCategory,
     },
     presenters: {
       optionsCategories: [{ key: "", value: "" }, ...optionsCategories],

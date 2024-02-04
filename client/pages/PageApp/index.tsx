@@ -76,7 +76,6 @@ export const PageApp = () => {
                   >
                     <Text
                       onClick={() => {
-                        console.log("[innput state] [taskId]", TASK_ID);
                         controllers.onOpenEdit(
                           TASK_ID,
                           task.details.task,
@@ -93,7 +92,17 @@ export const PageApp = () => {
                       <TagHour>{task.id}</TagHour>
                       <C.HStack spacing="4">
                         <TagHour>{task.details.duration} h</TagHour>
-                        <Tag py="0" hasIconLeft={false}>
+                        <Tag
+                          py="0"
+                          hasIconLeft={false}
+                          bg={formatColorTone(
+                            controllers.findColorOfCategory(
+                              task.details.category,
+                              presenters.categories
+                            )
+                          )}
+                          color="gray.600"
+                        >
                           {task.details.category}
                         </Tag>
                         <IconButton
