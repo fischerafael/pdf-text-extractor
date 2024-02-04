@@ -1,15 +1,19 @@
 import { appConfig } from "@/client/config/app";
 import { api } from "@/client/config/axios";
 
+const initialExperience = 0;
+
 class CategoriesGateway {
   private app: string = `${appConfig.appPrefix}.categories`;
 
-  async create(user: string, title: string) {
+  async create(user: string, title: string, color: string) {
     const { data } = await api.entities.post<{ id: string }>(`/entities`, {
       user: user,
       app: this.app,
       details: {
         title: title,
+        color: color,
+        experience: initialExperience,
       },
     });
     return data;
@@ -19,7 +23,10 @@ class CategoriesGateway {
     const { data } = await api.entities.get<{
       message: string;
       count: number;
-      data: { id: string; details: { title: string } }[];
+      data: {
+        id: string;
+        details: { title: string; color: string; experience: number };
+      }[];
     }>(`/entities`, {
       headers: {
         app: this.app,

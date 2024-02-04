@@ -3,8 +3,6 @@ import { useGetCategories } from "@/client/hooks/general/useGetCategories";
 import { useAuthentication } from "@/client/hooks/global/useAuthenticationGlobal";
 import { useState } from "react";
 
-// const loggedUser = "rafaelsanfischer@gmail.com";
-
 const colourOptions = [
   "gray",
   "red",
@@ -18,27 +16,96 @@ const colourOptions = [
   "pink",
 ];
 
+type CategoryColor =
+  | "gray"
+  | "red"
+  | "orange"
+  | "yellow"
+  | "green"
+  | "teal"
+  | "blue"
+  | "cyan"
+  | "purple"
+  | "pink"
+  | "";
+
+export interface ICategory {
+  id: string;
+  title: string;
+  color: CategoryColor;
+  experience: number;
+}
+
+// const loggedUser = "rafaelsanfischer@gmail.com";
+
+interface IState {
+  isLoading: boolean;
+  category: ICategory;
+}
+
 export const usePageAppCategories = () => {
   const { presenters } = useAuthentication();
-  const loggedUser = presenters.email;
-  const [state, setState] = useState({
+  const userEmail = presenters.email;
+  const [stateLegacy, setStateLegacy] = useState({
     isLoading: false,
     inputCategory: "",
     colour: "",
   });
 
-  const onChangeInputCategory = (value: string) => {
-    setState((prev) => ({ ...prev, inputCategory: value }));
+  const onChangeInputCategoryLegacy = (value: string) => {
+    setStateLegacy((prev) => ({ ...prev, inputCategory: value }));
   };
+
+  const createCategoryLegacy = async () => {
+    setStateLegacy((prev) => ({ ...prev, isLoading: true }));
+    try {
+      const { id } = await categoriesGateway.create(
+        userEmail,
+        stateLegacy.inputCategory,
+        ""
+      );
+      setStateLegacy((prev) => ({ ...prev, inputCategory: "" }));
+      await refetch();
+      console.log("[success - id]", id);
+    } catch (e: any) {
+      console.log("[error - id]", e.message);
+    } finally {
+      setStateLegacy((prev) => ({ ...prev, isLoading: false }));
+    }
+  };
+
+  const [state, setState] = useState<IState>({
+    isLoading: false,
+    category: {
+      id: "",
+      title: "",
+      color: "",
+      experience: 0,
+    },
+  });
+
+  const onChangeCategoryTitle = (key: "title" | "color", value: string) => {
+    setState((prev) => ({
+      ...prev,
+      category: { ...prev.category, title: value },
+    }));
+  };
+
+  const {
+    isLoading: isLoadingCategories,
+    categories,
+    refetch,
+  } = useGetCategories(userEmail);
 
   const createCategory = async () => {
     setState((prev) => ({ ...prev, isLoading: true }));
     try {
       const { id } = await categoriesGateway.create(
-        loggedUser,
-        state.inputCategory
+        userEmail,
+        state.category.title,
+        state.category.color
       );
-      setState((prev) => ({ ...prev, inputCategory: "" }));
+      setStateLegacy((prev) => ({ ...prev, inputCategory: "" }));
       await refetch();
       console.log("[success - id]", id);
     } catch (e: any) {
@@ -49,7 +116,7 @@ export const usePageAppCategories = () => {
   };
 
   const removeCategory = async (id: string) => {
-    setState((prev) => ({ ...prev, isLoading: true }));
+    setStateLegacy((prev) => ({ ...prev, isLoading: true }));
     try {
       const data = await categoriesGateway.remove(id);
       await refetch();
@@ -57,27 +124,21 @@ export const usePageAppCategories = () => {
     } catch (e: any) {
       console.log("[error - id]", e.message);
     } finally {
-      setState((prev) => ({ ...prev, isLoading: false }));
+      setStateLegacy((prev) => ({ ...prev, isLoading: false }));
     }
   };
 
-  const {
-    isLoading: isLoadingCategories,
-    categories,
-    refetch,
-  } = useGetCategories(loggedUser);
-
-  const isLoading = state.isLoading || isLoadingCategories;
+  const isLoading = stateLegacy.isLoading || isLoadingCategories;
 
   return {
     presenters: {
-      inputCategory: state.inputCategory,
+      inputCategory: stateLegacy.inputCategory,
       isLoading: isLoading,
       existingCategoryes: categories,
     },
     controllers: {
-      onChangeInputCategory,
-      createCategory: createCategory,
+      onChangeInputCategory: onChangeInputCategoryLegacy,
+      createCategory: createCategoryLegacy,
       removeCategory: removeCategory,
     },
   };
