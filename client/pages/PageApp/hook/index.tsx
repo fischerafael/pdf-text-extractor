@@ -1,6 +1,9 @@
 import { pages } from "@/client/config/links";
 import { tasksGateway } from "@/client/gateways/api/tasks";
-import { useGetCategories } from "@/client/hooks/general/useGetCategories";
+import {
+  Category,
+  useGetCategories,
+} from "@/client/hooks/general/useGetCategories";
 import { useToasts } from "@/client/hooks/general/useToasts";
 import { useAuthentication } from "@/client/hooks/global/useAuthenticationGlobal";
 import { utils } from "@/client/utils";
@@ -8,6 +11,7 @@ import { useDisclosure } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { useQuery } from "react-query";
+import { formatColorTone } from "../../PageAppCategories/hook";
 
 interface IState {
   task: string;
@@ -24,7 +28,8 @@ export const usePageApp = () => {
   const { query } = useRouter();
 
   const loggedUser = presenters.email;
-  const { categories } = useGetCategories(loggedUser);
+  const { optionsCategories: optionsCategories, categories } =
+    useGetCategories(loggedUser);
 
   const [isLoading, setLoading] = useState(false);
 
@@ -144,6 +149,12 @@ export const usePageApp = () => {
     onClose();
   };
 
+  const inputBgColor = formatColorTone(
+    findColorOfCategory(inputState.category, categories)
+  );
+
+  console.log(optionsCategories);
+
   return {
     controllers: {
       onChangeState: onChangeStateString,
@@ -156,7 +167,8 @@ export const usePageApp = () => {
       onCloseEdit: onCloseEdit,
     },
     presenters: {
-      optionsCategories: [{ key: "", value: "" }, ...categories],
+      optionsCategories: [{ key: "", value: "" }, ...optionsCategories],
+      categories,
       task: inputState.task,
       duration: inputState.duration,
       category: inputState.category,
@@ -166,6 +178,17 @@ export const usePageApp = () => {
       date: utils.formatDate(stateUi.currentDate, "/"),
       totalTime: totalTime,
       isOpenEditModal: isOpen,
+      inputBgColor,
     },
   };
+};
+
+export const findColorOfCategory = (
+  categoryName: string,
+  categories: Category[]
+) => {
+  return (
+    categories.find((cat) => cat.details.title === categoryName)?.details
+      .color || "transparent"
+  );
 };

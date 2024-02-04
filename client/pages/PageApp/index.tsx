@@ -17,6 +17,7 @@ import { Button } from "@/client/components/Button";
 import { TagHour } from "@/client/components/TagHour";
 import { Modal } from "@/client/components/Modal";
 import { theme } from "@/client/config/theme";
+import { formatColorTone } from "../PageAppCategories/hook";
 
 export const PageApp = () => {
   const { controllers, presenters } = usePageApp();
@@ -138,6 +139,7 @@ export const PageApp = () => {
                           <InputSelect
                             options={presenters.optionsCategories}
                             label="Category"
+                            bg={presenters.inputBgColor}
                             value={presenters.category}
                             onChange={(e) =>
                               controllers.onChangeState(
@@ -196,6 +198,7 @@ export const PageApp = () => {
                     onChange={(e) =>
                       controllers.onChangeState("category", e.target.value)
                     }
+                    bg={presenters.inputBgColor}
                   />
                 </C.HStack>
                 <Button

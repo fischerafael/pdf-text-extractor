@@ -8,7 +8,8 @@ import { Tag } from "@/client/components/Tag";
 import { TextTitleMain } from "@/client/components/Text";
 import { theme } from "@/client/config/theme";
 import * as C from "@chakra-ui/react";
-import { usePageAppCategories } from "./hook";
+import { formatColorTone, usePageAppCategories } from "./hook";
+import { InputSelect } from "@/client/components/InputSelect";
 
 export const PageAppCategories = () => {
   const { presenters, controllers } = usePageAppCategories();
@@ -34,15 +35,29 @@ export const PageAppCategories = () => {
               spacing="4"
               align="flex-end"
             >
-              <C.HStack w="full">
+              <C.Grid
+                w="full"
+                columnGap="4"
+                rowGap="2"
+                templateColumns={["1fr", "2fr 1fr"]}
+              >
                 <InputText
                   label="New Category"
-                  value={presenters.inputCategory}
+                  value={presenters.title}
                   onChange={(e) =>
-                    controllers.onChangeInputCategory(e.target.value)
+                    controllers.onChangeInputCategory("title", e.target.value)
                   }
                 />
-              </C.HStack>
+                <InputSelect
+                  bg={formatColorTone(presenters.color)}
+                  label="Color"
+                  value={presenters.color}
+                  onChange={(e) =>
+                    controllers.onChangeInputCategory("color", e.target.value)
+                  }
+                  options={presenters.optionsColors}
+                />
+              </C.Grid>
 
               <Button
                 variant="outline"
@@ -51,6 +66,7 @@ export const PageAppCategories = () => {
                 bg="transparent"
                 onClick={controllers.createCategory}
                 isLoading={presenters.isLoading}
+                isDisabled={!presenters.isEnabled}
               >
                 Add
               </Button>
@@ -58,12 +74,14 @@ export const PageAppCategories = () => {
 
             {!presenters.isLoading && (
               <C.HStack wrap="wrap" gap="2">
-                {presenters.existingCategoryes.map((cat) => (
+                {presenters.categories.map((cat) => (
                   <Tag
-                    key={cat.key}
-                    onClick={() => controllers.removeCategory(cat.key)}
+                    key={cat.id}
+                    onClick={() => controllers.removeCategory(cat.id)}
+                    bg={formatColorTone(cat.details.color)}
+                    color="gray.600"
                   >
-                    {cat.value}
+                    {cat.details.title}
                   </Tag>
                 ))}
               </C.HStack>

@@ -1,22 +1,10 @@
 import { categoriesGateway } from "@/client/gateways/api/categories";
 import { useGetCategories } from "@/client/hooks/general/useGetCategories";
 import { useAuthentication } from "@/client/hooks/global/useAuthenticationGlobal";
+import { IOption } from "@/client/interfaces";
 import { useState } from "react";
 
-const colourOptions = [
-  "gray",
-  "red",
-  "orange",
-  "yellow",
-  "green",
-  "teal",
-  "blue",
-  "cyan",
-  "purple",
-  "pink",
-];
-
-type CategoryColor =
+type Color =
   | "gray"
   | "red"
   | "orange"
@@ -32,11 +20,9 @@ type CategoryColor =
 export interface ICategory {
   id: string;
   title: string;
-  color: CategoryColor;
+  color: Color;
   experience: number;
 }
-
-// const loggedUser = "rafaelsanfischer@gmail.com";
 
 interface IState {
   isLoading: boolean;
@@ -46,33 +32,6 @@ interface IState {
 export const usePageAppCategories = () => {
   const { presenters } = useAuthentication();
   const userEmail = presenters.email;
-  const [stateLegacy, setStateLegacy] = useState({
-    isLoading: false,
-    inputCategory: "",
-    colour: "",
-  });
-
-  const onChangeInputCategoryLegacy = (value: string) => {
-    setStateLegacy((prev) => ({ ...prev, inputCategory: value }));
-  };
-
-  const createCategoryLegacy = async () => {
-    setStateLegacy((prev) => ({ ...prev, isLoading: true }));
-    try {
-      const { id } = await categoriesGateway.create(
-        userEmail,
-        stateLegacy.inputCategory,
-        ""
-      );
-      setStateLegacy((prev) => ({ ...prev, inputCategory: "" }));
-      await refetch();
-      console.log("[success - id]", id);
-    } catch (e: any) {
-      console.log("[error - id]", e.message);
-    } finally {
-      setStateLegacy((prev) => ({ ...prev, isLoading: false }));
-    }
-  };
 
   const [state, setState] = useState<IState>({
     isLoading: false,
@@ -87,12 +46,13 @@ export const usePageAppCategories = () => {
   const onChangeCategoryTitle = (key: "title" | "color", value: string) => {
     setState((prev) => ({
       ...prev,
-      category: { ...prev.category, title: value },
+      category: { ...prev.category, [key]: value },
     }));
   };
 
   const {
     isLoading: isLoadingCategories,
+    optionsCategories: optionsCategories,
     categories,
     refetch,
   } = useGetCategories(userEmail);
@@ -105,7 +65,10 @@ export const usePageAppCategories = () => {
         state.category.title,
         state.category.color
       );
-      setStateLegacy((prev) => ({ ...prev, inputCategory: "" }));
+      setState((prev) => ({
+        ...prev,
+        category: { ...prev.category, color: "", title: "" },
+      }));
       await refetch();
       console.log("[success - id]", id);
     } catch (e: any) {
@@ -116,7 +79,7 @@ export const usePageAppCategories = () => {
   };
 
   const removeCategory = async (id: string) => {
-    setStateLegacy((prev) => ({ ...prev, isLoading: true }));
+    setState((prev) => ({ ...prev, isLoading: true }));
     try {
       const data = await categoriesGateway.remove(id);
       await refetch();
@@ -124,22 +87,52 @@ export const usePageAppCategories = () => {
     } catch (e: any) {
       console.log("[error - id]", e.message);
     } finally {
-      setStateLegacy((prev) => ({ ...prev, isLoading: false }));
+      setState((prev) => ({ ...prev, isLoading: false }));
     }
   };
 
-  const isLoading = stateLegacy.isLoading || isLoadingCategories;
+  const isEnabled = !!state.category.color && !!state.category.color;
+  const isLoading = state.isLoading || isLoadingCategories;
+
+  console.log("[categories]", optionsCategories);
 
   return {
     presenters: {
-      inputCategory: stateLegacy.inputCategory,
+      title: state.category.title,
+      color: state.category.color,
       isLoading: isLoading,
-      existingCategoryes: categories,
+      optionsCategories: optionsCategories,
+      categories,
+      optionsColors: optionsColors,
+      isEnabled,
     },
     controllers: {
-      onChangeInputCategory: onChangeInputCategoryLegacy,
-      createCategory: createCategoryLegacy,
+      onChangeInputCategory: onChangeCategoryTitle,
+      createCategory: createCategory,
       removeCategory: removeCategory,
     },
   };
+};
+
+const colorsAvailable = [
+  "",
+  "gray",
+  "red",
+  "orange",
+  "yellow",
+  "green",
+  "teal",
+  "blue",
+  "cyan",
+  "purple",
+  "pink",
+];
+
+export const optionsColors: IOption[] = colorsAvailable.map((color) => ({
+  key: color,
+  value: color,
+}));
+
+export const formatColorTone = (color: string, tone: number = 200) => {
+  return `${color}.${tone}`;
 };
