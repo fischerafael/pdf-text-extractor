@@ -19,6 +19,8 @@ interface IState {
   category: string;
 }
 
+const today = new Date();
+
 const INITIAL_STATE: IState = { task: "", duration: "", category: "" };
 
 export const usePageApp = () => {
@@ -32,9 +34,8 @@ export const usePageApp = () => {
     useGetCategories(loggedUser);
 
   const [isLoading, setLoading] = useState(false);
-
   const [inputState, setInputState] = useState<IState>(INITIAL_STATE);
-  const [stateUi, setStateUi] = useState({ currentDate: new Date() });
+  const [stateUi, setStateUi] = useState({ currentDate: today });
 
   const onChangeStateString = (key: keyof IState, value: string) => {
     setInputState((prev) => ({ ...prev, [key]: value }));
@@ -153,7 +154,9 @@ export const usePageApp = () => {
     findColorOfCategory(inputState.category, categories)
   );
 
-  console.log(optionsCategories);
+  const isToday = utils.isToday(stateUi.currentDate);
+  const isCreateEnabled = !isOpen && isToday;
+  const isEditEnabled = isToday;
 
   return {
     controllers: {
@@ -180,6 +183,8 @@ export const usePageApp = () => {
       totalTime: totalTime,
       isOpenEditModal: isOpen,
       inputBgColor,
+      isCreateEnabled,
+      isEditEnabled,
     },
   };
 };

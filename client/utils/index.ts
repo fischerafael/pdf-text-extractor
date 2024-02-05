@@ -9,6 +9,10 @@ export const formatDate = (
   return format(date, `dd${separator}MM${separator}yyyy`);
 };
 
+const isToday = (date: Date) => {
+  return formatDate(new Date()) === formatDate(date);
+};
+
 export const utils = {
   handleNavigateTo: (url: string) => {
     Router.push(url);
@@ -25,4 +29,5 @@ export const utils = {
     return password.length >= 8;
   },
   formatDate,
+  isToday: isToday,
 };

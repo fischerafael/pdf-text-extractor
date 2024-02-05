@@ -74,18 +74,31 @@ export const PageApp = () => {
                     borderBottom="1px"
                     borderColor={theme.border.color}
                   >
-                    <Text
-                      onClick={() => {
-                        controllers.onOpenEdit(
-                          TASK_ID,
-                          task.details.task,
-                          task.details.duration,
-                          task.details.category
-                        );
-                      }}
-                      cursor={"pointer"}
-                    >
+                    <Text as="span">
                       {task.details.task}
+                      {presenters.isEditEnabled && (
+                        <IconButton
+                          icon={<Icon.HiOutlinePencil />}
+                          aria-label="Remove"
+                          bg="transparent"
+                          color={theme.color.light400}
+                          _hover={{
+                            bg: "transparent",
+                            color: theme.color.accent,
+                          }}
+                          w="6"
+                          h="6"
+                          isLoading={presenters.isLoading}
+                          onClick={() => {
+                            controllers.onOpenEdit(
+                              TASK_ID,
+                              task.details.task,
+                              task.details.duration,
+                              task.details.category
+                            );
+                          }}
+                        />
+                      )}
                     </Text>
 
                     <C.HStack w="full" spacing="4" justify="space-between">
@@ -180,7 +193,7 @@ export const PageApp = () => {
 
             {/* INPUTS */}
 
-            {!presenters.isOpenEditModal && (
+            {presenters.isCreateEnabled && (
               <C.VStack w="full">
                 <InputTextArea
                   label="New Task"
