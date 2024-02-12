@@ -1,7 +1,5 @@
-import { PageApp } from "@/client/pages/PageApp";
-
 const index = () => {
-  return <PageApp />;
+  return <h1>hi</h1>;
 };
 
 export default index;
