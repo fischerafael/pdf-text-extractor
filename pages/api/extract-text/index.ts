@@ -1,17 +1,15 @@
-import { pdfExtractor } from "@/server/PDFTextExtractor";
-import type { NextApiRequest, NextApiResponse } from "next";
+import {
+  NextApiRequestWithFile,
+  pdfExtractor,
+} from "@/server/PDFTextExtractor";
+import type { NextApiResponse } from "next";
 
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
+export const config = pdfExtractor.config;
 
-interface Request extends NextApiRequest {
-  file: any;
-}
-
-export default async function handler(req: Request, res: NextApiResponse) {
+export default async function handler(
+  req: NextApiRequestWithFile,
+  res: NextApiResponse
+) {
   try {
     await pdfExtractor.uploadPDFTemp(req, res);
     const data = await pdfExtractor.parsePDFFile(req.file);

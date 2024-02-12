@@ -1,12 +1,23 @@
 import multer from "multer";
 import pdfParse from "pdf-parse";
 import fs from "fs";
+import { NextApiRequest } from "next";
+
+export interface NextApiRequestWithFile extends NextApiRequest {
+  file: any;
+}
 
 class TextExtractor {
   private upload = multer({
     storage: multer.diskStorage({}),
     limits: { fileSize: 20 * 1024 * 1024 }, // Limit file size to 1MB
   });
+
+  public config = {
+    api: {
+      bodyParser: false,
+    },
+  };
 
   uploadPDFTemp = async (req: any, res: any) => {
     await new Promise((resolve, reject) => {
