@@ -1,7 +1,7 @@
-import { PageLandingPage } from "@/client/pages/PageLandingPage";
+import { PageExtractText } from "@/client/pages/PageExtractText";
 
 const index = () => {
-  return <PageLandingPage />;
+  return <PageExtractText />;
 };
 
 export default index;
