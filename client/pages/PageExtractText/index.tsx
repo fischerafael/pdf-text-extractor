@@ -4,13 +4,24 @@ import * as Chakra from "@chakra-ui/react";
 import { Button } from "@/client/components/Button";
 import axios from "axios";
 
+const initialState = {
+  file: null,
+  isLoading: false,
+  result: {
+    text: "",
+  },
+};
+
 export const PageExtractText = () => {
-  const [state, setState] = useState<{ isLoading: boolean; file: null | File }>(
-    {
-      file: null,
-      isLoading: false,
-    }
-  );
+  const toast = Chakra.useToast();
+
+  const [state, setState] = useState<{
+    isLoading: boolean;
+    file: null | File;
+    result: {
+      text: string;
+    };
+  }>(initialState);
 
   const onDrop = (acceptedFiles: File[]) => {
     setState((prev) => ({ ...prev, file: acceptedFiles[0] }));
@@ -18,6 +29,15 @@ export const PageExtractText = () => {
 
   const onRemoveFile = () => {
     setState((prev) => ({ ...prev, file: null }));
+  };
+
+  const onCopyContent = (content: string) => {
+    window.navigator.clipboard.writeText(content);
+    toast({ title: "Copied To Clipboard" });
+  };
+
+  const onReset = () => {
+    setState(initialState);
   };
 
   console.log("[file]", state);
@@ -33,6 +53,10 @@ export const PageExtractText = () => {
         };
       }>("/api/extract-text", form);
       console.log("[response]", data.data.text);
+      setState((prev) => ({
+        ...prev,
+        result: { ...prev.result, text: data.data.text },
+      }));
     } catch (e: any) {
       console.log("[error]", e.message);
     } finally {
@@ -64,6 +88,18 @@ export const PageExtractText = () => {
           <Button isLoading={state.isLoading} onClick={onExtractText}>
             Extract Text
           </Button>
+        </Chakra.VStack>
+      )}
+
+      {!!state.result.text && (
+        <Chakra.VStack w="full" align="flex-end">
+          <Chakra.Text>{state.result.text}</Chakra.Text>
+          <Chakra.HStack w="full" justify="space-between">
+            <Button onClick={onReset}>Reset</Button>
+            <Button onClick={() => onCopyContent(state.result.text)}>
+              Copy To Clipboard
+            </Button>
+          </Chakra.HStack>
         </Chakra.VStack>
       )}
     </Chakra.VStack>
